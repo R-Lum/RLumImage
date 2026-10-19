@@ -1,12 +1,21 @@
 #' Converts an array, a matrix or an image file (usually a TIFF file) to a terra::SpatRaster object
 #'
 #' @param obj
-#'
+#' TODO
 #'
 #' @param noflip 'noflip = TRUE' ensures that no coordinate system transformation happens
 #'
 #' @param warnings
+#' TODO
+#'
 #' @param verbose
+#' Print progress messages.
+#'
+#' @examples
+#' file <- system.file("extdata/sandworm_rf_median.tif", package = "RLumImage")
+#' obj <- as.SpatRaster(file)
+#'
+#' @export
 as.SpatRaster <- function(obj,
                           noflip = TRUE,
                           warnings = FALSE,

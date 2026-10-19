@@ -1,5 +1,15 @@
 #' Returns a meaningful image scale for plotting
 #'
+#' @param obj
+#' TODO
+#'
+#' @param contains.outlier
+#' TODO
+#'
+#' @param verbose
+#' Print progress messages.
+#'
+#' @export
 get_image_scale <- function(obj,
                             contains.outlier = FALSE,
                             verbose = FALSE){

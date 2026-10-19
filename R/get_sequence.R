@@ -1,14 +1,25 @@
 #' Extracts the sequence table of an imported imaging measurement
 #'
 #' @param obj
+#' TODO
+#'
 #' @param print.friendly
+#' Whether a nicely formatted output should be produced (`FALSE` by default).
+#'
 #' @param digits
+#' Number of digits used when rounding. It is ignored if `print.friendly` is
+#' `FALSE`.
+#'
 #' @param verbose
+#' Print progress messages.
 #'
 #' @returns
-#' @export
+#' TODO
 #'
 #' @examples
+#' # TODO
+#'
+#' @export
 get_sequence <- function(obj,
                          print.friendly = FALSE,
                          digits = 2, # Just if print.friendly = TRUE
@@ -61,7 +72,7 @@ get_sequence <- function(obj,
   tab$wavelength <- emi
 
   # Provide a nice header
-  colnames(tab) <- c("Files", "Type", "Emission",  "Interval [sec]", "Maximum measured temperature [°C]")
+  colnames(tab) <- c("Files", "Type", "Emission",  "Interval [sec]", "Maximum measured temperature [\u2103]") # \u2103 is ℃
 
 
   if (verbose) {

@@ -10,11 +10,22 @@
 #'   corner of the ROI bounding box in the image), and `class`. This is the
 #'   format returned by [find_grains()] / [select_grains()].
 #'
-#' @param recordType Placeholder for future functionality (not currently used).
+#' @param record.type
+#' Placeholder for future functionality (not currently used).
 #'
-#' @param detectionInterval Time spacing between frames (default: 1).
+#' @param x.interval
+#' Time spacing between frames (default: 1).
+#'
+#' @param x.unit
+#' TODO
 #'
 #' @param plot Logical; if TRUE, plot the time series (default: TRUE).
+#'
+#' @param xlab
+#' X-axis label.
+#'
+#' @param ylab
+#' Y-axis label.
 #'
 #' @param legend Logical; if TRUE and plot=TRUE, add a legend (default: TRUE).
 #'

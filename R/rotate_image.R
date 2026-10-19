@@ -22,14 +22,17 @@
 #' @param fill
 #' Fill value of the empty areas created by the rotation.
 #'
+#' @param verbose
+#' Print progress messages.
+#'
 #' @returns
 #' SpatRaster if input was SpatRaster,
 #' matrix if input was matrix, array if input was array
 #'
-#' @export
-#'
 #' @examples
+#' # TODO
 #'
+#' @export
 rotate_image <- function(obj,
                          angle,
                          center = c(0.5, 0.5),
@@ -99,7 +102,7 @@ rotate_image <- function(obj,
    text <- "Rotate image"
    if (nlays > 1) text <- paste("Rotate", nlays, "images")
 
-   cat(text, paste0(round(abs(angle), 2), "° ", rot_dir,"."), "\n")
+   cat(text, paste0(round(abs(angle), 2), "\u00b0 ", rot_dir,"."), "\n") # \u00b0 is °
   }
 
   # Rotation center in pixel coordinates

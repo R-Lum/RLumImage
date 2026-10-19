@@ -47,6 +47,12 @@
 #' \code{radius_px} and \code{class} (and, optionally, \code{id}). Only used
 #' for single-layer images; ignored (with a warning) for multi-layer stacks.
 #'
+#' @param roi.lwd
+#' TODO
+#'
+#' @param roi.cex
+#' TODO
+#'
 #' @param classes
 #' Named character vector mapping ROI class labels to display colours, e.g.
 #' \code{c("Quartz" = "yellow", "Other" = "magenta")}. Used only together with
@@ -60,6 +66,8 @@
 #'
 #' @returns
 #' Invisibly returns NULL; the image is plotted as a side effect.
+#'
+#' @export
 plot_image <- function(obj,
                        title = NA,
                        label = NA,

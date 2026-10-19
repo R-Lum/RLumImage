@@ -23,6 +23,9 @@
 #' selected layer(s) shifted by the given fractional offsets.
 #'
 #' @examples
+#' # TODO
+#'
+#' @export
 shift_image <- function(obj,
                         dx = 0,
                         dy = 0,

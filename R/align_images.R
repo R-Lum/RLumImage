@@ -32,12 +32,16 @@
 #' (before alignment), and 'fixed' minus 'aligned' (after alignment, where
 #' 'aligned' is 'moving' with the estimated shift/rotation applied).
 #'
+#' @param verbose
+#' Print progress messages.
+#'
 #' @returns
 #' The result of optim(), containing the estimated parameters (dx, dy, angle)
 #'
-#' @export
-#'
 #' @examples
+#' # TODO
+#'
+#' @export
 align_images <- function(fixed,
                          moving,
                          method = "L-BFGS-B", # "Nelder-Mead" ...
@@ -127,7 +131,7 @@ align_images <- function(fixed,
     ok <- !is.na(v1) & !is.na(v2)
     if (sum(ok) < 10) return(1)  # penalize no-overlap
 
-    -cor(v1[ok], v2[ok], method = "pearson")  # negative because optim() minimizes
+    -stats::cor(v1[ok], v2[ok], method = "pearson")  # negative because optim() minimizes
   }
 
   # Bounds for shift in map units, keeping all three parameters on a similar scale
@@ -135,7 +139,7 @@ align_images <- function(fixed,
   dy.bound <- ceiling(nrows * max.shift)
 
   ### Optimization call ###
-  opt <- optim(par = c(0, 0, 0),
+  opt <- stats::optim(par = c(0, 0, 0),
                fn = sim_fun,
                method = method,
                lower = c(-dx.bound, -dy.bound, -max.rotation),
@@ -168,7 +172,7 @@ align_images <- function(fixed,
 
     cat(" dx =", round(result$dx, 4), "\n")
     cat(" dy =", round(result$dy, 4), "\n")
-    cat(" angle =", paste0(round(result$angle, 2), "°\n"))
+    cat(" angle =", paste0(round(result$angle, 2), "\u00b0\n")) # \u00b0 is °
   }
 
   # Create difference images

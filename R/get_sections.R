@@ -1,18 +1,36 @@
 #' Return and plot single columns and rows (lines) of an image stack
 #'
 #' @param obj
+#' TODO
+#'
 #' @param coordinate
+#' TODO
+#'
 #' @param range
+#' TODO
+#'
 #' @param plot
+#' TODO
+#'
 #' @param show.X.line
+#' TODO
+#'
 #' @param show.Y.line
+#' TODO
+#'
 #' @param legend
+#' TODO
+#'
 #' @param colors
+#' TODO
 #'
 #' @returns
-#' @export
+#' TODO
 #'
 #' @examples
+#' # TODO
+#'
+#' @export
 get_sections <- function(obj,
                          coordinate = NA, # XY
                          range = NA,

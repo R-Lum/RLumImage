@@ -1,11 +1,18 @@
 #' Transform wavelength into RGB value
 #'
 #' @param wl
+#' Wavelength to convert.
+#'
+#' @param factor
+#' Scaling factor (1 by default).
 #'
 #' @returns
-#' @export
+#' TODO
 #'
 #' @examples
+#' # TODO
+#'
+#' @export
 wavelength_to_rgb <- function(wl, factor = 1) {
 
   # If wavelength is NA, return a factor-depending shade of grey

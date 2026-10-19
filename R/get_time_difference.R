@@ -1,7 +1,18 @@
-library(lubridate)
-library(lutz)
-library(tidygeocoder)
-
+#' Get time difference
+#'
+#' @param file
+#' TODO
+#'
+#' @param city
+#' TODO
+#'
+#' @param country
+#' TODO
+#'
+#' @author
+#' Mariana Sontag-González, University of Oxford\cr
+#'
+#' @noRd
 get_time_difference <- function(file, city, country) {
 
   # 1. Get file modification time
@@ -28,9 +39,7 @@ get_time_difference <- function(file, city, country) {
     location,
     city = city,
     country = country,
-    method = "osm",
-    lat = latitude,
-    long = longitude
+    method = "osm"
   )
 
   if (is.na(coords$latitude[1]) ||

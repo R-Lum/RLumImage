@@ -143,7 +143,7 @@ select_grains <- function(obj,
                     na.rm = TRUE)
 
     if (verbose) cat("ROI set by user (r =", radius,
-                     "px, A =", sum(mask),"px, µ =", formatC(average), "cts/px)\n")
+                     "px, A =", sum(mask), "px, \u00b5 =", formatC(average), "cts/px)\n") # \u00b5 is µ
 
     set_roi(
       mask    = mask,

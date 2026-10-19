@@ -7,7 +7,8 @@
 #'
 #' @param scale Zoom factor (> 1 zooms in, < 1 zooms out; default: 1).
 #'
-#' @param center Scaling centre as a fraction of the extent (x, y), each in [0, 1]
+#' @param center
+#' Scaling centre as a fraction of the extent (x, y), each in \[0, 1\]
 #'   (default: c(0.5, 0.5)).
 #'
 #' @param layer Integer vector of layer indices to rescale; NA rescales all layers
@@ -25,7 +26,9 @@
 #' selected layer(s) shifted by the given fractional offsets.
 #'
 #' @examples
+#' # TODO
 #'
+#' @export
 rescale_image <- function(obj,
                           scale = 1,
                           center = c(0.5, 0.5),
@@ -69,7 +72,7 @@ rescale_image <- function(obj,
 
 
   # Scaled source extent (relative to center)
-  src_ext <- ext(
+  src_ext <- terra::ext(
     cx + (ref_ext[1] - cx) * scale,
     cx + (ref_ext[2] - cx) * scale,
     cy + (ref_ext[3] - cy) * scale,
@@ -78,7 +81,7 @@ rescale_image <- function(obj,
 
   # Create a virtual scaled source raster
   src <- img
-  ext(src) <- src_ext
+  terra::ext(src) <- src_ext
 
   if (length(layer) == 1 && is.na(layer)) {
 

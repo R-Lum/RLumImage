@@ -35,6 +35,9 @@
 #'   the search image after detection (set to `NA`), preventing overlapping
 #'   grains. If `TRUE`, detected ROIs can overlap. Not recommended.
 #'
+#' @param default.class
+#' TODO
+#'
 #' @param plot Logical. If `TRUE` (default), plot the detected ROIs over the
 #'   input image.
 #'
@@ -48,12 +51,15 @@
 #'   Returns an empty list if no grains are found.
 #'
 #' @examples
+#' \dontrun{ # TODO
 #' # Detect grains in a single image, threshold given directly
 #' grains <- find_grains(image, r = 6, threshold = 15)
 #'
 #' # Estimate the threshold from a target grain density
 #' grains <- find_grains(image, r = 6, grain.density = 0.001)
-
+#' }
+#'
+#' @export
 find_grains <- function(obj,
                         r = 6, # Pixel
                         threshold = NA, # Minimum intensity compared to the local background [cts/px]

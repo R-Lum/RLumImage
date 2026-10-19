@@ -22,11 +22,20 @@
 #' always reported via `warning()` and excluded from the result, regardless
 #' of `verbose`.
 #'
+#' @param print.sequence
+#' Currently unused.
+#'
+#' @param city
+#' TODO
+#'
+#' @param country
+#' TODO
+#'
 #' @returns
 #' A nested list, structured as:
 #'
-#' ├─ [[aliquot position]]
-#' │		├─ [[1]]
+#' ├─ `[[aliquot position]]`
+#' │		├─ `[[1]]`
 #' │		│   ├─ position
 #' │		│   ├─ recordNumber
 #' │		│   ├─ recordType
@@ -39,9 +48,10 @@
 #' ...	...
 #'
 #'
-#' @export
-#'
 #' @examples
+#' # TODO
+#'
+#' @export
 import_lexsyg_images <- function(xsyg_file,
                                  folder = NA,
                                  detector = "EMCCD",

@@ -71,7 +71,7 @@ plot_image_difference <- function(objA,
     v1 <- terra::values(imgA)
     v2 <- terra::values(imgB)
     ok <- !is.na(v1) & !is.na(v2)
-    cc <- cor(v1[ok], v2[ok], method = "pearson")
+    cc <- stats::cor(v1[ok], v2[ok], method = "pearson")
 
     # Formatting
     cc <- round(cc, 4)

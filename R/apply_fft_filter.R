@@ -59,9 +59,12 @@
 #'   extent as the input.
 #'
 #' @examples
+#' \dontrun{ # TODO
 #' # Band-pass keeping structures between 3 and 50 px in an image stack
 #' f <- apply_fft_filter(image, shortpass = 50, longpass = 3, plot = FALSE)
-
+#' }
+#'
+#' @export
 apply_fft_filter <- function(
     obj,
     shortpass = NA, # px

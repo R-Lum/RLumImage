@@ -24,9 +24,10 @@
 #' Aligned image stack (SpatRaster), or NULL if alignment was unsuccessful
 #' and force.alignment = FALSE.
 #'
-#' @export
-#'
 #' @examples
+#' # TODO
+#'
+#' @export
 apply_image_alignment <- function(obj,
                                   alignment,
                                   method = "near",

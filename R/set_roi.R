@@ -31,13 +31,16 @@
 #'
 #' @param add.info A named list of attributes to add to the ROI's `info` list.
 #'
+#' @param source.image
+#' TODO
+#'
 #' @param warnings Logical. If `TRUE` (default), print warnings about potential data loss
 #'   when overwriting existing parameters.
 #'
 #' @return A list representing a single ROI object, compatible with [apply_rois()] and
 #'   [select_grains()].
 #'
-
+#' @export
 set_roi <- function(roi = NULL, # Existing ROI object
                     mask = NULL, # TRUE/FALSE mask defining the ROI
                     col_min = NULL, # Upper left corner of the ROI in the image

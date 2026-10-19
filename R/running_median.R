@@ -1,13 +1,21 @@
 #' Creates a grouped median image stack from an input stack
 #'
 #' @param obj
+#' TODO
+#'
 #' @param window.size
+#' TODO
+#'
 #' @param verbose
+#' Print progress messages.
 #'
 #' @returns
-#' @export
+#' TODO
 #'
 #' @examples
+#' # TODO
+#'
+#' @export
 running_median <- function(obj,
                            window.size = 5,
                            verbose = TRUE){
@@ -54,7 +62,7 @@ running_median <- function(obj,
   names(result) <- paste0("median_", sprintf("%02d", layer_starts),
                           "_", sprintf("%02d", layer_ends))
 
-  if (verbose) cat("Output images:", nlyr(result), "\n")
+  if (verbose) cat("Output images:", terra::nlyr(result), "\n")
 
   return(result)
 }
