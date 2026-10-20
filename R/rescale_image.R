@@ -46,23 +46,23 @@ rescale_image <- function(obj,
   ## - do result rounding (or not?)
 
   if (!is.numeric(scale) || length(scale) != 1 || scale <= 0)
-    stop("scale must be a single positive numeric value.")
+    stop("[rescale_image()] 'scale' must be a single positive numeric value.")
 
   if (!(method %in% c("bilinear", "near")))
-    stop("Interpolation method must be either 'bilinear' or 'near'.")
+    stop("[rescale_image()] Interpolation method must be either 'bilinear' or 'near'.")
 
   if (!is.numeric(center) || length(center) != 2 || any(center < 0) || any(center > 1))
-    stop("center must be a numeric vector of length 2 with values between 0 and 1.")
+    stop("[rescale_image()] 'center' must be a numeric vector of length 2 with values between 0 and 1.")
 
   # Check whether input is a SpatRaster
-  img <- as.SpatRaster(obj)
+  img <- as.SpatRaster(obj, verbose = verbose)
 
   nlays <- terra::nlyr(img)
 
   # Validate layer indices (NA means rescale all layers)
   if (!(length(layer) == 1 && is.na(layer)) &&
       (!is.numeric(layer) || any(is.na(layer)) || any(layer < 1) || any(layer > nlays)))
-    stop("[rescale_image()]'layer' must be a vector of valid layer indices between 1 and ", nlays, ".")
+    stop("[rescale_image()] 'layer' must be a vector of valid layer indices between 1 and ", nlays, ".")
 
   if (verbose) cat("Rescale", nlays,"images to", scale * 100,"% ... ")
 

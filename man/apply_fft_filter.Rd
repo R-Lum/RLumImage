@@ -12,7 +12,7 @@ apply_fft_filter(
   transition = 1,
   preserve.offset = TRUE,
   plot = TRUE,
-  plot.extented = FALSE,
+  plot.extended = FALSE,
   verbose = TRUE
 )
 }
@@ -48,7 +48,7 @@ data). A pure long-pass keeps the DC term and is therefore unaffected.}
 \item{plot}{Logical. If \code{TRUE} (default), plot the filtered image(s) with
 \code{\link[=plot_image]{plot_image()}}.}
 
-\item{plot.extented}{Logical. If \code{TRUE}, also plot diagnostic images: the FFT
+\item{plot.extended}{Logical. If \code{TRUE}, also plot diagnostic images: the FFT
 magnitude spectrum of the last layer, the frequency mask, and the
 unfiltered - filtered difference.}
 

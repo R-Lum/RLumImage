@@ -46,7 +46,7 @@ convert_rois2RLum <- function(rois, originator = NULL) {
 
   # Sanity check of the input
   if (!is.list(rois) || is.null(names(rois)) || length(rois) == 0)
-    stop("[convert_rois2RLum()] 'rois' must be a named non-empty list.")
+    stop("[convert_rois2RLum()] 'rois' must be a non-empty named list.")
 
   out <- vector(mode = "list", length = length(rois))
   names(out) <- names(rois)

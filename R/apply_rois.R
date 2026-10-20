@@ -107,7 +107,7 @@ apply_rois <- function(obj,
     col_indices <- col_min:col_max
 
     # Apply the mask to get only pixels within the ROI shape
-    roi_pixels <- imgs[row_indices, col_indices, ][roi$mask, ]
+    roi_pixels <- imgs[row_indices, col_indices, ][roi$mask, , drop = FALSE]
 
     # Calculate mean values for each layer
     roi_means <- as.numeric(colMeans(roi_pixels, na.rm = TRUE))

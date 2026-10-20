@@ -49,7 +49,7 @@
 #' @param plot Logical. If `TRUE` (default), plot the filtered image(s) with
 #'   [plot_image()].
 #'
-#' @param plot.extented Logical. If `TRUE`, also plot diagnostic images: the FFT
+#' @param plot.extended Logical. If `TRUE`, also plot diagnostic images: the FFT
 #'   magnitude spectrum of the last layer, the frequency mask, and the
 #'   unfiltered - filtered difference.
 #'
@@ -72,7 +72,7 @@ apply_fft_filter <- function(
     transition = 1, # fractional
     preserve.offset = TRUE,
     plot = TRUE,
-    plot.extented = FALSE, # Plot also the frequency mask, the inverses and the difference
+    plot.extended = FALSE, # Plot also the frequency mask, the inverses and the difference
     verbose = TRUE
 ){
 
@@ -233,7 +233,7 @@ apply_fft_filter <- function(
   if (plot) {
     plot_image(out, label = msg_text)
 
-    if (plot.extented) {
+    if (plot.extended) {
 
       if (nlyrs > 1) {
         if (verbose) cat("Only last image layer is used for the extended plots.\n")

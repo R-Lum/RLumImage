@@ -162,7 +162,8 @@ set_roi <- function(roi = NULL, # Existing ROI object
 
       # ToDo: Check if new overlay still matches 'mask', 'col_min' and 'row_min'
 
-      if (warnings) warning("[set_roi()] Changing the overlay might lead to errornous plots.")
+      if (warnings)
+        warning("[set_roi()] Changing the overlay might lead to erroneous plots.")
 
       roi$overlay <- overlay
     }

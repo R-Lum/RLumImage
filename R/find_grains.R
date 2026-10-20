@@ -41,7 +41,7 @@
 #' @param plot Logical. If `TRUE` (default), plot the detected ROIs over the
 #'   input image.
 #'
-#' @param plot.extented Logical. If `TRUE`, also plot the FFT filtered image, the
+#' @param plot.extended Logical. If `TRUE`, also plot the FFT filtered image, the
 #'   ROI residual image, and combinations thereof as diagnostic plots.
 #'
 #' @param verbose Print progress messages.
@@ -68,7 +68,7 @@ find_grains <- function(obj,
                         allow.overlap = FALSE, # Not recommended
                         default.class = "Unclassified",
                         plot = TRUE,
-                        plot.extented = FALSE, # Plots also FFT-filtered images
+                        plot.extended = FALSE, # Plots also FFT-filtered images
                         verbose = TRUE){
 
   ## ------ Changelog ------
@@ -90,19 +90,11 @@ find_grains <- function(obj,
   # Remember the name of the input object for the ROI info slot
   source_obj <- deparse(substitute(obj))
 
-  img <- as.SpatRaster(obj, verbose = verbose)
-
-  # Ensure one-layer images
-  if (terra::nlyr(img) > 1) {
-    if (verbose) cat("Image has multiple layers: Create one representative median image.\n")
-    img <- terra::median(img, na.rm = TRUE)
-  }
-
   if (is.na(threshold) && is.na(grain.density))
     stop("[find_grains()] Either 'threshold' or 'grain.density' must be defined.")
 
   if (!is.na(threshold) && !is.na(grain.density))
-    warning("[find_grains()] Both, 'threshold' and 'grain.density' are defined. Only 'threshold'will be used.")
+    warning("[find_grains()] Both 'threshold' and 'grain.density' are defined. Only 'threshold' will be used.")
 
   if (!is.na(grain.density)){
 
@@ -112,6 +104,14 @@ find_grains <- function(obj,
     # We reduce the grain density value because otherwise we would get too many ROIs.
     # We simply assume, arbitrarily, that only about 1/4 of a grain exceeds the threshold.
     grain_density <- grain.density * 0.25
+  }
+
+  img <- as.SpatRaster(obj, verbose = verbose)
+
+  # Ensure one-layer images
+  if (terra::nlyr(img) > 1) {
+    if (verbose) cat("Image has multiple layers: Create one representative median image.\n")
+    img <- terra::median(img, na.rm = TRUE)
   }
 
   fill_value <- NA
@@ -287,7 +287,7 @@ find_grains <- function(obj,
   if (plot) {
 
     msg_text <- paste0("r = ", r, ", threshold = ", formatC(threshold))
-    if (plot.extented){
+    if (plot.extended) {
 
       fft_label <- paste0("Band-pass ", fft.filter[2] * r, " - ", fft.filter[1] * r,
                           " px (transition = ", fft.filter[3], ")")

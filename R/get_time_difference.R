@@ -13,7 +13,7 @@
 #' Mariana Sontag-González, University of Oxford\cr
 #'
 #' @noRd
-get_time_difference <- function(file, city, country) {
+get_time_difference <- function(file, city = NA, country = NA) {
 
   # 1. Get file modification time
   file_time <- file.info(file)$mtime
@@ -42,15 +42,14 @@ get_time_difference <- function(file, city, country) {
     method = "osm"
   )
 
-  if (is.na(coords$latitude[1]) ||
-      is.na(coords$longitude[1])) {
+  if (is.na(coords$lat[1]) || is.na(coords$long[1])) {
     stop("Could not find coordinates for the city.")
   }
 
   # 4. Determine city's IANA time zone
   city_tz <- lutz::tz_lookup_coords(
-    lat = coords$latitude[1],
-    lon = coords$longitude[1],
+    lat = coords$lat[1],
+    lon = coords$long[1],
     method = "accurate"
   )
 

@@ -35,12 +35,12 @@ apply_image_alignment <- function(obj,
                                   verbose = TRUE){
 
   if (!all(c("success", "dx", "dy", "angle") %in% names(alignment)))
-    stop("[apply_image_alignment()]: Input object 'alignment' is invalid. Must be return object from align_images().")
+    stop("[apply_image_alignment()]: 'alignment' object is invalid. Must be return object from align_images().")
 
   if (!alignment$success){
 
     if (force.alignment) {
-      warning("[apply_image_alignment()] Image alignment parameters were applied to input stack although image alignment loop was prematurely quited. Please check the results.\n")
+      warning("[apply_image_alignment()] Image alignment parameters were applied to input stack although the image alignment loop was quitted prematurely. Please check the results.\n")
     }else{
       if (verbose) cat("Image alignment was not successful, NULL returned.\n")
       return(NULL)

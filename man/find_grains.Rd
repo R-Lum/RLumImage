@@ -13,7 +13,7 @@ find_grains(
   allow.overlap = FALSE,
   default.class = "Unclassified",
   plot = TRUE,
-  plot.extented = FALSE,
+  plot.extended = FALSE,
   verbose = TRUE
 )
 }
@@ -45,7 +45,7 @@ grains. If \code{TRUE}, detected ROIs can overlap. Not recommended.}
 \item{plot}{Logical. If \code{TRUE} (default), plot the detected ROIs over the
 input image.}
 
-\item{plot.extented}{Logical. If \code{TRUE}, also plot the FFT filtered image, the
+\item{plot.extended}{Logical. If \code{TRUE}, also plot the FFT filtered image, the
 ROI residual image, and combinations thereof as diagnostic plots.}
 
 \item{verbose}{Print progress messages.}
