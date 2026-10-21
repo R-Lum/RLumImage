@@ -13,8 +13,9 @@
 #'
 #' @param fill Fill value for the empty areas created by zooming out (default: NA).
 #'
-#' @param method Interpolation method for estimating the new cell values, forwarded
-#'   to `terra::resample` ('bilinear' or 'near'; default: 'bilinear').
+#' @param method
+#' Interpolation method for estimating the new cell values, one of `"bilinear"`
+#' (default) or `"near"`.
 #'
 #' @param verbose Print progress messages.
 #'
@@ -31,7 +32,7 @@ shift_image <- function(obj,
                         dy = 0,
                         layer = NA,
                         fill = NA,
-                        method = "bilinear",
+                        method = c("bilinear", "near"),
                         verbose = TRUE){
 
   ## Changelog
@@ -39,6 +40,7 @@ shift_image <- function(obj,
 
   img <- as.SpatRaster(obj, verbose = verbose)
   nlyrs <- terra::nlyr(img)
+  method <- match.arg(method)
 
   # Convert fractional offsets to map units
   # Total extent width/height = number of pixels * pixel size
