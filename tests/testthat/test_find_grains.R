@@ -12,6 +12,16 @@ test_that("check functionality", {
                "'grain.density' must be larger than 0 and must not exceed 1")
 })
 
+test_that("check functionality", {
+  testthat::skip_on_cran()
+
+  expect_error( # TODO
+  expect_warning(find_grains(img_1lyr, threshold = 1000,
+                             allow.overlap = TRUE, verbose = FALSE),
+                 "Threshold is too large for this image"),
+  "invalid argument to unary operator")
+})
+
 test_that("snapshot tests", {
   testthat::skip_on_cran()
 
@@ -32,5 +42,7 @@ test_that("graphical snapshot tests", {
   vdiffr::expect_doppelganger("plot.extended",
                               find_grains(sandworm.file, threshold = 250,
                                           plot.extended = TRUE))
+  vdiffr::expect_doppelganger("layers",
+                              find_grains(img_2lyr, threshold = 850))
   })
 })

@@ -43,8 +43,9 @@
 
     Code
       set_roi(roi, add.curve = data.frame(x = 1:10, y = (12:3)^1.5), add.info = c(
-        other = "info"), class = "arbitrary")
+        other = "info"), source.image = sandworm.file, class = "arbitrary")
     Output
+      Load image file sandworm_rf_median.tif into system memory.
       $mask
            [,1] [,2] [,3] [,4] [,5]
       [1,] TRUE TRUE TRUE TRUE TRUE
@@ -75,6 +76,15 @@
       $info$other
       [1] "info"
       
+      $info$source_obj
+      [1] "sandworm.file"
+      
+      $info$source_ncols
+      [1] 512
+      
+      $info$source_nrows
+      [1] 512
+      
       
       $overlay
       $overlay$dx
@@ -85,7 +95,12 @@
       
       
       $curves
-      $curves[[1]]
+      $curves$curve1
+        x    y
+      1 1 11.3
+      2 2 13.2
+      
+      $curves[[2]]
           x         y
       1   1 41.569219
       2   2 36.482873

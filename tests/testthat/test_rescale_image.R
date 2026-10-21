@@ -21,9 +21,8 @@ test_that("input validation", {
 test_that("check functionality", {
   testthat::skip_on_cran()
 
-  expect_output(rescale_image(sandworm.file, scale = 0.9),
+  expect_output(rescale_image(sandworm.file, scale = 0.9, fill = 1),
                 "Rescale 1 images to 90 %")
-  expect_output(rescale_image(c(sandworm.file, sandworm.file),
-                              layer = 1:2, fill = 0),
+  expect_output(rescale_image(img_2lyr, layer = 1:2, fill = 0),
                 "Rescale 2 images to 100 %")
 })

@@ -22,8 +22,11 @@ test_that("check functionality", {
                 "Apply FFT short-pass 15 px")
   expect_output(apply_fft_filter(sandworm.file, longpass = 20, plot = FALSE),
                 "Apply FFT long-pass 20 px")
-  expect_output(apply_fft_filter(sandworm.file, shortpass = 40, longpass = 20, plot = FALSE),
+  expect_output(apply_fft_filter(sandworm.file, shortpass = 40, longpass = 20,
+                                 transition = NA, plot = FALSE),
                 "Apply FFT band-pass 20 - 40 px")
+  expect_output(apply_fft_filter(img_2lyr, shortpass = 10, plot.extended = TRUE),
+                "Only last image layer is used for the extended plots")
 })
 
 test_that("graphical snapshot tests", {

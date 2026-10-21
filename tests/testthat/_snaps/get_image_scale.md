@@ -1,0 +1,17 @@
+# snapshot tests
+
+    Code
+      get_image_scale(img_1lyr)
+    Output
+         20% 99.99% 
+           2   1334 
+
+---
+
+    Code
+      get_image_scale(img_2lyr, contains.outlier = TRUE, verbose = TRUE)
+    Output
+      Reasonable signal value limits for plotting are: 2 - 121 
+      10% 99% 
+        2 121 
+

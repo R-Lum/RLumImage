@@ -15,5 +15,7 @@ test_that("check functionality", {
   SW({
   expect_output(align_images(sandworm.file, sandworm.file),
                 "Image alignment successful after 2 iterations")
+  expect_output(align_images(img_2lyr, img_2lyr),
+                "'fixed' has multiple layers.*'moving' has multiple layers")
   })
 })

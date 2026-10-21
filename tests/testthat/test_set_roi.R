@@ -1,5 +1,8 @@
 roi <- set_roi(mask = matrix(rep(TRUE, 25), ncol = 5),
-               col_min = 42, row_min = 67, info = list(hello = "world"))
+               col_min = 42, row_min = 67,
+               info = list(hello = "world"),
+               overlay = list(dx = 5, dy = 5),
+               curves = list(curve1 = data.frame(x = 1:2, y = c(11.3, 13.2))))
 
 test_that("input validation", {
   testthat::skip_on_cran()
@@ -19,8 +22,31 @@ test_that("input validation", {
 test_that("check functionality", {
   testthat::skip_on_cran()
 
-  expect_error()
+  expect_equal(set_roi(roi),
+               roi)
 
+  ## info
+  expect_warning(new <- set_roi(roi, info = list(added = "added")),
+                 "Old 'info' contains entries which are not in new 'info'")
+  expect_equal(new$info$added,
+               "added")
+  expect_null(new$info$hello)
+
+  ## overlay
+  expect_warning(expect_warning(
+      new <- set_roi(roi, overlay = list(added = "added")),
+      "Old 'overlay' contains entries which are not in new 'overlay'"),
+      "Changing the overlay might lead to erroneous plots")
+  expect_equal(new$overlay$added,
+               "added")
+  expect_null(new$overlay$dx)
+
+  ## curves
+  expect_warning(new <- set_roi(roi, curves = list(added = "added")),
+                 "Old 'curves' contains entries which are not in new 'curves'")
+  expect_equal(new$curves$added,
+               "added")
+  expect_null(new$curves$curve)
 })
 
 test_that("snapshot tests", {
@@ -32,5 +58,6 @@ test_that("snapshot tests", {
   expect_snapshot(set_roi(roi,
                           add.curve = data.frame(x = 1:10, y = (12:3)^1.5),
                           add.info = c(other = "info"),
+                          source.image = sandworm.file,
                           class = "arbitrary"))
 })

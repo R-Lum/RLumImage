@@ -18,8 +18,14 @@ test_that("check functionality", {
                 "Load image file sandworm_rf_median.tif into system memory")
   expect_s4_class(res,
                   "SpatRaster")
-  expect_identical(as.SpatRaster(res),
-                   res)
+  expect_identical(as.SpatRaster(img_2lyr),
+                   img_2lyr)
+
+  ## warnings
+  img_warn <- test_path("_data/rast_unknown_extent.tif")
+  expect_warning(as.SpatRaster(img_warn, warning = TRUE, verbose = FALSE),
+                 "[rast] unknown extent", fixed = TRUE)
+  expect_silent(as.SpatRaster(img_warn, warning = FALSE, verbose = FALSE))
 
   ## more coverage
   expect_silent(as.SpatRaster(sandworm.file, warning = TRUE, noflip = FALSE,

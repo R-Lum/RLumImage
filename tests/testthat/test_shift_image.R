@@ -3,6 +3,8 @@ test_that("input validation", {
 
   expect_error(shift_image(sandworm.file, method = "error", verbose = FALSE),
                'should be one of "near", "bilinear", "cubic", "cubicspline",')
+  expect_error(shift_image(img_2lyr, layer = 3, verbose = FALSE),
+               "'layer' must be a vector of valid layer indices between 1 and 2")
 })
 
 test_that("check functionality", {
@@ -12,8 +14,10 @@ test_that("check functionality", {
                 "Shift image 46080 pixel to the right and 0 pixel upwards")
   expect_output(shift_image(sandworm.file, 0, 10),
                 "Shift image 0 pixel to the right and 5120 pixel upwards")
-  expect_output(shift_image(sandworm.file, -10, -10),
+  expect_output(shift_image(img_1lyr, -10, -10),
                 "Shift image 5120 pixel to the left and 5120 pixel downwards")
-  expect_output(shift_image(c(sandworm.file, sandworm.file), 1, -1),
+  expect_output(shift_image(img_2lyr, 1, -1),
                 "Shift 2 images 512 pixel to the right and 512 pixel downwards")
+  expect_output(shift_image(img_2lyr, layer = 2),
+                "Shift 1 of 2 images 0 pixel to the right and 0 pixel upwards")
 })
