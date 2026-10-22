@@ -145,12 +145,9 @@ align_images <- function(fixed,
                lower = c(-dx.bound, -dy.bound, -max.rotation),
                upper = c( dx.bound,  dy.bound,  max.rotation))
 
-  success <- FALSE
-  if (opt$convergence == 0) success <- TRUE
-
   # Create output structure
   result <- list()
-  result$success <- success
+  result$success <- opt$convergence == 0
   result$dx <- opt$par[1] / conversion_dx
   result$dy <- opt$par[2] / conversion_dy
   result$angle <- opt$par[3]
@@ -159,17 +156,15 @@ align_images <- function(fixed,
   # Console output
   if (verbose) {
     iterations <- opt$counts[["function"]]
-    if (success)
-      cat("Image alignment successful after", iterations, "iterations.\n")
+    msg <- switch(as.character(opt$convergence),
+                  "0" = paste("Image alignment successful after",
+                              iterations, "iterations"),
+                  "1" = paste("Image alignment failed: Iteration maximum of",
+                              iterations, "reached"),
+                  paste("Image alignment failed with stats::optim() error code",
+                        paste0(opt$convergence, ":"), opt$message))
 
-    if (opt$convergence == 1)
-      cat("Image alignment failed: Iteration maximum of", iterations, "reached.\n")
-
-    if (opt$convergence > 1)
-      cat("Image alignment failed with stats::optim() error code",
-          paste0(opt$convergence, ":"), opt$message, "\n")
-
-
+    cat(msg, ".\n", sep = "")
     cat(" dx =", round(result$dx, 4), "\n")
     cat(" dy =", round(result$dy, 4), "\n")
     cat(" angle =", paste0(round(result$angle, 2), "\u00b0\n")) # \u00b0 is °
