@@ -13,8 +13,10 @@ test_that("check functionality", {
   testthat::skip_on_cran()
 
   SW({
-  expect_output(align_images(sandworm.file, sandworm.file),
+  expect_output(res <- align_images(sandworm.file, sandworm.file),
                 "Image alignment successful after 2 iterations")
+  expect_s3_class(res,
+                  "RLumImage.Alignment")
   expect_output(align_images(img_2lyr, img_2lyr),
                 "'fixed' has multiple layers.*'moving' has multiple layers")
   })

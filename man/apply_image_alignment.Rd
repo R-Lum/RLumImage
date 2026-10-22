@@ -15,7 +15,7 @@ apply_image_alignment(
 \arguments{
 \item{obj}{Image stack (coercible to SpatRaster) to align.}
 
-\item{alignment}{List returned by align_images(), containing 'success', 'dx', 'dy' and 'angle'.}
+\item{alignment}{An object of class \code{RLumImage.Alignment} as returned by \link{align_images}.}
 
 \item{method}{Resampling method forwarded to \link{shift_image} and \link{rotate_image}, one of
 \code{"near"} (default) or \code{"bilinear"}. \code{"near"} is faster and might better
