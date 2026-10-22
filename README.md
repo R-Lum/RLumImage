@@ -24,6 +24,7 @@ Features needed before release:
 | `align_images` | Automatically estimates the horizontal shift, vertical shift, and rotation angle that best aligns a 'moving' single-layer image onto a 'fixed' one, using image correlation and `optim()`. |
 | `apply_fft_filter` | Applies a Fast Fourier Transform (FFT) filter to one or multiple grey-scale image layers, acting as a short-pass, long-pass, or band-pass filter on spatial frequencies. Filter edges are smoothed with a cosine taper. Can be used, e.g., to remove signal cross-talk between grains. |
 | `apply_image_alignment` | Applies the shift/rotation parameters estimated by `align_images` to a full image stack. |
+| `apply_median_grouping` | Combines every *N* images of a stack into a median image. This removes X-ray speckles in RF images and reduces the amount of data. |
 | `apply_rois` | Extracts mean values within circular regions of interest (ROIs) across an image stack and optionally plots the resulting time series. |
 | `as.SpatRaster` | Converts file paths, arrays, matrices to a `terra::spatRaster` object. Is just a simple wrapper for `terra::rast()` but ensures image validity inside RLumImage environment. |
 | `convert_rois2RLum` | Converts a ROI list (as returned by `apply_rois()` / `set_roi()`) into a named list of `Luminescence::RLum.Analysis` objects. Every curve in `rois$curves` is converted into an `RLum.Data.Curve` object stored in the `@records` slot; the ROI's mineral `class` is kept in the analysis `info`. |
@@ -35,7 +36,6 @@ Features needed before release:
 | `plot_image_difference` | Computes and plots the pixel-wise difference between two images (objA - objB) using `plot_image`. |
 | `rescale_image` | Zooms in or out or moves an image's centre while maintaining its dimensions. Works also with image stacks. |
 | `rotate_image` | Rotates an image while maintaining its dimensions. Works also with image stacks. |
-| `running_median` | Combines every *N* images of a stack into a median image. This removes X-ray speckles in RF images and reduces the amount of data. |
 | `select_grains` | Opens a shiny app that lets the user place circular ROIs on a reference image (combined as the pixel-wise mean of the stack), assign a mineral class to each, and optionally detect grains automatically via `find_grains()`. Returns per-grain ROI objects in the format of `set_roi()` / `apply_rois()`. |
 | `set_roi` | Creates a new region-of-interest (ROI) object (pixel `mask`, position, `shape`, mineral `class`, optional `info`/`overlay`/`curves`) or edits an existing one. Underlies the ROI objects used by `apply_rois()`, `find_grains()` and `select_grains()`. |
 | `shift_image` | Shifts an image's position while maintaining its dimensions. Works also with image stacks. |
