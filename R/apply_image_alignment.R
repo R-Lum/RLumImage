@@ -7,7 +7,7 @@
 #' Image stack (coercible to SpatRaster) to align.
 #'
 #' @param alignment
-#' List returned by align_images(), containing 'success', 'dx', 'dy' and 'angle'.
+#' An object of class `RLumImage.Alignment` as returned by [align_images].
 #'
 #' @param method
 #' Resampling method forwarded to [shift_image] and [rotate_image], one of
@@ -37,8 +37,8 @@ apply_image_alignment <- function(
   verbose = TRUE
 ) {
 
-  if (!all(c("success", "dx", "dy", "angle") %in% names(alignment)))
-    stop("[apply_image_alignment()]: 'alignment' object is invalid. Must be return object from align_images().")
+  if (!inherits(alignment, "RLumImage.Alignment"))
+    stop("[apply_image_alignment()]: 'alignment' must be an object returned by align_images().")
 
   if (!alignment$success){
 

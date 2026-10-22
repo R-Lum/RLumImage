@@ -40,7 +40,8 @@ robustness to edge artifacts; 1.0 uses the full image.}
 \item{verbose}{Print progress messages.}
 }
 \value{
-The result of optim(), containing the estimated parameters (dx, dy, angle)
+An object of class \code{RLumImage.Alignment}, containing the result of \link{optim}
+and the estimated parameters (dx, dy, angle).
 }
 \description{
 Estimates the horizontal shift, vertical shift and rotation angle that

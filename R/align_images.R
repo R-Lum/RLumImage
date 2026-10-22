@@ -36,7 +36,8 @@
 #' Print progress messages.
 #'
 #' @returns
-#' The result of optim(), containing the estimated parameters (dx, dy, angle)
+#' An object of class `RLumImage.Alignment`, containing the result of [optim]
+#' and the estimated parameters (dx, dy, angle).
 #'
 #' @examples
 #' # TODO
@@ -188,6 +189,7 @@ align_images <- function(fixed,
                title = c("Before", "After"))
   }
 
-  #if (verbose) invisible(result)
-  return(result)
+  ## return
+  structure(result,
+            class = "RLumImage.Alignment")
 }

@@ -1,11 +1,13 @@
-align.ok <- list(dx = 1, dy = -1, angle = 5, success = TRUE)
-align.fail <- list(dx = 1, dy = -1, angle = 5, success = FALSE)
+align.ok <- structure(list(dx = 1, dy = -1, angle = 5, success = TRUE),
+                      class = "RLumImage.Alignment")
+align.fail <- align.ok
+align.fail$success <- FALSE
 
 test_that("input validation", {
   testthat::skip_on_cran()
 
   expect_error(apply_image_alignment(sandworm.file, alignment = 2),
-               "'alignment' object is invalid")
+               "'alignment' must be an object returned by align_images")
   expect_error(apply_image_alignment(sandworm.file, alignment = align.ok,
                                      method = "error", verbose = FALSE),
                "Resampling method should be either 'near' or 'bilinear'")
