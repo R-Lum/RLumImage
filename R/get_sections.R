@@ -6,11 +6,11 @@
 #' @param coordinate
 #' TODO
 #'
-#' @param range
-#' TODO
-#'
 #' @param plot
 #' TODO
+#'
+#' @param ylim
+#' Optional y-axis limits.
 #'
 #' @param show.X.line
 #' TODO
@@ -31,22 +31,21 @@
 #' # TODO
 #'
 #' @export
-get_sections <- function(obj,
-                         coordinate = NA, # XY
-                         range = NA,
-                         plot = TRUE,
-                         show.X.line = TRUE,
-                         show.Y.line = TRUE,
-                         legend = FALSE,
-                         colors = c("red", "black")
-                         ){
+get_sections <- function(
+  obj,
+  coordinate = NA,
+  plot = TRUE,
+  ylim = NULL,
+  show.X.line = TRUE,
+  show.Y.line = TRUE,
+  legend = FALSE,
+  colors = c("red", "black")
+) {
 
   img <- as.SpatRaster(obj)
   n_records <- terra::nlyr(img)
   n_rows <- terra::nrow(img)
   n_cols <- terra::ncol(img)
-
-  if (any(is.na(range))) range <- NULL
 
   # If coordinate is not set, take the middle of the image
   if (is.na(coordinate)[1]){
@@ -69,7 +68,7 @@ get_sections <- function(obj,
     matplot(x = 1:nrow(secs$X),
             y = secs$X,
             col = cols,
-            ylim = range,
+            ylim = ylim,
             type = "l", lty = 1,
             xlab = "Pixel no. in X-direction",
             ylab = "Signal")
@@ -86,7 +85,7 @@ get_sections <- function(obj,
     matplot(x = 1:nrow(secs$Y),
             y = secs$Y,
             col = cols,
-            ylim = range,
+            ylim = ylim,
             type = "l", lty = 1,
             xlab = "Pixel no. in Y-direction",
             ylab = "Signal")

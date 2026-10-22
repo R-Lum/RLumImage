@@ -7,8 +7,8 @@
 get_sections(
   obj,
   coordinate = NA,
-  range = NA,
   plot = TRUE,
+  ylim = NULL,
   show.X.line = TRUE,
   show.Y.line = TRUE,
   legend = FALSE,
@@ -20,9 +20,9 @@ get_sections(
 
 \item{coordinate}{TODO}
 
-\item{range}{TODO}
-
 \item{plot}{TODO}
+
+\item{ylim}{Optional y-axis limits.}
 
 \item{show.X.line}{TODO}
 
