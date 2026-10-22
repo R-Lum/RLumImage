@@ -15,11 +15,9 @@ test_that("check functionality", {
 test_that("check functionality", {
   testthat::skip_on_cran()
 
-  expect_error( # TODO
   expect_warning(find_grains(img_1lyr, threshold = 1000,
                              allow.overlap = TRUE, verbose = FALSE),
-                 "Threshold is too large for this image"),
-  "invalid argument to unary operator")
+                 "Threshold is too large for this image")
 })
 
 test_that("snapshot tests", {

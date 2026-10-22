@@ -257,7 +257,8 @@ find_grains <- function(obj,
   if (verbose) cat(nrow(xymax), "grains found in", N, "iterations.\n")
 
   # Sort by average in descending order (largest first)
-  xymax <- xymax[order(-xymax$average), ]
+  if (nrow(xymax) > 0)
+    xymax <- xymax[order(-xymax$average), ]
 
   # Build the return list
   result <- vector("list", nrow(xymax))
@@ -280,8 +281,10 @@ find_grains <- function(obj,
                      fft_max = xymax$fft_max[i])
     )
   }
+
   # Naming is not important and it might be better to remove it in final R package
-  names(result) <- paste0("ROI_", seq_len(nrow(xymax)))
+  if (length(result) > 0)
+    names(result) <- paste0("ROI_", seq_len(nrow(xymax)))
 
   # Plotting
   if (plot) {
