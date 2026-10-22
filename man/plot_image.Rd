@@ -18,9 +18,9 @@ plot_image(
   contains.outlier = FALSE,
   rois = NULL,
   roi.lwd = 1,
+  roi.ids = FALSE,
   roi.cex = 1.1,
-  classes = NULL,
-  show.numbers = FALSE
+  classes = NULL
 )
 }
 \arguments{
@@ -58,16 +58,17 @@ for single-layer images; ignored (with a warning) for multi-layer stacks.}
 
 \item{roi.lwd}{TODO}
 
-\item{roi.cex}{TODO}
+\item{roi.ids}{Whether the ROI ids should be printed at the centre of each ROI overlay
+(\code{FALSE} by default). Only applied together with \code{rois}.}
+
+\item{roi.cex}{Scaling factor to control the font size for the ROI ids. Only applied
+if \code{roi.ids = TRUE}.}
 
 \item{classes}{Named character vector mapping ROI class labels to display colours, e.g.
 \code{c("Quartz" = "yellow", "Other" = "magenta")}. Used only together with
 \code{rois}. Defaults to the same five preset mineral classes used by
 \code{select_grains()}. Classes present in \code{rois} but missing from
 this vector are drawn in white and trigger a warning.}
-
-\item{show.numbers}{If TRUE, print the ROI id at the centre of each ROI overlay. Only applied
-together with \code{rois}. Default is FALSE.}
 }
 \value{
 Invisibly returns NULL; the image is plotted as a side effect.

@@ -311,7 +311,7 @@ find_grains <- function(obj,
                  title = "FFT ROI residual image")
     }
 
-    plot_image(img, rois = result, show.numbers = FALSE,
+    plot_image(img, rois = result, roi.ids = FALSE,
                label = msg_text)
   }
 

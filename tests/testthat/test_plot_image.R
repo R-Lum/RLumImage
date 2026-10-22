@@ -33,6 +33,6 @@ test_that("graphical snapshot tests", {
                                          contains.outlier = TRUE))
   vdiffr::expect_doppelganger("rois",
                               plot_image(img_1lyr, rois = rois,
-                                         show.numbers = TRUE))
+                                         roi.ids = TRUE))
   })
 })

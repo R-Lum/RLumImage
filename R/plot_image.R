@@ -50,8 +50,13 @@
 #' @param roi.lwd
 #' TODO
 #'
+#' @param roi.ids
+#' Whether the ROI ids should be printed at the centre of each ROI overlay
+#' (`FALSE` by default). Only applied together with `rois`.
+#'
 #' @param roi.cex
-#' TODO
+#' Scaling factor to control the font size for the ROI ids. Only applied
+#' if `roi.ids = TRUE`.
 #'
 #' @param classes
 #' Named character vector mapping ROI class labels to display colours, e.g.
@@ -60,30 +65,28 @@
 #' \code{select_grains()}. Classes present in \code{rois} but missing from
 #' this vector are drawn in white and trigger a warning.
 #'
-#' @param show.numbers
-#' If TRUE, print the ROI id at the centre of each ROI overlay. Only applied
-#' together with \code{rois}. Default is FALSE.
-#'
 #' @returns
 #' Invisibly returns NULL; the image is plotted as a side effect.
 #'
 #' @export
-plot_image <- function(obj,
-                       title = NA,
-                       label = NA,
-                       range = NA,
-                       color.scale = NA, # Without effect yet
-                       wavelength = NA,
-                       legend = TRUE, # Valid only for single layer images
-                       axes = TRUE, # Valid only for single layer images
-                       margin = 1.13,
-                       max.layer = 6,
-                       contains.outlier = FALSE,
-                       rois = NULL,
-                       roi.lwd = 1,
-                       roi.cex = 1.1,
-                       classes = NULL,
-                       show.numbers = FALSE){
+plot_image <- function(
+  obj,
+  title = NA,
+  label = NA,
+  range = NA,
+  color.scale = NA, # Without effect yet
+  wavelength = NA,
+  legend = TRUE, # Valid only for single layer images
+  axes = TRUE, # Valid only for single layer images
+  margin = 1.13,
+  max.layer = 6,
+  contains.outlier = FALSE,
+  rois = NULL,
+  roi.lwd = 1,
+  roi.ids = FALSE,
+  roi.cex = 1.1,
+  classes = NULL
+) {
 
   ## ------ Changelog ------
   ## 2026-08-14, DM, Claude Sonnet 5: Added 'rois', 'classes' and 'show.numbers' arguments to draw
@@ -245,7 +248,7 @@ plot_image <- function(obj,
                       lwd = roi.lwd)
 
       # Optionally print the ROI ID number at the circle centre
-      if (show.numbers)
+      if (roi.ids)
         graphics::text(x, y, labels = as.character(i),
                        col = clr, cex = roi.cex, font = 2)
 
@@ -268,7 +271,7 @@ plot_image <- function(obj,
                       c(y_min, y_min, y_max, y_max, y_min),
                       col = clr, lwd = roi.lwd)
 
-      if (show.numbers) {
+      if (roi.ids) {
         graphics::text((x_min + x_max) / 2, (y_min + y_max) / 2,
                        labels = as.character(i),
                        col = clr, cex = roi.cex, font = 2)

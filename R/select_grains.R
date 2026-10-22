@@ -355,7 +355,7 @@ select_grains <- function(obj,
                  contains.outlier = FALSE,
                  rois             = roi_obj,
                  classes          = classes,
-                 show.numbers     = input$show_labels)
+                 roi.ids          = input$show_labels)
     })
 
 
