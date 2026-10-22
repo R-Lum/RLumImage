@@ -1,7 +1,7 @@
 #' Function for creating a difference image
 #'
 #' Computes and plots the pixel-wise difference between two images
-#' (objA - objB) using plot_image().
+#' (objA - objB) using [plot_image].
 #'
 #' @param objA
 #' First image (coercible to SpatRaster); minuend of the difference.
@@ -10,39 +10,32 @@
 #' Second image (coercible to SpatRaster); subtrahend of the difference.
 #'
 #' @param range
-#' Numeric vector of length 2 giving the color scale limits. If NA (default),
-#' a symmetric range is estimated from the difference image via get_image_scale().
+#' Numeric vector of length 2 giving the color scale limits. If `NA` (default),
+#' a symmetric range is estimated from the difference image via [get_image_scale].
 #'
-#' @param title
-#' Plot title, forwarded to plot_image().
-#'
-#' @param label
-#' Text label drawn on the image, forwarded to plot_image().
-#'
-#' @param label.cor
-#' Writes the Pearson correlation coefficient between objA and objB as images label.
-#' Is put in parentheses if 'label' is not NA.
-#'
-#' @param color.scale
-#' Manually set color scale, forwarded to plot_image(). If not set, grey scale is used.
-#'
-#' @param margin
-#' Plot margin, forwarded to plot_image().
+#' @param cor.label
+#' Whether the Pearson correlation coefficient between objA and objB should
+#' be reported in the image label (`TRUE` by default).
 #'
 #' @param plot
 #' Enable/disable plot output. Useful if only the SpatRaster object is needed.
 #'
+#' @param ...
+#' Arguments passed to [plot_image] (with the exclusion of `wavelength`,
+#' `max.layer` and `contains.outlier`).
+#'
 #' @returns
 #' Returns invisibly the difference image as SpatRaster object.
-plot_image_difference <- function(objA,
-                                  objB,
-                                  range = NA,
-                                  title = NA,
-                                  label = NA,
-                                  label.cor = TRUE,
-                                  color.scale = NA,
-                                  margin = 1.3,
-                                  plot = TRUE){
+#'
+#' @export
+plot_image_difference <- function(
+  objA,
+  objB,
+  range = NA,
+  cor.label = TRUE,
+  plot = TRUE,
+  ...
+) {
 
   imgA <- as.SpatRaster(objA, verbose = FALSE)
   imgB <- as.SpatRaster(objB, verbose = FALSE)
@@ -66,7 +59,11 @@ plot_image_difference <- function(objA,
     range <- c(-diff_range[2], diff_range[2])
   }
 
-  if (label.cor) {
+  label <- list(...)$label %||% NA
+  if (!nzchar(label))
+    label <- NA
+
+  if (cor.label) {
     # Calculate correlation coefficient
     v1 <- terra::values(imgA)
     v2 <- terra::values(imgB)
@@ -74,22 +71,25 @@ plot_image_difference <- function(objA,
     cc <- stats::cor(v1[ok], v2[ok], method = "pearson")
 
     # Formatting
-    cc <- round(cc, 4)
-    if (is.na(label)) {
-      label <- cc
-    }else{
-      label <- paste0(label, " (", cc, ")")
-    }
+    cc <- sprintf("%.4f", cc)
+    label <- if (is.na(label)) cc else paste0(label, " (", cc, ")")
   }
 
   if (plot) {
-    plot_image(img_diff,
-               range = range,
-               title = title,
-               label = label,
-               color.scale = color.scale,
-               margin = margin)
+    ## arguments to pass to plot_image()
+    args <- modifyList(list(
+        margin = 1.3
+    ), list(...))
+    args$obj <- img_diff
+    args$range <- range
+    args$label <- label
+
+    ## ensure we don't pass arguments that wouldn't work as intended
+    args$wavelength <- args$max.layer <- args$contains.outlier <- NULL
+
+    do.call(plot_image, args)
   }
-  names(img_diff) <- paste0("Diff_img", ifelse(is.na(label), "", paste0("_", label)))
+  names(img_diff) <- paste0("Diff_img",
+                            if (is.na(label)) "" else paste0("_", label))
   invisible(img_diff)
 }

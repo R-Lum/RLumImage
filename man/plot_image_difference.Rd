@@ -8,12 +8,9 @@ plot_image_difference(
   objA,
   objB,
   range = NA,
-  title = NA,
-  label = NA,
-  label.cor = TRUE,
-  color.scale = NA,
-  margin = 1.3,
-  plot = TRUE
+  cor.label = TRUE,
+  plot = TRUE,
+  ...
 )
 }
 \arguments{
@@ -21,26 +18,21 @@ plot_image_difference(
 
 \item{objB}{Second image (coercible to SpatRaster); subtrahend of the difference.}
 
-\item{range}{Numeric vector of length 2 giving the color scale limits. If NA (default),
-a symmetric range is estimated from the difference image via get_image_scale().}
+\item{range}{Numeric vector of length 2 giving the color scale limits. If \code{NA} (default),
+a symmetric range is estimated from the difference image via \link{get_image_scale}.}
 
-\item{title}{Plot title, forwarded to plot_image().}
-
-\item{label}{Text label drawn on the image, forwarded to plot_image().}
-
-\item{label.cor}{Writes the Pearson correlation coefficient between objA and objB as images label.
-Is put in parentheses if 'label' is not NA.}
-
-\item{color.scale}{Manually set color scale, forwarded to plot_image(). If not set, grey scale is used.}
-
-\item{margin}{Plot margin, forwarded to plot_image().}
+\item{cor.label}{Whether the Pearson correlation coefficient between objA and objB should
+be reported in the image label (\code{TRUE} by default).}
 
 \item{plot}{Enable/disable plot output. Useful if only the SpatRaster object is needed.}
+
+\item{...}{Arguments passed to \link{plot_image} (with the exclusion of \code{wavelength},
+\code{max.layer} and \code{contains.outlier}).}
 }
 \value{
 Returns invisibly the difference image as SpatRaster object.
 }
 \description{
 Computes and plots the pixel-wise difference between two images
-(objA - objB) using plot_image().
+(objA - objB) using \link{plot_image}.
 }
