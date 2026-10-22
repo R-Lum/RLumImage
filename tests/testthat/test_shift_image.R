@@ -2,7 +2,7 @@ test_that("input validation", {
   testthat::skip_on_cran()
 
   expect_error(shift_image(sandworm.file, method = "error", verbose = FALSE),
-               'should be one of "bilinear", "near"')
+               "Interpolation method should be either 'near' or 'bilinear'")
   expect_error(shift_image(img_2lyr, layer = 3, verbose = FALSE),
                "'layer' must be a vector of valid layer indices between 1 and 2")
 })

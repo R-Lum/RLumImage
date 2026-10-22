@@ -6,6 +6,9 @@ test_that("input validation", {
 
   expect_error(apply_image_alignment(sandworm.file, alignment = 2),
                "'alignment' object is invalid")
+  expect_error(apply_image_alignment(sandworm.file, alignment = align.ok,
+                                     method = "error", verbose = FALSE),
+               "Resampling method should be either 'near' or 'bilinear'")
 })
 
 test_that("check functionality", {

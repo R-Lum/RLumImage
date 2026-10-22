@@ -10,8 +10,9 @@
 #' List returned by align_images(), containing 'success', 'dx', 'dy' and 'angle'.
 #'
 #' @param method
-#' Resampling method forwarded to shift_image()/rotate_image().
-#' "bilinear" by default. "near" is faster and might better preserve intensity values.
+#' Resampling method forwarded to [shift_image] and [rotate_image], one of
+#' `"near"` (default) or `"bilinear"`. `"near"` is faster and might better
+#' preserve intensity values.
 #'
 #' @param force.alignment
 #' If TRUE (default), apply the alignment parameters even if align_images()
@@ -28,11 +29,13 @@
 #' # TODO
 #'
 #' @export
-apply_image_alignment <- function(obj,
-                                  alignment,
-                                  method = "near",
-                                  force.alignment = TRUE,
-                                  verbose = TRUE){
+apply_image_alignment <- function(
+  obj,
+  alignment,
+  method = c("near", "bilinear"),
+  force.alignment = TRUE,
+  verbose = TRUE
+) {
 
   if (!all(c("success", "dx", "dy", "angle") %in% names(alignment)))
     stop("[apply_image_alignment()]: 'alignment' object is invalid. Must be return object from align_images().")
@@ -48,6 +51,8 @@ apply_image_alignment <- function(obj,
   }
 
   img <- as.SpatRaster(obj, verbose = verbose)
+  if (!method[1] %in% c("near", "bilinear"))
+    stop("[apply_image_alignment()] Resampling method should be either 'near' or 'bilinear'.")
 
   out <- shift_image(img,
                      dx = alignment$dx,

@@ -14,8 +14,8 @@
 #' @param fill Fill value for the empty areas created by zooming out (default: NA).
 #'
 #' @param method
-#' Interpolation method for estimating the new cell values, one of `"bilinear"`
-#' (default) or `"near"`.
+#' Interpolation method for estimating the new cell values, one of `"near"`
+#' (default) or `"bilinear"`.
 #'
 #' @param verbose Print progress messages.
 #'
@@ -27,19 +27,24 @@
 #' # TODO
 #'
 #' @export
-shift_image <- function(obj,
-                        dx = 0,
-                        dy = 0,
-                        layer = NA,
-                        fill = NA,
-                        method = c("bilinear", "near"),
-                        verbose = TRUE){
+shift_image <- function(
+  obj,
+  dx = 0,
+  dy = 0,
+  layer = NA,
+  fill = NA,
+  method = c("near", "bilinear"),
+  verbose = TRUE
+) {
 
   ## Changelog
   ## 2026-10-07, DM, DeepSeek v4: Cleaned up code and documentation
 
   img <- as.SpatRaster(obj, verbose = verbose)
   nlyrs <- terra::nlyr(img)
+
+  if (!method[1] %in% c("near", "bilinear"))
+    stop("[shift_image()] Interpolation method should be either 'near' or 'bilinear'.")
   method <- match.arg(method)
 
   # Convert fractional offsets to map units
