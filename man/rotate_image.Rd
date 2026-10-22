@@ -8,7 +8,7 @@ rotate_image(
   obj,
   angle,
   center = c(0.5, 0.5),
-  method = "near",
+  method = c("near", "bilinear"),
   round = FALSE,
   fill = NA,
   verbose = TRUE
@@ -21,9 +21,9 @@ rotate_image(
 
 \item{center}{Center of rotation in relative values.}
 
-\item{method}{Re-sampling method ("near", "bilinear"). \strong{near}rest neighbour is faster
-and preserves signal values and sharp edges in the images.
-\strong{bilinear} interpolation allows for precise rotation without adding distortions
+\item{method}{Resampling method, one of \code{"near"} (default) or \code{"bilinear"}. Nearest
+neighbour is faster and preserves signal values and sharp edges in the image;
+bilinear interpolation allows for precise rotation without adding distortions
 to image structures.}
 
 \item{round}{Input values are usually counts and thus integers. If TRUE, the bilinear interpolated

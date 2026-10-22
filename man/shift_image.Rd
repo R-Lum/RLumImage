@@ -10,7 +10,7 @@ shift_image(
   dy = 0,
   layer = NA,
   fill = NA,
-  method = c("bilinear", "near"),
+  method = c("near", "bilinear"),
   verbose = TRUE
 )
 }
@@ -28,8 +28,8 @@ For example dy = 0.5 shifts by 50\% of the image height}
 
 \item{fill}{Fill value for the empty areas created by zooming out (default: NA).}
 
-\item{method}{Interpolation method for estimating the new cell values, one of \code{"bilinear"}
-(default) or \code{"near"}.}
+\item{method}{Interpolation method for estimating the new cell values, one of \code{"near"}
+(default) or \code{"bilinear"}.}
 
 \item{verbose}{Print progress messages.}
 }

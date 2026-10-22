@@ -2,7 +2,7 @@ test_that("input validation", {
   testthat::skip_on_cran()
 
   expect_error(rotate_image(sandworm.file, method = "error"),
-               "Resampling method must be either 'bilinear' or 'near'")
+               "Resampling method should be either 'near' or 'bilinear'")
 })
 
 test_that("check functionality", {

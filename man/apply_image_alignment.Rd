@@ -7,7 +7,7 @@
 apply_image_alignment(
   obj,
   alignment,
-  method = "near",
+  method = c("near", "bilinear"),
   force.alignment = TRUE,
   verbose = TRUE
 )
@@ -17,8 +17,9 @@ apply_image_alignment(
 
 \item{alignment}{List returned by align_images(), containing 'success', 'dx', 'dy' and 'angle'.}
 
-\item{method}{Resampling method forwarded to shift_image()/rotate_image().
-"bilinear" by default. "near" is faster and might better preserve intensity values.}
+\item{method}{Resampling method forwarded to \link{shift_image} and \link{rotate_image}, one of
+\code{"near"} (default) or \code{"bilinear"}. \code{"near"} is faster and might better
+preserve intensity values.}
 
 \item{force.alignment}{If TRUE (default), apply the alignment parameters even if align_images()
 did not report a successful convergence (with a warning).}

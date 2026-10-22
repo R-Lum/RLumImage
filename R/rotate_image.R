@@ -10,9 +10,9 @@
 #' Center of rotation in relative values.
 #'
 #' @param method
-#' Re-sampling method ("near", "bilinear"). **near**rest neighbour is faster
-#' and preserves signal values and sharp edges in the images.
-#' **bilinear** interpolation allows for precise rotation without adding distortions
+#' Resampling method, one of `"near"` (default) or `"bilinear"`. Nearest
+#' neighbour is faster and preserves signal values and sharp edges in the image;
+#' bilinear interpolation allows for precise rotation without adding distortions
 #' to image structures.
 #'
 #' @param round
@@ -33,14 +33,15 @@
 #' # TODO
 #'
 #' @export
-rotate_image <- function(obj,
-                         angle,
-                         center = c(0.5, 0.5),
-                         method = "near",
-                         round = FALSE,
-                         fill = NA,
-                         verbose = TRUE
-                         ){
+rotate_image <- function(
+  obj,
+  angle,
+  center = c(0.5, 0.5),
+  method = c("near", "bilinear"),
+  round = FALSE,
+  fill = NA,
+  verbose = TRUE
+) {
 
   ## ------ Changelog ------
   ## 2026-01-30, DM: First fully functional version, created with the help of ChatGPT 5
@@ -65,10 +66,9 @@ rotate_image <- function(obj,
   ##  | expand.grid() — output pixel grid | 0.31s | 12% |
   ##  | rast() — array → SpatRaster reconstruction | 0.06s | 2.3% |
 
-
-  if (!(method %in% c("bilinear", "near")))
-    stop("[rotate_image()] Resampling method must be either 'bilinear' or 'near'.")
-
+  if (!method[1] %in% c("near", "bilinear"))
+    stop("[rotate_image()] Resampling method should be either 'near' or 'bilinear'.")
+  method <- match.arg(method)
   is_raster <- FALSE
 
   if (is.matrix(obj)) {
