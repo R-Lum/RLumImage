@@ -6,8 +6,8 @@
 #' @param angle
 #' Clockwise rotation angle in degree.
 #'
-#' @param center
-#' Center of rotation in relative values.
+#' @param centre
+#' Centre of rotation in relative values.
 #'
 #' @param method
 #' Resampling method, one of `"near"` (default) or `"bilinear"`. Nearest
@@ -36,7 +36,7 @@
 rotate_image <- function(
   obj,
   angle,
-  center = c(0.5, 0.5),
+  centre = c(0.5, 0.5),
   method = c("near", "bilinear"),
   round = FALSE,
   fill = NA,
@@ -53,7 +53,7 @@ rotate_image <- function(
   ##
   ## ToDos
   ## - Improve performance!
-  ## - Center arguments input check
+  ## - Centre arguments input check
   ## - Improve documentation
   ##
   ##  Performance analysis results by Claude Sonnet 5 at 2026-07-30 using
@@ -105,9 +105,9 @@ rotate_image <- function(
    cat(text, paste0(round(abs(angle), 2), "\u00b0 ", rot_dir,"."), "\n") # \u00b0 is °
   }
 
-  # Rotation center in pixel coordinates
-  center_col <- ncols * center[1] + 0.5
-  center_row <- nrows * (1 - center[2]) + 0.5
+  # Rotation centre in pixel coordinates
+  centre_col <- ncols * centre[1] + 0.5
+  centre_row <- nrows * (1 - centre[2]) + 0.5
 
 
   # Convert degrees to radians
@@ -121,13 +121,13 @@ rotate_image <- function(
     col = seq_len(ncols)
   )
 
-  # Pixel offset relative to rotation center
-  dx <- grid$col - center_col
-  dy <- grid$row - center_row
+  # Pixel offset relative to rotation centre
+  dx <- grid$col - centre_col
+  dy <- grid$row - centre_row
 
   # Inverse rotation (output → input)
-  src_x <-  ct * dx + st * dy + center_col
-  src_y <- -st * dx + ct * dy + center_row
+  src_x <-  ct * dx + st * dy + centre_col
+  src_y <- -st * dx + ct * dy + centre_row
 
   # Skip pixels outside the input image
   inside <- src_x >= 1 & src_x <= ncols &

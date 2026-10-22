@@ -7,7 +7,7 @@
 rotate_image(
   obj,
   angle,
-  center = c(0.5, 0.5),
+  centre = c(0.5, 0.5),
   method = c("near", "bilinear"),
   round = FALSE,
   fill = NA,
@@ -19,7 +19,7 @@ rotate_image(
 
 \item{angle}{Clockwise rotation angle in degree.}
 
-\item{center}{Center of rotation in relative values.}
+\item{centre}{Centre of rotation in relative values.}
 
 \item{method}{Resampling method, one of \code{"near"} (default) or \code{"bilinear"}. Nearest
 neighbour is faster and preserves signal values and sharp edges in the image;

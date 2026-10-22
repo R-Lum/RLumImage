@@ -93,7 +93,7 @@ align_images <- function(fixed,
 
   if (optimization.roi < 1) {
 
-    # Calculate centered crop dimensions
+    # Calculate centred crop dimensions
     crop_width <- round(ncols * optimization.roi)
     crop_height <- round(nrows * optimization.roi)
 

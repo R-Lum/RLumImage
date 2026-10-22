@@ -1,13 +1,13 @@
 #' Rescales (zoom) an image or image stack while maintaining its dimensions
 #'
-#' Scales the image content by `scale` relative to `center` and warps it back
+#' Scales the image content by `scale` relative to `centre` and warps it back
 #' onto the original grid so the output keeps the same extent and resolution.
 #'
 #' @param obj Image or image stack or file path. See `as.SpatRaster` for allowed objects.
 #'
 #' @param scale Zoom factor (> 1 zooms in, < 1 zooms out; default: 1).
 #'
-#' @param center
+#' @param centre
 #' Scaling centre as a fraction of the extent (x, y), each in \[0, 1\]
 #'   (default: c(0.5, 0.5)).
 #'
@@ -31,7 +31,7 @@
 #' @export
 rescale_image <- function(obj,
                           scale = 1,
-                          center = c(0.5, 0.5),
+                          centre = c(0.5, 0.5),
                           layer = NA,
                           fill = NA,
                           method = "bilinear",
@@ -51,8 +51,8 @@ rescale_image <- function(obj,
   if (!(method %in% c("bilinear", "near")))
     stop("[rescale_image()] Interpolation method must be either 'bilinear' or 'near'.")
 
-  if (!is.numeric(center) || length(center) != 2 || any(center < 0) || any(center > 1))
-    stop("[rescale_image()] 'center' must be a numeric vector of length 2 with values between 0 and 1.")
+  if (!is.numeric(centre) || length(centre) != 2 || any(centre < 0) || any(centre > 1))
+    stop("[rescale_image()] 'centre' must be a numeric vector of length 2 with values between 0 and 1.")
 
   # Check whether input is a SpatRaster
   img <- as.SpatRaster(obj, verbose = verbose)
@@ -67,11 +67,11 @@ rescale_image <- function(obj,
   if (verbose) cat("Rescale", nlays,"images to", scale * 100,"% ... ")
 
   ref_ext <- terra::ext(img)
-  cx <- (ref_ext[1] + ref_ext[2]) * center[1]
-  cy <- (ref_ext[3] + ref_ext[4]) * center[2]
+  cx <- (ref_ext[1] + ref_ext[2]) * centre[1]
+  cy <- (ref_ext[3] + ref_ext[4]) * centre[2]
 
 
-  # Scaled source extent (relative to center)
+  # Scaled source extent (relative to centre)
   src_ext <- terra::ext(
     cx + (ref_ext[1] - cx) * scale,
     cx + (ref_ext[2] - cx) * scale,

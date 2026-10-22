@@ -7,7 +7,7 @@
 rescale_image(
   obj,
   scale = 1,
-  center = c(0.5, 0.5),
+  centre = c(0.5, 0.5),
   layer = NA,
   fill = NA,
   method = "bilinear",
@@ -19,7 +19,7 @@ rescale_image(
 
 \item{scale}{Zoom factor (> 1 zooms in, < 1 zooms out; default: 1).}
 
-\item{center}{Scaling centre as a fraction of the extent (x, y), each in [0, 1]
+\item{centre}{Scaling centre as a fraction of the extent (x, y), each in [0, 1]
 (default: c(0.5, 0.5)).}
 
 \item{layer}{Integer vector of layer indices to rescale; NA rescales all layers
@@ -37,7 +37,7 @@ A \code{terra::SpatRaster} with the same dimensions as the input, with the
 selected layer(s) shifted by the given fractional offsets.
 }
 \description{
-Scales the image content by \code{scale} relative to \code{center} and warps it back
+Scales the image content by \code{scale} relative to \code{centre} and warps it back
 onto the original grid so the output keeps the same extent and resolution.
 }
 \examples{
