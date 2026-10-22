@@ -1,7 +1,7 @@
 # snapshot tests
 
     Code
-      running_median(sandworm.file, window.size = 1)
+      apply_median_grouping(sandworm.file, window.size = 1)
     Output
       Load image file sandworm_rf_median.tif into system memory.
       Input images: 1 

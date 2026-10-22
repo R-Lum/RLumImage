@@ -1,28 +1,33 @@
 #' Creates a grouped median image stack from an input stack
 #'
+#' @description
+#' Combines every *N* images of a stack into a median image. This removes X-ray
+#' speckles in RF images and reduces the amount of data.
+#'
 #' @param obj
-#' TODO
+#' An object coercible to a `SpatRaster` (see [as.SpatRaster]) containing the
+#' image stack.
 #'
 #' @param window.size
-#' TODO
+#' Number of images (or layers) to combine together.
 #'
 #' @param verbose
 #' Print progress messages.
 #'
 #' @returns
-#' TODO
+#' An image stack.
 #'
 #' @examples
 #' # TODO
 #'
 #' @export
-running_median <- function(obj,
-                           window.size = 5,
-                           verbose = TRUE){
+apply_median_grouping <- function(
+  obj,
+  window.size = 5,
+  verbose = TRUE
+) {
 
   ## ToDo's:
-  ## - "running_median" is a misleading function name, rename it to "median_grouping" or
-  ##   something similar in RLumImage
   ## - If the input (and output) objects contain any meta data on the detection interval,
   ##   don't forget to update the that meta data on the output object
 
@@ -33,7 +38,7 @@ running_median <- function(obj,
   if (verbose) cat("Input images:", n_layers, "\n")
 
   if (n_layers < window.size)
-    stop("[running_median()] Number of images is smaller than window size.")
+    stop("[apply_median_grouping()] Number of images is smaller than window size.")
 
   if (n_layers %% window.size != 0) {
     msg <- "Number of images is not a multiple of the window size. Any excess images are disregarded."
