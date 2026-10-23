@@ -202,6 +202,7 @@ plot_image <- function(
   if (is.null(classes)) {
     classes <- .default_mineral_classes()
   }
+  classes <- as.list(classes)
 
   # Pixel size in spatial units, needed to scale pixel-radius circles
   # to the coordinate system
@@ -212,10 +213,8 @@ plot_image <- function(
   for (roi in rois) {
     i <- i + 1
 
-    # Set ROI color
-    clr <- as.character(classes[roi$class])
-
-    if (is.null(clr)) clr <- "white" # Default value
+    # Set ROI colour, falling back to white for unknown classes
+    clr <- classes[[roi$class %||% ""]] %||% "white"
 
     # Decide the drawing function based on the ROI shape
     if(roi$shape == "circle"){

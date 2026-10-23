@@ -34,5 +34,8 @@ test_that("graphical snapshot tests", {
   vdiffr::expect_doppelganger("rois",
                               plot_image(img_1lyr, rois = rois,
                                          roi.ids = TRUE))
+  vdiffr::expect_doppelganger("issue 9",
+                              plot_image(img_1lyr, rois = rois,
+                                         classes = list(Unclassified = "red")))
   })
 })

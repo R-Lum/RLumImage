@@ -156,7 +156,7 @@
 <g clip-path='url(#cpNTkuNDd8NjAyLjkzfDE2LjI3fDU1OS43Mw==)'>
 <polyline points='480.86,346.38 480.78,345.36 480.53,344.36 480.13,343.42 479.59,342.55 478.91,341.79 478.11,341.14 477.22,340.63 476.27,340.26 475.26,340.06 474.24,340.02 473.22,340.14 472.24,340.42 471.31,340.86 470.47,341.45 469.73,342.16 469.11,342.98 468.64,343.88 468.31,344.85 468.15,345.87 468.15,346.89 468.31,347.90 468.64,348.88 469.11,349.78 469.73,350.60 470.47,351.31 471.31,351.89 472.24,352.33 473.22,352.62 474.24,352.74 475.26,352.70 476.27,352.50 477.22,352.13 478.11,351.62 478.91,350.97 479.59,350.20 480.13,349.34 480.53,348.40 480.78,347.40 480.86,346.38 ' style='stroke-width: 0.75; stroke: #FF0000;' />
 <text x='474.49' y='350.92' text-anchor='middle' style='font-size: 13.20px; font-weight: bold; fill: #FF0000; font-family: sans;' textLength='7.34px' lengthAdjust='spacingAndGlyphs'>1</text>
-<polyline points='283.97,306.58 292.46,306.58 292.46,317.19 283.97,317.19 283.97,306.58 ' style='stroke-width: 0.75; stroke: none;' />
-<text x='288.21' y='316.49' text-anchor='middle' style='font-size: 13.20px; font-weight: bold; font-family: sans;' textLength='7.34px' lengthAdjust='spacingAndGlyphs'>2</text>
+<polyline points='283.97,306.58 292.46,306.58 292.46,317.19 283.97,317.19 283.97,306.58 ' style='stroke-width: 0.75; stroke: #FFFFFF;' />
+<text x='288.21' y='316.49' text-anchor='middle' style='font-size: 13.20px; font-weight: bold; fill: #FFFFFF; font-family: sans;' textLength='7.34px' lengthAdjust='spacingAndGlyphs'>2</text>
 </g>
 </svg>
