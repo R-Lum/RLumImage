@@ -3,7 +3,7 @@
     Code
       rotate_image(matrix(1:9, ncol = 3), 90)
     Output
-      Rotate image 90° clockwise. 
+      Rotate image 90° clockwise.
            [,1] [,2] [,3]
       [1,]    3    2    1
       [2,]    6    5    4
@@ -14,7 +14,7 @@
     Code
       rotate_image(array(1:27, dim = c(3, 3, 3)), -180)
     Output
-      Rotate 3 images 180° counter-clockwise. 
+      Rotate 3 images 180° counter-clockwise.
       , , 1
       
            [,1] [,2] [,3]

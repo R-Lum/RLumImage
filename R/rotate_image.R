@@ -97,12 +97,10 @@ rotate_image <- function(
 
   # Console output
   if (verbose) {
-   rot_dir <- "clockwise"
-   if (angle < 0) rot_dir <- "counter-clockwise"
-   text <- "Rotate image"
-   if (nlays > 1) text <- paste("Rotate", nlays, "images")
-
-   cat(text, paste0(round(abs(angle), 2), "\u00b0 ", rot_dir,"."), "\n") # \u00b0 is °
+   cat(sprintf("Rotate %s %g\u00b0 %s.\n", # \u00b0 is °
+               if (nlays > 1) paste(nlays, "images") else "image",
+               round(abs(angle), 2),
+               if (angle < 0) "counter-clockwise" else "clockwise"))
   }
 
   # Rotation centre in pixel coordinates
