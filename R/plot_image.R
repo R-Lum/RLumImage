@@ -193,13 +193,7 @@ plot_image <- function(
   # Default mineral classes and their display colours, matching
   # select_grains()'s defaults
   if (is.null(classes)) {
-    classes <- c(
-      "Unclassified" = "red",
-      "Quartz"       = "yellow",
-      "K-felspar"    = "cyan",
-      "Plagioclase"  = "green",
-      "Other"        = "magenta"
-    )
+    classes <- .default_mineral_classes()
   }
 
   # Pixel size in spatial units, needed to scale pixel-radius circles

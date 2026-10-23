@@ -54,7 +54,6 @@ select_grains <- function(obj,
 
   ## ToDo's
   ## - Is it possible to start the app in fullscreen automatically in RStudio?
-  ## - Define default ROI classes somewhere else and just load it here
   ## - Make more use of the info text fields at the top (for example: dynamic informations)
   ## - Update the value in the "Threshol" box after performing "find grains"
   ## - Allow coloured and multispectral images
@@ -66,13 +65,8 @@ select_grains <- function(obj,
 
   # ── Default mineral classes and their display colours ─────────────────────
   if (is.null(classes)) {
-    classes <- c(
-      "Unclassified" = "red",
-      "Quartz"       = "yellow",
-      "K-felspar"    = "cyan",
-      "Plagioclase"  = "green",
-      "Other"        = "magenta"
-    )}
+    classes <- .default_mineral_classes()
+  }
 
   # Remember the name of the input object for the ROI info slot
   source_obj <- deparse(substitute(obj))
