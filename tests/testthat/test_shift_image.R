@@ -20,4 +20,6 @@ test_that("check functionality", {
                 "Shift 2 images 58.9 pixel to the right and 512 pixel downwards")
   expect_output(shift_image(img_2lyr, layer = 2),
                 "Shift 1 of 2 images 0 pixel to the right and 0 pixel upwards")
+  expect_output(shift_image(c(img_2lyr, img_2lyr), layer = 2:3),
+                "Shift 2 of 4 images 0 pixel to the right and 0 pixel upwards")
 })

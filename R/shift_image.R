@@ -52,11 +52,18 @@ shift_image <- function(
   shift_x <- dx * terra::ncol(img) * terra::xres(img)
   shift_y <- dy * terra::nrow(img) * terra::yres(img)
 
+  # Validate layer indices
+  shift_all <- isTRUE(is.na(layer))
+  if (shift_all)
+    layer <- seq_len(nlyrs)
+  if (!is.numeric(layer) || any(is.na(layer)) || any(layer < 1) || any(layer > nlyrs))
+    stop("[shift_image()] 'layer' must be a vector of valid layer indices between 1 and ", nlyrs, ".")
+
   # Console output
   if (verbose) {
     if (nlyrs == 1) {
       what <- "image"
-    } else if (is.na(layer)) {
+    } else if (shift_all) {
       what <- paste(nlyrs, "images")
     } else {
       what <- paste(length(layer), "of", nlyrs, "images")
@@ -68,17 +75,12 @@ shift_image <- function(
                 what, round(abs(shift_x), 1), x_dir, round(abs(shift_y), 1), y_dir))
   }
 
-  # Validate layer indices (NA means shift all layers)
-  if (length(layer) == 1 && is.na(layer)) {
-
+  if (shift_all) {
     out <- terra::shift(img, dx = shift_x, dy = shift_y)
     out <- terra::resample(out, img, method = method)
     out[is.na(out)] <- fill
     return(out)
   }
-
-  if (!is.numeric(layer) || any(is.na(layer)) || any(layer < 1) || any(layer > nlyrs))
-    stop("[shift_image()] 'layer' must be a vector of valid layer indices between 1 and ", nlyrs, ".")
 
   # Work on a copy to preserve unshifted layers
   out <- img
