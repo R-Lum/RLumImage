@@ -34,8 +34,11 @@ test_that("graphical snapshot tests", {
   vdiffr::expect_doppelganger("rois",
                               plot_image(img_1lyr, rois = rois,
                                          roi.ids = TRUE))
+  expect_warning(
   vdiffr::expect_doppelganger("issue 9",
                               plot_image(img_1lyr, rois = rois,
-                                         classes = list(Unclassified = "red")))
+                                         classes = list(Unclassified = "red"))),
+  "Some mineral classes ('Intentional error') are missing from",
+  fixed = TRUE)
   })
 })

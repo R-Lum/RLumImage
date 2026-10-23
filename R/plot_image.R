@@ -204,6 +204,13 @@ plot_image <- function(
   }
   classes <- as.list(classes)
 
+  # check that all classes cover the classes used in rois
+  missing <- setdiff(unlist(sapply(rois, function(x) x$class)), names(classes))
+  if (length(missing) > 0) {
+    warning("[plot_image] Some mineral classes (", toString(sQuote(missing)),
+            ") are missing from 'classes' and will be drawn in white")
+  }
+
   # Pixel size in spatial units, needed to scale pixel-radius circles
   # to the coordinate system
   xres <- terra::xres(img)
