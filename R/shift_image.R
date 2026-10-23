@@ -54,25 +54,18 @@ shift_image <- function(
 
   # Console output
   if (verbose) {
-
-    # Directions?
-    x_dir <- "right"
-    if (shift_x < 0)  x_dir <- "left"
-    y_dir <- "upwards"
-    if (shift_y < 0)  y_dir <- "downwards"
-
-    text <- "Shift"
     if (nlyrs == 1) {
-      text <- paste(text, "image")
+      what <- "image"
     } else if (is.na(layer)) {
-      text <- paste(text, nlyrs, "images")
+      what <- paste(nlyrs, "images")
     } else {
-      text <- paste(text, length(layer), "of", nlyrs, "images")
+      what <- paste(length(layer), "of", nlyrs, "images")
     }
 
-    text <- paste(text, round(abs(shift_x), 1), "pixel to the", x_dir, "and")
-    text <- paste(text, round(abs(shift_y), 1), "pixel", y_dir)
-    cat(paste0(text, ".\n"))
+    x_dir <- if (shift_x < 0) "left" else "right"
+    y_dir <- if (shift_y < 0) "downwards" else "upwards"
+    cat(sprintf("Shift %s %g pixel to the %s and %g pixel %s.\n",
+                what, round(abs(shift_x), 1), x_dir, round(abs(shift_y), 1), y_dir))
   }
 
   # Validate layer indices (NA means shift all layers)
