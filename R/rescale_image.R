@@ -60,11 +60,14 @@ rescale_image <- function(obj,
   nlays <- terra::nlyr(img)
 
   # Validate layer indices (NA means rescale all layers)
-  if (!(length(layer) == 1 && is.na(layer)) &&
-      (!is.numeric(layer) || any(is.na(layer)) || any(layer < 1) || any(layer > nlays)))
+  rescale_all <- identical(layer, NA)
+  if (rescale_all)
+    layer <- seq_len(nlays)
+  else if (!is.numeric(layer) || any(is.na(layer)) || any(layer < 1) || any(layer > nlays))
     stop("[rescale_image()] 'layer' must be a vector of valid layer indices between 1 and ", nlays, ".")
 
-  if (verbose) cat("Rescale", nlays,"images to", scale * 100,"% ... ")
+  if (verbose)
+    cat("Rescale", length(layer), "images to", scale * 100, "% ... ")
 
   ref_ext <- terra::ext(img)
   cx <- (ref_ext[1] + ref_ext[2]) * centre[1]
@@ -83,7 +86,7 @@ rescale_image <- function(obj,
   src <- img
   terra::ext(src) <- src_ext
 
-  if (length(layer) == 1 && is.na(layer)) {
+  if (rescale_all) {
 
     # Rescale all layers at once
     out <- terra::resample(src, img, method = method)

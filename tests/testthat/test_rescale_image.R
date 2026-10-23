@@ -16,6 +16,14 @@ test_that("input validation", {
   expect_error(rescale_image(sandworm.file, layer = c(0.2, 3),
                              verbose = FALSE),
                "layer' must be a vector of valid layer indices between 1 and 1")
+  expect_error(rescale_image(img_2lyr, layer = 3, verbose = FALSE),
+               "'layer' must be a vector of valid layer indices between 1 and 2")
+  expect_error(rescale_image(img_2lyr, layer = 0, verbose = FALSE),
+               "'layer' must be a vector of valid layer indices between 1 and 2")
+  expect_error(rescale_image(img_2lyr, layer = c(1, NA), verbose = FALSE),
+               "'layer' must be a vector of valid layer indices between 1 and 2")
+  expect_error(rescale_image(img_2lyr, layer = "1", verbose = FALSE),
+               "'layer' must be a vector of valid layer indices between 1 and 2")
 })
 
 test_that("check functionality", {
@@ -26,5 +34,18 @@ test_that("check functionality", {
   expect_output(rescale_image(img_2lyr, layer = 1:2, fill = 0),
                 "Rescale 2 images to 100 %")
   expect_output(rescale_image(c(img_2lyr, img_2lyr), layer = 2:3, fill = 0),
-                "Rescale 4 images to 100 %")
+                "Rescale 2 images to 100 %")
+
+  ref_vals <- lapply(1:2, function(i) terra::values(img_2lyr[[i]]))
+  res <- rescale_image(img_2lyr, scale = 0.5, verbose = FALSE)
+  expect_false(identical(terra::values(res[[1]]),
+                         ref_vals[[1]]))
+  expect_false(identical(terra::values(res[[2]]),
+                         ref_vals[[2]]))
+
+  res <- rescale_image(img_2lyr, scale = 0.5, layer = 2, verbose = FALSE)
+  expect_equal(terra::values(res[[1]]),
+               ref_vals[[1]])
+  expect_false(identical(terra::values(res[[2]]),
+                         ref_vals[[2]]))
 })
