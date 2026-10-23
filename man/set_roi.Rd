@@ -2,7 +2,7 @@
 % Please edit documentation in R/set_roi.R
 \name{set_roi}
 \alias{set_roi}
-\title{Create or edit a region-of-interest (ROI) object}
+\title{Create or edit a region of interest (ROI) object}
 \usage{
 set_roi(
   roi = NULL,
@@ -26,21 +26,21 @@ set_roi(
 \item{mask}{A logical matrix defining the shape of the ROI. \code{TRUE} values indicate
 pixels within the ROI, \code{FALSE} values indicate pixels outside.}
 
-\item{col_min}{Numeric (pixels). The column index (1-based) of the upper-left corner
-of the ROI bounding box in the image.}
+\item{col_min}{The column index (1-based) of the upper-left corner of the ROI bounding
+box in the image.}
 
-\item{row_min}{Numeric (pixels). The row index (1-based) of the upper-left corner
-of the ROI bounding box in the image.}
+\item{row_min}{The row index (1-based) of the upper-left corner of the ROI bounding box in
+the image.}
 
-\item{shape}{Character. The geometric shape of the ROI (e.g., "circle", "rectangle").
-Used for proper visualization of the ROI overlay.}
+\item{shape}{The geometric shape of the ROI (e.g., \code{"circle"}, \code{"rectangle"}). Used for
+proper visualisation of the ROI overlay.}
 
-\item{class}{Character. Mineral classification for the ROI (default: "unclassified").}
+\item{class}{Mineral classification for the ROI (\code{"Unclassified"} by default).}
 
 \item{info}{A named list of optional attributes and parameters associated with the ROI.}
 
-\item{overlay}{A named list of plotting parameters for visualizing the ROI overlay.
-The necessary arguments in the overlay list depend on the \code{shape} of the ROI.}
+\item{overlay}{A named list of plotting parameters for visualising the ROI overlay. The
+necessary arguments in the overlay list depend on the \code{shape} of the ROI.}
 
 \item{curves}{A named list of luminescence curves extracted from image stacks.}
 
@@ -48,17 +48,23 @@ The necessary arguments in the overlay list depend on the \code{shape} of the RO
 
 \item{add.info}{A named list of attributes to add to the ROI's \code{info} list.}
 
-\item{source.image}{TODO}
+\item{source.image}{An object coercible to a \code{SpatRaster} (see \link{as.SpatRaster}) representing the
+image from which the ROI originates. Its dimensions are stored in the ROI's
+\code{info} as \code{source_ncols} and \code{source_nrows} (default: \code{NULL}).}
 
-\item{warnings}{Logical. If \code{TRUE} (default), print warnings about potential data loss
-when overwriting existing parameters.}
+\item{warnings}{Whether warnings about potential data loss when overwriting existing
+parameters should be reported (\code{TRUE} by default).}
 }
 \value{
-A list representing a single ROI object, compatible with \code{\link[=apply_rois]{apply_rois()}} and
-\code{\link[=select_grains]{select_grains()}}.
+A list representing a single ROI object, compatible with \link{apply_rois} and
+\link{select_grains}.
 }
 \description{
 Creates a new ROI object or edits an existing one. ROIs define regions within an
 image, typically used for extracting luminescence signal time series. This function
 supports setting the ROI shape, position, and metadata like mineral class.
+}
+\examples{
+# TODO
+
 }

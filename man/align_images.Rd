@@ -16,11 +16,16 @@ align_images(
 )
 }
 \arguments{
-\item{fixed}{Reference SpatRaster (single layer)}
+\item{fixed}{An object coercible to a \code{SpatRaster} (see \link{as.SpatRaster}) containing the
+image stack. If it contains multiple layers, a representative median image
+is created first.}
 
-\item{moving}{SpatRaster to be aligned to 'fixed' (single layer)}
+\item{moving}{An object coercible to a \code{SpatRaster} (see \link{as.SpatRaster}) containing the
+image stack of the same dimension as \code{fixed}. If it contains multiple layers,
+a representative median image is created first.}
 
-\item{method}{Optimization method, forwarded to optim() (e.g. "L-BFGS-B", "Nelder-Mead")}
+\item{method}{Optimization method, forwarded to \link[stats:optim]{stats::optim} (e.g. "L-BFGS-B",
+"Nelder-Mead").}
 
 \item{max.rotation}{Maximum absolute rotation (in degrees) allowed during the search. Used as
 the lower/upper bound for the rotation parameter.}
@@ -28,25 +33,25 @@ the lower/upper bound for the rotation parameter.}
 \item{max.shift}{Maximum allowed shift, expressed as a fraction of image width/height.
 Used to calculate the lower/upper bounds for dx and dy.}
 
-\item{optimization.roi}{Fractional size of the region-of-interest (ROI) used during optimization.
-Default 0.8 means a centered crop of 80\% of the original image width/height
+\item{optimization.roi}{Fractional size of the region of interest (ROI) used during optimization.
+Default 0.8 means a centred crop of 80\% of the original image width/height
 is used in the similarity function. Values < 1 reduce computation time and
-robustness to edge artifacts; 1.0 uses the full image.}
+robustness to edge artefacts; 1.0 uses the full image.}
 
-\item{plot}{If TRUE (default), plot two difference images: 'fixed' minus 'moving'
-(before alignment), and 'fixed' minus 'aligned' (after alignment, where
-'aligned' is 'moving' with the estimated shift/rotation applied).}
+\item{plot}{If \code{TRUE} (default), plot two difference images: \code{fixed} minus \code{moving}
+(before alignment), and \code{fixed} minus \code{aligned} (after alignment, where
+\code{aligned} is \code{moving} with the estimated shift/rotation applied).}
 
-\item{verbose}{Print progress messages.}
+\item{verbose}{Whether progress messages should be printed to the terminal.}
 }
 \value{
-An object of class \code{RLumImage.Alignment}, containing the result of \link{optim}
-and the estimated parameters (dx, dy, angle).
+An object of class \code{RLumImage.Alignment}, containing the result of
+\link[stats:optim]{stats::optim} and the estimated parameters (dx, dy, angle).
 }
 \description{
 Estimates the horizontal shift, vertical shift and rotation angle that
-best aligns 'moving' onto 'fixed', using image correlation as the
-similarity metric and optim() for the parameter search.
+best aligns \code{moving} onto \code{fixed}, using image correlation as the
+similarity metric and \link[stats:optim]{stats::optim} for the parameter search.
 }
 \examples{
 # TODO

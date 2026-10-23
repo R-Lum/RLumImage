@@ -1,30 +1,35 @@
 #' Shifts an image or image stack while maintaining dimension
 #'
-#' @param obj Image or image stack or file path. See `as.SpatRaster` for allowed objects.
+#' @param obj
+#' An object coercible to a `SpatRaster` (see [as.SpatRaster]) containing the
+#' image stack.
 #'
-#' @param dx Fractional shift relative to image dimensions in direction of the x-axis.
-#' For example dx = 0.5 shifts by 50% of the image width
+#' @param dx,dy
+#' Fractional shift relative to image dimensions in direction of the x-axis or
+#' the y-axis. For example dx = 0.5 shifts to the right by 50% of the image
+#' width.
 #'
-#' @param dy Fractional shift relative to image dimensions in direction of the y-axis.
-#' For example dy = 0.5 shifts by 50% of the image height
+#' @param layer
+#' Indices of layer to shift. If `NA` (default), all layers are rescaled.
 #'
-#' @param layer Integer vector of layer indices to shift; NA shifts all layers
-#'   (default: NA).
-#'
-#' @param fill Fill value for the empty areas created by zooming out (default: NA).
+#' @param fill
+#' Value used to fill the empty areas created by shifting (`NA` by default).
 #'
 #' @param method
 #' Interpolation method for estimating the new cell values, one of `"near"`
 #' (default) or `"bilinear"`.
 #'
-#' @param verbose Print progress messages.
+#' @param verbose
+#' Whether progress messages should be printed to the terminal.
 #'
-#' @returns
+#' @return
 #' A `terra::SpatRaster` with the same dimensions as the input, with the
-#' selected layer(s) shifted by the given fractional offsets.
+#' selected layers shifted by the given fractional offsets.
 #'
 #' @examples
-#' # TODO
+#' # shift the image 256 pixel to the right and downwards
+#' file <- system.file("extdata/sandworm_rf_median.tif", package = "RLumImage")
+#' shift_image(file, 0.5, -0.5)
 #'
 #' @export
 shift_image <- function(

@@ -1,26 +1,32 @@
 #' Converts an array, a matrix or an image file (usually a TIFF file) to a terra::SpatRaster object
 #'
 #' @param obj
-#' TODO
+#' A `SpatRaster` or an object coercible to one, i.e. a file path, a matrix,
+#' a 3-dimensional array, a numeric vector (of length 4 at least), or a nested
+#' list as returned by [import_lexsyg_images].
 #'
-#' @param noflip 'noflip = TRUE' ensures that no coordinate system transformation happens
+#' @param noflip
+#' Whether no coordinate system transformation should happen (`TRUE` by
+#' default).
 #'
 #' @param warnings
-#' TODO
+#' Whether warnings produced by [terra::rast] should be reported (`FALSE` by
+#' default).
 #'
 #' @param verbose
-#' Print progress messages.
+#' Whether progress messages should be printed to the terminal.
 #'
 #' @examples
 #' file <- system.file("extdata/sandworm_rf_median.tif", package = "RLumImage")
 #' obj <- as.SpatRaster(file)
 #'
 #' @export
-as.SpatRaster <- function(obj,
-                          noflip = TRUE,
-                          warnings = FALSE,
-                          verbose = TRUE
-                          ){
+as.SpatRaster <- function(
+  obj,
+  noflip = TRUE,
+  warnings = FALSE,
+  verbose = TRUE
+) {
 
   ## ToDo:
   ## - Accept also Luminescence::RLumImage objects

@@ -6,9 +6,9 @@ RLum network package for luminescence image processing.
 
 Features needed before release:
 
-- Collect small example data sets (TIF/XSYG) of a OSL, TL and RF measurement, add to repository and refer ALL code examples and module tests to them
+- Collect small example data sets (TIF/XSYG) of OSL, TL and RF measurement, add to repository and refer ALL code examples and module tests to them
 
-- Get a Risö Reader EMCCD data set and implement its import
+- Get a Risø Reader EMCCD data set and implement its import
 
 - Enhance internal data structure to hand over meta data and processing history
 
@@ -37,7 +37,7 @@ Features needed before release:
 | `rescale_image` | Zooms in or out or moves an image's centre while maintaining its dimensions. Works also with image stacks. |
 | `rotate_image` | Rotates an image while maintaining its dimensions. Works also with image stacks. |
 | `select_grains` | Opens a shiny app that lets the user place circular ROIs on a reference image (combined as the pixel-wise mean of the stack), assign a mineral class to each, and optionally detect grains automatically via `find_grains()`. Returns per-grain ROI objects in the format of `set_roi()` / `apply_rois()`. |
-| `set_roi` | Creates a new region-of-interest (ROI) object (pixel `mask`, position, `shape`, mineral `class`, optional `info`/`overlay`/`curves`) or edits an existing one. Underlies the ROI objects used by `apply_rois()`, `find_grains()` and `select_grains()`. |
+| `set_roi` | Creates a new region of interest (ROI) object (pixel `mask`, position, `shape`, mineral `class`, optional `info`/`overlay`/`curves`) or edits an existing one. Underlies the ROI objects used by `apply_rois()`, `find_grains()` and `select_grains()`. |
 | `shift_image` | Shifts an image's position while maintaining its dimensions. Works also with image stacks. |
 | `wavelength_to_rgb` | Converts a wavelength into an RGB value. Helper function for plotting functions. |
 | `write_rf_table` | Saves single-grain IR-RF measurements as a `*.rf` file (Mittelstrass & Kreutzer 2021) with `<Statistics>`, `<Natural>` and `<Bleached>` blocks. Draws on natural and bleached dose curves stored in a list of ROIs (as returned by `apply_rois()`) and can be filtered by mineral class. Open the file with `Luminescence::read_RF2R()`. |

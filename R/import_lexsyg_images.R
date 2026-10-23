@@ -1,11 +1,14 @@
 #' Searches for TIFF files and assigns them to XSYG sequence data
 #'
 #' Imports TIFF files recorded from lexsyg research readers using LexStudio 2.
+#' TIFF files that fall outside the XSYG recording time range (i.e. cannot be
+#' matched to any record) are always reported via `warning()` and excluded
+#' from the result.
 #'
 #' **Important note**: This function is complicated and might break if the
-#' data structure of lexsyg image recording is changed. Thus, this function needs a
-#' overwork once LexStudio is updated for better image recording. Also, this structure
-#' should be switched to XLUM format.
+#' data structure of lexsyg image recording is changed. Thus, this function
+#' needs to be reworked once LexStudio is updated for better image recording.
+#' Also, this structure should be switched to XLUM format.
 #'
 #' @param xsyg_file
 #' Path to the lexsyg XSYG file of the measured sequence.
@@ -17,22 +20,17 @@
 #' Short name of the detector in LexStudio 2.
 #'
 #' @param verbose
-#' Logical. If `TRUE`, prints progress messages. TIFF files that fall outside
-#' the XSYG recording time range (i.e. cannot be matched to any record) are
-#' always reported via `warning()` and excluded from the result, regardless
-#' of `verbose`.
+#' Whether progress messages should be printed to the terminal.
 #'
 #' @param print.sequence
 #' Currently unused.
 #'
-#' @param city
-#' TODO
+#' @param city,country
+#' Location where the measurement was performed, used to determine the time
+#' zone of the image files.
 #'
-#' @param country
-#' TODO
-#'
-#' @returns
-#' A nested list, structured as:
+#' @return
+#' Returns a nested list, structured as:
 #'
 #' ├─ `[[aliquot position]]`
 #' │		├─ `[[1]]`
@@ -52,13 +50,16 @@
 #' # TODO
 #'
 #' @export
-import_lexsyg_images <- function(xsyg_file,
-                                 folder = NA,
-                                 detector = "EMCCD",
-                                 verbose = TRUE,
-                                 print.sequence = TRUE,
-                                 city=NA,
-                                 country=NA){
+import_lexsyg_images <- function(
+  xsyg_file,
+  folder = NA,
+  detector = "EMCCD",
+  verbose = TRUE,
+  print.sequence = TRUE,
+  city = NA,
+  country = NA
+) {
+
   ## ToDo
   ## - (!) Read TIFF meta data and use that time stamp as first choice
   ##   Fall back to file creating time stamp only if that in the meta data is not available
@@ -150,10 +151,8 @@ import_lexsyg_images <- function(xsyg_file,
                                      txtProgressBar = FALSE)
 
     lex[[1]] <- merge_RLum(objects = list(lex[[1]], lex_i[[1]]))
-
      }
     }
-
 
 
   # Get sequence information

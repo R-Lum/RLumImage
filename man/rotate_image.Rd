@@ -15,9 +15,10 @@ rotate_image(
 )
 }
 \arguments{
-\item{obj}{Input object. Must either be a 2D matrix, a 3D array or a terra::spatRaster object.}
+\item{obj}{An object coercible to a \code{SpatRaster} (see \link{as.SpatRaster}) containing the
+image stack, a 2D matrix or a 3D array.}
 
-\item{angle}{Clockwise rotation angle in degree.}
+\item{angle}{Clockwise rotation angle in degrees.}
 
 \item{centre}{Centre of rotation in relative values.}
 
@@ -26,12 +27,14 @@ neighbour is faster and preserves signal values and sharp edges in the image;
 bilinear interpolation allows for precise rotation without adding distortions
 to image structures.}
 
-\item{round}{Input values are usually counts and thus integers. If TRUE, the bilinear interpolated
-values are rounded back to integers to prevent compatibility issues.}
+\item{round}{Whether values should be rounded (\code{FALSE} by default). Note that input
+values are usually counts and thus integers; if \code{TRUE}, the interpolated
+values produced by \code{method = "bilinear"} are rounded back to integers to
+prevent compatibility issues.}
 
-\item{fill}{Fill value of the empty areas created by the rotation.}
+\item{fill}{Value used to fill the empty areas created by the rotation (\code{NA} by default).}
 
-\item{verbose}{Print progress messages.}
+\item{verbose}{Whether progress messages should be printed to the terminal.}
 }
 \value{
 SpatRaster if input was SpatRaster,
@@ -41,6 +44,6 @@ matrix if input was matrix, array if input was array
 Rotate an image or a stack of images
 }
 \examples{
-# TODO
+rotate_image(matrix(1:9, ncol = 3), 90)
 
 }

@@ -1,34 +1,41 @@
 #' Return and plot single columns and rows (lines) of an image stack
 #'
 #' @param obj
-#' TODO
+#' An object coercible to a `SpatRaster` (see [as.SpatRaster]) containing the
+#' image stack.
 #'
 #' @param coordinate
-#' TODO
+#' Numeric vector of length 2 giving the column and row index (1-based) of the
+#' pixel at which the sections are taken. If `NA` (default), the centre of the
+#' image is used.
 #'
 #' @param plot
-#' TODO
+#' Whether plots should be generated (`TRUE` by default).
 #'
 #' @param ylim
 #' Optional y-axis limits.
 #'
 #' @param show.X.line
-#' TODO
+#' Whether to plot the section along the X-direction (a fixed row) (`TRUE` by
+#' default).
 #'
 #' @param show.Y.line
-#' TODO
+#' Whether to plot the section along the Y-direction (a fixed column) (`TRUE` by
+#' default).
 #'
 #' @param legend
-#' TODO
+#' Whether a legend should be added to the plot (`FALSE` by default).
 #'
-#' @param colors
-#' TODO
+#' @param col
+#' Vector of colours used to build a colour ramp for the individual records
+#' (`c("red", "black")` by default).
 #'
-#' @returns
+#' @return
 #' TODO
 #'
 #' @examples
-#' # TODO
+#' file <- system.file("extdata/sandworm_rf_median.tif", package = "RLumImage")
+#' get_sections(file)
 #'
 #' @export
 get_sections <- function(
@@ -39,7 +46,7 @@ get_sections <- function(
   show.X.line = TRUE,
   show.Y.line = TRUE,
   legend = FALSE,
-  colors = c("red", "black")
+  col = c("red", "black")
 ) {
 
   img <- as.SpatRaster(obj)
@@ -61,7 +68,7 @@ get_sections <- function(
 
   if(!plot) return(secs)
 
-  cols <- colorRampPalette(colors)(n_records)
+  cols <- colorRampPalette(col)(n_records)
 
   # X section
   if (show.X.line) {
@@ -96,5 +103,6 @@ get_sections <- function(
              lty = 1, lwd = 1, bty = "n")
     }
   }
+
   invisible(secs)
 }

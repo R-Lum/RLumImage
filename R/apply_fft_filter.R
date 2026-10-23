@@ -7,74 +7,82 @@
 #' multi-layer stack is filtered independently. Filter edges on the frequency
 #' mask are smoothed with a cosine taper.
 #'
-#' FFT filters can be used to extract or remove features in images based on their
-#' spatial size. For example, signal-cross talk can be removed by applying a short-pass filter
-#' with a cut-off value sufficiently larger than the grain diameters (recommended are ~2x the
-#' average diameter).
+#' FFT filters can be used to extract or remove features in images based on
+#' their spatial size. For example, signal cross-talk can be removed by
+#' applying a short-pass filter with a cut-off value sufficiently larger than
+#' the grain diameters (recommended are ~2x the average diameter).
 #'
-#' However, FFT filters have two issues: (a) They can add *ripples*, image artefacts induced by
-#' the lose of the phase information in the Fourier back-transformation of the the image. This
-#' effect can be reduced by selecting a suitable `transition` value. (b) They do not smooth out
-#' image noise like median filter or Savitzky-Golay filter do. Instead, the signal-to-noise ratio
-#'  of an image might be worse after a FFT filter.
+#' However, FFT filters have two issues:
+#' 1. They can add *ripples*, image artefacts induced by the loss of the phase
+#' information in the Fourier back-transformation of the image. This effect
+#' can be reduced by selecting a suitable `transition` value.
+#' 2. They do not smooth out image noise like median filter or Savitzky-Golay
+#' filter do. Instead, the signal-to-noise ratio of an image might be worse
+#' after a FFT filter.
 #'
-#' @param obj A `SpatRaster` or object coercible to a `SpatRaster` (see
-#'   [as.SpatRaster()]) containing the image stack.
+#' A short-pass or band-pass filter removes the zero-frequency (DC) term,
+#' i.e. the mean / offset of the image. The original layer mean can be added
+#' back after filtering by setting `preserve.offset = TRUE`, so that absolute
+#' signal levels are retained (relevant for dosimetry / RL data). A pure
+#' long-pass keeps the DC term and is therefore unaffected.
 #'
-#' @param shortpass Numeric (pixels) or `NA`. Structures *shorter* than this
-#'   period are kept (high-pass); structures longer than it are suppressed. If
-#'   `NA`, no high-frequency / short-structure limit is applied and only the
-#'   `longpass` cut-off matters.
+#' @param obj
+#' An object coercible to a `SpatRaster` (see [as.SpatRaster]) containing the
+#' image stack.
 #'
-#' @param longpass Numeric (pixels) or `NA`. Structures *longer* than this
-#'   period are kept (low-pass); structures shorter than it are suppressed. If
-#'   `NA`, no low-frequency / long-structure limit is applied and only the
-#'   `shortpass` cut-off matters.
+#' @param shortpass Numeric (pixels) or `NA`.
+#' Structures *shorter* than this period are kept (high-pass); structures
+#' longer than it are suppressed. If `NA`, no high-frequency / short-structure
+#' limit is applied and only the `longpass` cut-off matters.
 #'
-#'   Providing both `shortpass` and `longpass` builds a band-pass that keeps
-#'   periods between `longpass` and `shortpass`; this requires
-#'   `shortpass > longpass`.
+#' @param longpass Numeric (pixels) or `NA`.
+#' Structures *longer* than this period are kept (low-pass); structures shorter
+#' than it are suppressed. If `NA`, no low-frequency / long-structure limit is
+#' applied and only the `shortpass` cut-off matters.
+#' Providing both `shortpass` and `longpass` builds a band-pass that keeps
+#' periods between `longpass` and `shortpass`; this requires `shortpass > longpass`.
 #'
-#' @param transition Numeric (fractional) or `NA`. Relative width of the cosine-tapered
-#'   transition between the stop and pass bands at each cut-off frequency. Thus, this smooths
-#'   the filter edges and reduces the appearance of *ripples*. Hard cut-off is applied if
-#'   set to `NA` or `0`.
+#' @param transition Numeric (fractional) or `NA`.
+#' Relative width of the cosine-tapered transition between the stop and pass
+#' bands at each cut-off frequency. Thus, this smooths the filter edges and
+#' reduces the appearance of *ripples*. A hard cut-off is applied if set to
+#' `NA` or 0.
 #'
-#' @param preserve.offset Logical. A short-pass or band-pass filter removes the
-#'   zero-frequency (DC) term, i.e. the mean / offset of the image. If `TRUE`
-#'   (the default), the original layer mean is added back after filtering so
-#'   that absolute signal levels are retained (relevant for dosimetry / RL
-#'   data). A pure long-pass keeps the DC term and is therefore unaffected.
+#' @param preserve.offset
+#' Whether the original layer mean should be added back after filtering (`TRUE`
+#' by default). See details.
 #'
-#' @param plot Logical. If `TRUE` (default), plot the filtered image(s) with
-#'   [plot_image()].
+#' @param plot
+#' Whether to plot the filtered images with [plot_image] (`TRUE` by default).
 #'
-#' @param plot.extended Logical. If `TRUE`, also plot diagnostic images: the FFT
-#'   magnitude spectrum of the last layer, the frequency mask, and the
-#'   unfiltered - filtered difference.
+#' @param plot.extended
+#' Whether to plot additional diagnostic images: the FFT magnitude spectrum of
+#' the last layer, the frequency mask, and the unfiltered - filtered difference
+#' (`FALSE` by default). It is ignored if `plot = FALSE`.
 #'
-#' @param verbose Print progress messages.
+#' @param verbose
+#' Whether progress messages should be printed to the terminal.
 #'
-#' @return A `terra::SpatRaster` with the same dimensions, number of layers and
-#'   extent as the input.
+#' @return
+#' A `terra::SpatRaster` with the same dimensions, number of layers and
+#'  extent as the input.
 #'
 #' @examples
-#' \dontrun{ # TODO
 #' # Band-pass keeping structures between 3 and 50 px in an image stack
-#' f <- apply_fft_filter(image, shortpass = 50, longpass = 3, plot = FALSE)
-#' }
+#' file <- system.file("extdata/sandworm_rf_median.tif", package = "RLumImage")
+#' f <- apply_fft_filter(file, shortpass = 50, longpass = 3, plot = FALSE)
 #'
 #' @export
 apply_fft_filter <- function(
-    obj,
-    shortpass = NA, # px
-    longpass = NA, # px
-    transition = 1, # fractional
-    preserve.offset = TRUE,
-    plot = TRUE,
-    plot.extended = FALSE, # Plot also the frequency mask, the inverses and the difference
-    verbose = TRUE
-){
+  obj,
+  shortpass = NA,
+  longpass = NA,
+  transition = 1,
+  preserve.offset = TRUE,
+  plot = TRUE,
+  plot.extended = FALSE,
+  verbose = TRUE
+) {
 
   ## Changelog
   ## 2026-09-01, DM & DeepSeek v4-flash: Initial implementation.
@@ -196,7 +204,7 @@ apply_fft_filter <- function(
   # Copy stack
   out <- img
 
-  # Process each layer seperately
+  # Process each layer separately
   for (i in seq_len(nlyrs)) {
 
     # Convert spatRaster to a matrix

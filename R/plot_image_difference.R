@@ -4,13 +4,15 @@
 #' (objA - objB) using [plot_image].
 #'
 #' @param objA
-#' First image (coercible to SpatRaster); minuend of the difference.
+#' An object coercible to a `SpatRaster` (see [as.SpatRaster]) containing the
+#' image stack; the minuend of the difference.
 #'
 #' @param objB
-#' Second image (coercible to SpatRaster); subtrahend of the difference.
+#' An object coercible to a `SpatRaster` (see [as.SpatRaster]) containing the
+#' image stack; the subtrahend of the difference.
 #'
 #' @param range
-#' Numeric vector of length 2 giving the color scale limits. If `NA` (default),
+#' Numeric vector of length 2 giving the colour scale limits. If `NA` (default),
 #' a symmetric range is estimated from the difference image via [get_image_scale].
 #'
 #' @param cor.label
@@ -24,8 +26,9 @@
 #' Arguments passed to [plot_image] (with the exclusion of `wavelength`,
 #' `max.layer` and `contains.outlier`).
 #'
-#' @returns
-#' Returns invisibly the difference image as SpatRaster object.
+#' @return
+#' Returns invisibly the difference image as SpatRaster object; the difference
+#' image is plotted as a side effect.
 #'
 #' @export
 plot_image_difference <- function(

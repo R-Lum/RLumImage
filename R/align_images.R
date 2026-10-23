@@ -1,17 +1,22 @@
 #' Automatically align two single-layer SpatRaster images
 #'
 #' Estimates the horizontal shift, vertical shift and rotation angle that
-#' best aligns 'moving' onto 'fixed', using image correlation as the
-#' similarity metric and optim() for the parameter search.
+#' best aligns `moving` onto `fixed`, using image correlation as the
+#' similarity metric and [stats::optim] for the parameter search.
 #'
 #' @param fixed
-#' Reference SpatRaster (single layer)
+#' An object coercible to a `SpatRaster` (see [as.SpatRaster]) containing the
+#' image stack. If it contains multiple layers, a representative median image
+#' is created first.
 #'
 #' @param moving
-#' SpatRaster to be aligned to 'fixed' (single layer)
+#' An object coercible to a `SpatRaster` (see [as.SpatRaster]) containing the
+#' image stack of the same dimension as `fixed`. If it contains multiple layers,
+#' a representative median image is created first.
 #'
 #' @param method
-#' Optimization method, forwarded to optim() (e.g. "L-BFGS-B", "Nelder-Mead")
+#' Optimization method, forwarded to [stats::optim] (e.g. "L-BFGS-B",
+#' "Nelder-Mead").
 #'
 #' @param max.rotation
 #' Maximum absolute rotation (in degrees) allowed during the search. Used as
@@ -22,35 +27,37 @@
 #' Used to calculate the lower/upper bounds for dx and dy.
 #'
 #' @param optimization.roi
-#' Fractional size of the region-of-interest (ROI) used during optimization.
-#' Default 0.8 means a centered crop of 80% of the original image width/height
+#' Fractional size of the region of interest (ROI) used during optimization.
+#' Default 0.8 means a centred crop of 80% of the original image width/height
 #' is used in the similarity function. Values < 1 reduce computation time and
-#' robustness to edge artifacts; 1.0 uses the full image.
+#' robustness to edge artefacts; 1.0 uses the full image.
 #'
 #' @param plot
-#' If TRUE (default), plot two difference images: 'fixed' minus 'moving'
-#' (before alignment), and 'fixed' minus 'aligned' (after alignment, where
-#' 'aligned' is 'moving' with the estimated shift/rotation applied).
+#' If `TRUE` (default), plot two difference images: `fixed` minus `moving`
+#' (before alignment), and `fixed` minus `aligned` (after alignment, where
+#' `aligned` is `moving` with the estimated shift/rotation applied).
 #'
 #' @param verbose
-#' Print progress messages.
+#' Whether progress messages should be printed to the terminal.
 #'
-#' @returns
-#' An object of class `RLumImage.Alignment`, containing the result of [optim]
-#' and the estimated parameters (dx, dy, angle).
+#' @return
+#' An object of class `RLumImage.Alignment`, containing the result of
+#' [stats::optim] and the estimated parameters (dx, dy, angle).
 #'
 #' @examples
 #' # TODO
 #'
 #' @export
-align_images <- function(fixed,
-                         moving,
-                         method = "L-BFGS-B", # "Nelder-Mead" ...
-                         max.rotation = 45, # degree
-                         max.shift = 0.2, # fractional
-                         optimization.roi = 0.8, # fractional
-                         plot = TRUE,
-                         verbose = TRUE) {
+align_images <- function(
+  fixed,
+  moving,
+  method = "L-BFGS-B",
+  max.rotation = 45,
+  max.shift = 0.2,
+  optimization.roi = 0.8,
+  plot = TRUE,
+  verbose = TRUE
+) {
 
   ## ToDo:
   ## - Add R² and total-residual² values to output object

@@ -7,17 +7,18 @@
 wavelength_to_rgb(wl, factor = 1)
 }
 \arguments{
-\item{wl}{Wavelength to convert.}
+\item{wl}{Wavelength to convert. \strong{Note:} This is silently clamped between 300 and
+1000 nanometres.}
 
 \item{factor}{Scaling factor (1 by default).}
 }
 \value{
-TODO
+A hexadecimal string representing the wavelength colour in RGB format.
 }
 \description{
 Transform wavelength into RGB value
 }
 \examples{
-# TODO
+wavelength_to_rgb(420)
 
 }

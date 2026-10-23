@@ -1,60 +1,79 @@
-#' Create or edit a region-of-interest (ROI) object
+#' Create or edit a region of interest (ROI) object
 #'
 #' Creates a new ROI object or edits an existing one. ROIs define regions within an
 #' image, typically used for extracting luminescence signal time series. This function
 #' supports setting the ROI shape, position, and metadata like mineral class.
 #'
-#' @param roi A ROI object (list) to edit. If `NULL` (default), a new ROI is created.
+#' @param roi
+#' A ROI object (list) to edit. If `NULL` (default), a new ROI is created.
 #'
-#' @param mask A logical matrix defining the shape of the ROI. `TRUE` values indicate
-#'   pixels within the ROI, `FALSE` values indicate pixels outside.
+#' @param mask
+#' A logical matrix defining the shape of the ROI. `TRUE` values indicate
+#' pixels within the ROI, `FALSE` values indicate pixels outside.
 #'
-#' @param col_min Numeric (pixels). The column index (1-based) of the upper-left corner
-#'   of the ROI bounding box in the image.
+#' @param col_min
+#' The column index (1-based) of the upper-left corner of the ROI bounding
+#' box in the image.
 #'
-#' @param row_min Numeric (pixels). The row index (1-based) of the upper-left corner
-#'   of the ROI bounding box in the image.
+#' @param row_min
+#' The row index (1-based) of the upper-left corner of the ROI bounding box in
+#' the image.
 #'
-#' @param shape Character. The geometric shape of the ROI (e.g., "circle", "rectangle").
-#'   Used for proper visualization of the ROI overlay.
+#' @param shape
+#' The geometric shape of the ROI (e.g., `"circle"`, `"rectangle"`). Used for
+#' proper visualisation of the ROI overlay.
 #'
-#' @param class Character. Mineral classification for the ROI (default: "unclassified").
+#' @param class
+#' Mineral classification for the ROI (`"Unclassified"` by default).
 #'
-#' @param info A named list of optional attributes and parameters associated with the ROI.
+#' @param info
+#' A named list of optional attributes and parameters associated with the ROI.
 #'
-#' @param overlay A named list of plotting parameters for visualizing the ROI overlay.
-#' The necessary arguments in the overlay list depend on the `shape` of the ROI.
+#' @param overlay
+#' A named list of plotting parameters for visualising the ROI overlay. The
+#' necessary arguments in the overlay list depend on the `shape` of the ROI.
 #'
-#' @param curves A named list of luminescence curves extracted from image stacks.
+#' @param curves
+#' A named list of luminescence curves extracted from image stacks.
 #'
-#' @param add.curve A luminescence curve to add to the ROI's `curves` list.
+#' @param add.curve
+#' A luminescence curve to add to the ROI's `curves` list.
 #'
-#' @param add.info A named list of attributes to add to the ROI's `info` list.
+#' @param add.info
+#' A named list of attributes to add to the ROI's `info` list.
 #'
 #' @param source.image
-#' TODO
+#' An object coercible to a `SpatRaster` (see [as.SpatRaster]) representing the
+#' image from which the ROI originates. Its dimensions are stored in the ROI's
+#' `info` as `source_ncols` and `source_nrows` (default: `NULL`).
 #'
-#' @param warnings Logical. If `TRUE` (default), print warnings about potential data loss
-#'   when overwriting existing parameters.
+#' @param warnings
+#' Whether warnings about potential data loss when overwriting existing
+#' parameters should be reported (`TRUE` by default).
 #'
-#' @return A list representing a single ROI object, compatible with [apply_rois()] and
-#'   [select_grains()].
+#' @return
+#' A list representing a single ROI object, compatible with [apply_rois] and
+#' [select_grains].
+#'
+#' @examples
+#' # TODO
 #'
 #' @export
-set_roi <- function(roi = NULL, # Existing ROI object
-                    mask = NULL, # TRUE/FALSE mask defining the ROI
-                    col_min = NULL, # Upper left corner of the ROI in the image
-                    row_min = NULL, # Upper left corner of the ROI in the image
-                    shape = NULL, # ROI shape: "circle", "rectangle", ... Is important for the overlay
-                    class = NULL, # Mineral classification result
-                    info = list(), # List optional attributes and parameter
-                    overlay = list(), # Overlay parameters for plotting the ROI
-                    curves = list(), # Luminescence curves from image stacks
-                    add.curve = NULL, # Add a new luminescence curve
-                    add.info = NULL, # Add one or multiple (list/vector) optional information
-                    source.image = NULL,
-                    warnings = TRUE
-                    ){
+set_roi <- function(
+  roi = NULL,
+  mask = NULL,
+  col_min = NULL,
+  row_min = NULL,
+  shape = NULL,
+  class = NULL,
+  info = list(),
+  overlay = list(),
+  curves = list(),
+  add.curve = NULL,
+  add.info = NULL,
+  source.image = NULL,
+  warnings = TRUE
+) {
 
   ## ------ Changelog ------
   ## 2026-09-09, DM: First version

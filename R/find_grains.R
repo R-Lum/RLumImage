@@ -1,7 +1,7 @@
 #' Automatically detects single grains (local signal maxima) in an image.
 #'
 #' The function iteratively finds the pixel of maximum signal in an FFT
-#' filtered copy of the image, defines a circular region-of-interest (ROI)
+#' filtered copy of the image, defines a circular region of interest (ROI)
 #' around it, and removes it before searching for the next maximum. Grains are
 #' only kept if their mean signal within the ROI exceeds the estimated local
 #' background by the given `threshold`. This avoids detecting FFT filter
@@ -12,43 +12,53 @@
 #' part of grains). The returned ROIs are sorted by their mean `average` signal
 #' in descending order.
 #'
-#' @param obj A `SpatRaster` or object coercible to a `SpatRaster` (see
-#'   [as.SpatRaster()]) containing the image. If it has multiple layers, a
-#'   representative median image is created first.
+#' @param obj
+#' An object coercible to a `SpatRaster` (see [as.SpatRaster]) containing the
+#' image stack. If it contains multiple layers, a representative median image
+#' is created first.
 #'
-#' @param r Numeric (pixels). Radius of the circular ROI placed around each
-#'   detected signal maximum.
+#' @param r
+#' Radius in pixels of the circular ROI placed around each detected signal
+#' maximum.
 #'
-#' @param threshold Numeric (cts/px) or `NA`. Minimum mean signal within a ROI,
-#'   relative to the estimated local background, for it to count as a grain.
-#'   Either `threshold` or `grain.density` must be given.
+#' @param threshold Numeric (cts/px) or `NA`.
+#' Minimum mean signal within a ROI, relative to the estimated local background,
+#' for it to count as a grain. Either `threshold` or `grain.density` must be
+#' given.
 #'
-#' @param grain.density Numeric or `NA`. Fraction of pixels expected to belong
-#'   to grains. If `threshold` is `NA`, the threshold is derived from this
-#'   density as the corresponding quantile of the FFT filtered image.
+#' @param grain.density
+#' Fraction of pixels expected to belong to grains. If `NA`, the threshold is
+#' derived from this density as the corresponding quantile of the FFT filtered
+#' image. Either `threshold` or `grain.density` must be given.
 #'
-#' @param fft.filter Numeric vector of length 3 `c(shortpass, longpass,
-#'   transition)`, `shortpass` and `longpass` given as multiples of `r`. Passed
-#'   to [apply_fft_filter()] to build the search image.
+#' @param fft.filter
+#' Numeric vector of length 3 (shortpass, longpass, transition), with shortpass
+#' and longpass given as multiples of `r`. It is passed to [apply_fft_filter]
+#' to build the search image.
 #'
-#' @param allow.overlap Logical. If `FALSE` (default), the ROI is removed from
-#'   the search image after detection (set to `NA`), preventing overlapping
-#'   grains. If `TRUE`, detected ROIs can overlap. Not recommended.
+#' @param allow.overlap
+#' Whether the detected ROIs can overlap. If `FALSE` (default), the ROI is
+#' removed from the search image after detection and set to `NA`, preventing
+#' overlapping grains. Setting `TRUE` is not recommended.
 #'
 #' @param default.class
-#' TODO
+#' Mineral class assigned to all detected ROIs (`"Unclassified"` by default).
 #'
-#' @param plot Logical. If `TRUE` (default), plot the detected ROIs over the
-#'   input image.
+#' @param plot
+#' Whether to plot the filtered images with [plot_image] (`TRUE` by default).
 #'
-#' @param plot.extended Logical. If `TRUE`, also plot the FFT filtered image, the
-#'   ROI residual image, and combinations thereof as diagnostic plots.
+#' @param plot.extended
+#' Whether to plot additional diagnostic images: the FFT filtered image, the
+#' ROI residual image, and combinations thereof (`FALSE` by default). It is
+#' ignored if `plot = FALSE`.
 #'
-#' @param verbose Print progress messages.
+#' @param verbose
+#' Whether progress messages should be printed to the terminal.
 #'
-#' @return A named list of ROIs in the same format as [apply_rois()] /
-#'   [select_grains()], sorted by mean `average` signal in descending order.
-#'   Returns an empty list if no grains are found.
+#' @return
+#' A named list of ROIs in the same format as [apply_rois] and [select_grains],
+#' sorted by mean average signal in descending order. Returns an empty list if
+#' no grains are found.
 #'
 #' @examples
 #' \dontrun{ # TODO

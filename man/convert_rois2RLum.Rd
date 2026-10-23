@@ -7,20 +7,20 @@
 convert_rois2RLum(rois, originator = NULL)
 }
 \arguments{
-\item{rois}{A named list of ROI objects as returned by \code{\link[=apply_rois]{apply_rois()}},
-\code{\link[=set_roi]{set_roi()}}, \code{\link[=find_grains]{find_grains()}} or \code{\link[=select_grains]{select_grains()}}. Each ROI is a list with
-(at least) a \code{curves} element holding a list of per-curve lists.}
+\item{rois}{A named list of ROI objects as returned by \link{apply_rois}, \link{set_roi},
+\link{find_grains} or \link{select_grains}. Each ROI is a list with (at least) a
+\code{curves} element holding a list of per-curve lists.}
 
-\item{originator}{Character (optional). Stored in the \code{originator} slot of
-every generated object. If \code{NULL}, defaults to the name of this function.}
+\item{originator}{Name to be stored in the \code{originator} slot of every generated object.
+If \code{NULL}, defaults to the name of this function.}
 }
 \value{
 A named list of \code{Luminescence::RLum.Analysis} objects, one per ROI.
 Each list element maintains the name of the corresponding ROI.
 }
 \description{
-Converts the per-ROI curve lists stored in an ROIs object (as returned by
-\code{\link[=apply_rois]{apply_rois()}} / \code{\link[=set_roi]{set_roi()}}) into \code{Luminescence::RLum.Data.Curve} objects
+Converts the per-ROI curve lists stored in a ROI object (as returned by
+\link{apply_rois} and \link{set_roi}) into \code{Luminescence::RLum.Data.Curve} objects
 and combines all curves of one ROI into a \code{Luminescence::RLum.Analysis}
 object. The output is a named list of \code{RLum.Analysis} objects, one per ROI.
 }

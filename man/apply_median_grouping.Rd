@@ -12,7 +12,7 @@ image stack.}
 
 \item{window.size}{Number of images (or layers) to combine together.}
 
-\item{verbose}{Print progress messages.}
+\item{verbose}{Whether progress messages should be printed to the terminal.}
 }
 \value{
 An image stack.

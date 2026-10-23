@@ -9,43 +9,56 @@ apply_rois(
   rois,
   record.type = NA,
   x.interval = 1,
-  x.unit = "image",
   plot = TRUE,
   xlab = NA,
   ylab = NA,
+  x.unit = "image",
   legend = TRUE,
   col = NULL,
   verbose = TRUE
 )
 }
 \arguments{
-\item{obj}{A SpatRaster or object coercible to SpatRaster containing the image stack.}
+\item{obj}{An object coercible to a \code{SpatRaster} (see \link{as.SpatRaster}) containing the
+image stack.}
 
-\item{rois}{A named list of ROI objects, each with fields \code{mask} (a logical
-matrix defining the ROI shape), \code{row_min} and \code{col_min} (the top-left
-corner of the ROI bounding box in the image), and \code{class}. This is the
-format returned by \code{\link[=find_grains]{find_grains()}} / \code{\link[=select_grains]{select_grains()}}.}
+\item{rois}{A named list of ROI objects, each with fields \code{mask} (a logical matrix
+defining the ROI shape), \code{row_min} and \code{col_min} (the top-left corner of
+the ROI bounding box in the image), and \code{class}. This is the format returned
+by \link{find_grains} and \link{select_grains}.}
 
 \item{record.type}{Placeholder for future functionality (not currently used).}
 
-\item{x.interval}{Time spacing between frames (default: 1).}
+\item{x.interval}{Time spacing between frames (1 by default).}
 
-\item{x.unit}{TODO}
+\item{plot}{Whether to plot the time series (\code{TRUE} by default).}
 
-\item{plot}{Logical; if TRUE, plot the time series (default: TRUE).}
+\item{xlab}{X-axis label. If \code{NA} (default), it is constructed automatically.}
 
-\item{xlab}{X-axis label.}
+\item{ylab}{Y-axis label. If \code{NA} (default), it is constructed automatically.}
 
-\item{ylab}{Y-axis label.}
+\item{x.unit}{X-axis unit, e.g. \code{"s"} or \code{"Gy"}, to be used in the automatic construction
+of axis labels.}
 
-\item{legend}{Logical; if TRUE and plot=TRUE, add a legend (default: TRUE).}
+\item{legend}{Whether a legend should be added to the plot (\code{TRUE} by default).
+TODO: This is currently not functional.}
 
-\item{col}{Color specification for matplot lines (see \code{matplot} for options).
-If NULL, uses default colors.}
+\item{col}{Colour specification for \link{matplot} lines. If \code{NULL}, default colours are
+used.}
 
-\item{verbose}{Print progress messages.}
+\item{verbose}{Whether progress messages should be printed to the terminal.}
+}
+\value{
+A named list of ROI objects in the same format as the input \code{rois}, each
+extended with a \code{curves} list holding the extracted mean signal series
+(\code{x}, \code{y}, \code{recordType}, \code{detectionInterval}, \code{curveDescriptor}, and
+\code{source_obj}).
 }
 \description{
 Extract mean values within circular regions of interest (ROIs) across
 an image stack and optionally plot the time series.
+}
+\examples{
+# TODO
+
 }

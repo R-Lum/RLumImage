@@ -1,13 +1,11 @@
 #' Get time difference
 #'
 #' @param file
-#' TODO
+#' Path to the image file whose modification time is used.
 #'
-#' @param city
-#' TODO
-#'
-#' @param country
-#' TODO
+#' @param city,country
+#' Location where the measurement was performed, used to determine the time
+#' zone.
 #'
 #' @author
 #' Mariana Sontag-González, University of Oxford\cr

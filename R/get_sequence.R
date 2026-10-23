@@ -1,7 +1,8 @@
 #' Extracts the sequence table of an imported imaging measurement
 #'
 #' @param obj
-#' TODO
+#' A list as returned by [import_lexsyg_images], either for a single aliquot
+#' position or a list of such lists for multiple positions.
 #'
 #' @param print.friendly
 #' Whether a nicely formatted output should be produced (`FALSE` by default).
@@ -11,10 +12,13 @@
 #' `FALSE`.
 #'
 #' @param verbose
-#' Print progress messages.
+#' Whether progress messages should be printed to the terminal.
 #'
-#' @returns
-#' TODO
+#' @return
+#' A data frame with one row per measurement record and columns `files`,
+#' `recordType`, `wavelength`, `interval`, and `maxMeasuredT`. With
+#' `print.friendly = TRUE`, values are rounded and the columns are given
+#' readable names.
 #'
 #' @examples
 #' # TODO

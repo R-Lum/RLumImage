@@ -3,50 +3,69 @@
 #' Extract mean values within circular regions of interest (ROIs) across
 #' an image stack and optionally plot the time series.
 #'
-#' @param obj A SpatRaster or object coercible to SpatRaster containing the image stack.
+#' @param obj
+#' An object coercible to a `SpatRaster` (see [as.SpatRaster]) containing the
+#' image stack.
 #'
-#' @param rois A named list of ROI objects, each with fields `mask` (a logical
-#'   matrix defining the ROI shape), `row_min` and `col_min` (the top-left
-#'   corner of the ROI bounding box in the image), and `class`. This is the
-#'   format returned by [find_grains()] / [select_grains()].
+#' @param rois
+#' A named list of ROI objects, each with fields `mask` (a logical matrix
+#' defining the ROI shape), `row_min` and `col_min` (the top-left corner of
+#' the ROI bounding box in the image), and `class`. This is the format returned
+#' by [find_grains] and [select_grains].
 #'
 #' @param record.type
 #' Placeholder for future functionality (not currently used).
 #'
 #' @param x.interval
-#' Time spacing between frames (default: 1).
+#' Time spacing between frames (1 by default).
 #'
 #' @param x.unit
-#' TODO
+#' X-axis unit, e.g. `"s"` or `"Gy"`, to be used in the automatic construction
+#' of axis labels.
 #'
-#' @param plot Logical; if TRUE, plot the time series (default: TRUE).
+#' @param plot
+#' Whether to plot the time series (`TRUE` by default).
 #'
 #' @param xlab
-#' X-axis label.
+#' X-axis label. If `NA` (default), it is constructed automatically.
 #'
 #' @param ylab
-#' Y-axis label.
+#' Y-axis label. If `NA` (default), it is constructed automatically.
 #'
-#' @param legend Logical; if TRUE and plot=TRUE, add a legend (default: TRUE).
+#' @param legend
+#' Whether a legend should be added to the plot (`TRUE` by default).
+#' TODO: This is currently not functional.
 #'
-#' @param col Color specification for matplot lines (see `matplot` for options).
-#'   If NULL, uses default colors.
+#' @param col
+#' Colour specification for [matplot] lines. If `NULL`, default colours are
+#' used.
 #'
-#' @param verbose Print progress messages.
+#' @param verbose
+#' Whether progress messages should be printed to the terminal.
 #'
-apply_rois <- function(obj,
-                       rois,
-                       record.type = NA,
-                       x.interval = 1,
-                       x.unit = "image", # recommended: 's' or 'Gy'
-                       plot = TRUE,
-                       xlab = NA, # "Time [s]"
-                       ylab = NA, # "Avg. signal [cts/ch]"
-                       legend = TRUE,
-                       col = NULL,
-                       verbose = TRUE)
-{
-
+#' @return
+#' A named list of ROI objects in the same format as the input `rois`, each
+#' extended with a `curves` list holding the extracted mean signal series
+#' (`x`, `y`, `recordType`, `detectionInterval`, `curveDescriptor`, and
+#' `source_obj`).
+#'
+#' @examples
+#' # TODO
+#'
+#' @export
+apply_rois <- function(
+  obj,
+  rois,
+  record.type = NA,
+  x.interval = 1,
+  plot = TRUE,
+  xlab = NA, # "Time [s]"
+  ylab = NA, # "Avg. signal [cts/ch]"
+  x.unit = "image",
+  legend = TRUE,
+  col = NULL,
+  verbose = TRUE
+) {
   ## ToDo's:
   ## - (!) If input obj is a list of records, apply this function for each record.
   ## - (!) Add 'class' selection argument (one or multi-element vector)

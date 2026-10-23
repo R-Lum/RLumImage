@@ -7,17 +7,21 @@
 get_sequence(obj, print.friendly = FALSE, digits = 2, verbose = TRUE)
 }
 \arguments{
-\item{obj}{TODO}
+\item{obj}{A list as returned by \link{import_lexsyg_images}, either for a single aliquot
+position or a list of such lists for multiple positions.}
 
 \item{print.friendly}{Whether a nicely formatted output should be produced (\code{FALSE} by default).}
 
 \item{digits}{Number of digits used when rounding. It is ignored if \code{print.friendly} is
 \code{FALSE}.}
 
-\item{verbose}{Print progress messages.}
+\item{verbose}{Whether progress messages should be printed to the terminal.}
 }
 \value{
-TODO
+A data frame with one row per measurement record and columns \code{files},
+\code{recordType}, \code{wavelength}, \code{interval}, and \code{maxMeasuredT}. With
+\code{print.friendly = TRUE}, values are rounded and the columns are given
+readable names.
 }
 \description{
 Extracts the sequence table of an imported imaging measurement

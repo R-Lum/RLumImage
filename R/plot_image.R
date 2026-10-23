@@ -1,34 +1,37 @@
 #' Plot spatially resolved luminescence images
 #'
 #' Displays a single- or multi-layer SpatRaster (or object coercible to one)
-#' as a false-color image with a custom wavelength-based color ramp.
+#' as a false-colour image with a custom wavelength-based colour ramp.
 #'
 #' @param obj
-#' Image or stack of images (coercible to SpatRaster) to plot.
+#' An object coercible to a `SpatRaster` (see [as.SpatRaster]) containing the
+#' image stack.
 #'
 #' @param title
-#' Plot title(s), forwarded to terra::plot(). Accepts also vectors, then each
-#' image in a sequence of image gets a specific title.
+#' Plot title(s), forwarded to [terra::plot]. Accepts also vectors, in which
+#' case each image in a sequence of image gets a specific title.
 #'
 #' @param label
 #' Text label drawn in the bottom-left corner of the image (e.g. a file name).
-#' works only for single images.
+#' Works only for single images.
 #'
 #' @param range
-#' Numeric vector of length 2 giving the color scale limits. If NA (default),
-#' a range is estimated via get_image_scale().
+#' Numeric vector of length 2 giving the colour scale limits. If `NA` (default),
+#' a range is estimated via [get_image_scale].
 #'
 #' @param color.scale
 #' Currently without effect; reserved for future use.
 #'
 #' @param wavelength
-#' Wavelength (nm) used to generate the color ramp via wavelength_to_rgb().
+#' Wavelength (nm) used to generate the colour ramp via [wavelength_to_rgb].
 #'
 #' @param legend
-#' If TRUE (default), draw a color legend. Only applied for single-layer images.
+#' Whether a colour legend should be drawn (`TRUE` by default). Only applied
+#' for single-layer images.
 #'
 #' @param axes
-#' If TRUE (default), draw axes. Only applied for single-layer images.
+#' Whether axes should be drawn (`TRUE` by default). Only applied for
+#' single-layer images.
 #'
 #' @param margin
 #' Plot margin (all sides except right, if legend is drawn).
@@ -37,18 +40,18 @@
 #' Maximum number of layers to plot for multi-layer images.
 #'
 #' @param contains.outlier
-#' If TRUE, the estimated range accounts for outliers and out-of-range
-#' values are shown in white.
+#' Whether the estimated range accounts for outliers and out-of-range values
+#' should be shown in white (`FALSE` by default).
 #'
 #' @param rois
-#' Optional regions-of-interest to overlay on the image as circles. Accepts
-#' either the named list returned by \code{select_grains()} or a
-#' \code{data.frame} with (at least) the columns \code{x_coord}, \code{y_coord},
-#' \code{radius_px} and \code{class} (and, optionally, \code{id}). Only used
-#' for single-layer images; ignored (with a warning) for multi-layer stacks.
+#' Optional regions of interest to overlay on the image as circles. Accepts
+#' either the named list returned by [select_grains] or a data frame with (at
+#' least) columns `x_coord`, `y_coord`, `radius_px` and `class` (optionally,
+#' `id`). Only used for single-layer images; ignored (with a warning) for
+#' multi-layer stacks.
 #'
 #' @param roi.lwd
-#' TODO
+#' Line width to be used for the regions of interest.
 #'
 #' @param roi.ids
 #' Whether the ROI ids should be printed at the centre of each ROI overlay
@@ -59,14 +62,18 @@
 #' if `roi.ids = TRUE`.
 #'
 #' @param classes
-#' Named character vector mapping ROI class labels to display colours, e.g.
-#' \code{c("Quartz" = "yellow", "Other" = "magenta")}. Used only together with
-#' \code{rois}. Defaults to the same five preset mineral classes used by
-#' \code{select_grains()}. Classes present in \code{rois} but missing from
-#' this vector are drawn in white and trigger a warning.
+#' Named character vector (or list) mapping mineral class labels to display
+#' colours, e.g. `c(Quartz = "yellow", Other = "magenta")`. Used only together
+#' with `rois`. Defaults to the same five preset mineral classes used by
+#' [select_grains]. Classes present in `rois` but missing from this vector are
+#' drawn in white and trigger a warning.
 #'
-#' @returns
-#' Invisibly returns NULL; the image is plotted as a side effect.
+#' @return
+#' Returns `NULL` invisibly; the image is plotted as a side effect.
+#'
+#' @examples
+#' file <- system.file("extdata/sandworm_rf_median.tif", package = "RLumImage")
+#' plot_image(file)
 #'
 #' @export
 plot_image <- function(

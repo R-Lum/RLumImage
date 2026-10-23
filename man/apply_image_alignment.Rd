@@ -13,7 +13,8 @@ apply_image_alignment(
 )
 }
 \arguments{
-\item{obj}{Image stack (coercible to SpatRaster) to align.}
+\item{obj}{An object coercible to a \code{SpatRaster} (see \link{as.SpatRaster}) containing the
+image stack.}
 
 \item{alignment}{An object of class \code{RLumImage.Alignment} as returned by \link{align_images}.}
 
@@ -21,14 +22,14 @@ apply_image_alignment(
 \code{"near"} (default) or \code{"bilinear"}. \code{"near"} is faster and might better
 preserve intensity values.}
 
-\item{force.alignment}{If TRUE (default), apply the alignment parameters even if align_images()
+\item{force.alignment}{If \code{TRUE} (default), apply the alignment parameters even if \link{align_images}
 did not report a successful convergence (with a warning).}
 
-\item{verbose}{If TRUE (default), print progress/status messages.}
+\item{verbose}{Whether progress messages should be printed to the terminal.}
 }
 \value{
-Aligned image stack (SpatRaster), or NULL if alignment was unsuccessful
-and force.alignment = FALSE.
+Aligned image stack (\code{SpatRaster}), or \code{NULL} if alignment was unsuccessful
+and \code{force.alignment = FALSE}.
 }
 \description{
 Shifts and rotates an image stack according to the dx, dy and angle

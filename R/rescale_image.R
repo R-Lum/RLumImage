@@ -1,41 +1,52 @@
 #' Rescales (zoom) an image or image stack while maintaining its dimensions
 #'
+#' @description
 #' Scales the image content by `scale` relative to `centre` and warps it back
 #' onto the original grid so the output keeps the same extent and resolution.
 #'
-#' @param obj Image or image stack or file path. See `as.SpatRaster` for allowed objects.
+#' @param obj
+#' An object coercible to a `SpatRaster` (see [as.SpatRaster]) containing the
+#' image stack.
 #'
-#' @param scale Zoom factor (> 1 zooms in, < 1 zooms out; default: 1).
+#' @param scale
+#' Zoom factor (> 1 zooms in, < 1 zooms out; default: 1).
 #'
 #' @param centre
 #' Scaling centre as a fraction of the extent (x, y), each in \[0, 1\]
-#'   (default: c(0.5, 0.5)).
+#' (`c(0.5, 0.5)` by default).
 #'
-#' @param layer Integer vector of layer indices to rescale; NA rescales all layers
-#'   (default: NA).
+#' @param layer
+#' Indices of layers to rescale. If `NA` (default), all layers are rescaled.
 #'
-#' @param fill Fill value for the empty areas created by zooming out (default: NA).
+#' @param fill
+#' Value used to fill the empty areas created by zooming out (`NA` by default).
 #'
-#' @param method Interpolation method for estimating the new cell values, forwarded
-#'   to `terra::resample` ('bilinear' or 'near'; default: 'bilinear').
+#' @param method
+#' Interpolation method for estimating the new cell values, one of `"bilinear"`
+#' (default) or `"near"`.
 #'
-#' @param verbose Print progress messages.
+#' @param verbose
+#' Whether progress messages should be printed to the terminal.
 #'
-#' @returns
+#' @return
 #' A `terra::SpatRaster` with the same dimensions as the input, with the
-#' selected layer(s) shifted by the given fractional offsets.
+#' selected layers rescaled by the given factor.
 #'
 #' @examples
-#' # TODO
+#' ## Rescale image to 90 %
+#' file <- system.file("extdata/sandworm_rf_median.tif", package = "RLumImage")
+#' rescale_image(file, scale = 0.9)
 #'
 #' @export
-rescale_image <- function(obj,
-                          scale = 1,
-                          centre = c(0.5, 0.5),
-                          layer = NA,
-                          fill = NA,
-                          method = "bilinear",
-                          verbose = TRUE) {
+rescale_image <- function(
+  obj,
+  scale = 1,
+  centre = c(0.5, 0.5),
+  layer = NA,
+  fill = NA,
+  method = "bilinear",
+  verbose = TRUE
+) {
 
   ## Changelog
   ## 2026-02-02, DM: First fully functional version, created with the help of ChatGPT 5

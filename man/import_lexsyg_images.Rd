@@ -21,19 +21,15 @@ import_lexsyg_images(
 
 \item{detector}{Short name of the detector in LexStudio 2.}
 
-\item{verbose}{Logical. If \code{TRUE}, prints progress messages. TIFF files that fall outside
-the XSYG recording time range (i.e. cannot be matched to any record) are
-always reported via \code{warning()} and excluded from the result, regardless
-of \code{verbose}.}
+\item{verbose}{Whether progress messages should be printed to the terminal.}
 
 \item{print.sequence}{Currently unused.}
 
-\item{city}{TODO}
-
-\item{country}{TODO}
+\item{city, country}{Location where the measurement was performed, used to determine the time
+zone of the image files.}
 }
 \value{
-A nested list, structured as:
+Returns a nested list, structured as:
 
 ├─ \verb{[[aliquot position]]}
 │		├─ \verb{[[1]]}
@@ -50,12 +46,15 @@ A nested list, structured as:
 }
 \description{
 Imports TIFF files recorded from lexsyg research readers using LexStudio 2.
+TIFF files that fall outside the XSYG recording time range (i.e. cannot be
+matched to any record) are always reported via \code{warning()} and excluded
+from the result.
 }
 \details{
 \strong{Important note}: This function is complicated and might break if the
-data structure of lexsyg image recording is changed. Thus, this function needs a
-overwork once LexStudio is updated for better image recording. Also, this structure
-should be switched to XLUM format.
+data structure of lexsyg image recording is changed. Thus, this function
+needs to be reworked once LexStudio is updated for better image recording.
+Also, this structure should be switched to XLUM format.
 }
 \examples{
 # TODO

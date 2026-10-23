@@ -1,7 +1,7 @@
 #' Convert a ROI list into a list of `RLum.Analysis` objects
 #'
-#' Converts the per-ROI curve lists stored in an ROIs object (as returned by
-#' [apply_rois()] / [set_roi()]) into `Luminescence::RLum.Data.Curve` objects
+#' Converts the per-ROI curve lists stored in a ROI object (as returned by
+#' [apply_rois] and [set_roi]) into `Luminescence::RLum.Data.Curve` objects
 #' and combines all curves of one ROI into a `Luminescence::RLum.Analysis`
 #' object. The output is a named list of `RLum.Analysis` objects, one per ROI.
 #'
@@ -17,18 +17,22 @@
 #' The whole ROI is collected in an `RLum.Analysis` object (slots `records`
 #' and `info`), with the ROI's `class` stored in `info$class`.
 #'
-#' @param rois A named list of ROI objects as returned by [apply_rois()],
-#'   [set_roi()], [find_grains()] or [select_grains()]. Each ROI is a list with
-#'   (at least) a `curves` element holding a list of per-curve lists.
+#' @param rois
+#' A named list of ROI objects as returned by [apply_rois], [set_roi],
+#' [find_grains] or [select_grains]. Each ROI is a list with (at least) a
+#' `curves` element holding a list of per-curve lists.
 #'
-#' @param originator Character (optional). Stored in the `originator` slot of
-#'   every generated object. If `NULL`, defaults to the name of this function.
+#' @param originator
+#' Name to be stored in the `originator` slot of every generated object.
+#' If `NULL`, defaults to the name of this function.
 #'
-#' @return A named list of `Luminescence::RLum.Analysis` objects, one per ROI.
-#'   Each list element maintains the name of the corresponding ROI.
+#' @return
+#' A named list of `Luminescence::RLum.Analysis` objects, one per ROI.
+#' Each list element maintains the name of the corresponding ROI.
 #'
-#' @seealso [Luminescence::set_RLum()], [Luminescence::RLum.Analysis-class],
-#'   [Luminescence::RLum.Data.Curve-class]
+#' @seealso
+#' [Luminescence::set_RLum()], [Luminescence::RLum.Analysis-class],
+#' [Luminescence::RLum.Data.Curve-class]
 #'
 #' @examples
 #' \dontrun{
@@ -36,6 +40,7 @@
 #'   get_RLum(rois_analysis[[1]])
 #' }
 #'
+#' @export
 convert_rois2RLum <- function(rois, originator = NULL) {
 
   ## ------ Changelog ------

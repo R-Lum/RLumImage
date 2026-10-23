@@ -1,10 +1,11 @@
 #' Rotate an image or a stack of images
 #'
 #' @param obj
-#' Input object. Must either be a 2D matrix, a 3D array or a terra::spatRaster object.
+#' An object coercible to a `SpatRaster` (see [as.SpatRaster]) containing the
+#' image stack, a 2D matrix or a 3D array.
 #'
 #' @param angle
-#' Clockwise rotation angle in degree.
+#' Clockwise rotation angle in degrees.
 #'
 #' @param centre
 #' Centre of rotation in relative values.
@@ -16,21 +17,23 @@
 #' to image structures.
 #'
 #' @param round
-#' Input values are usually counts and thus integers. If TRUE, the bilinear interpolated
-#' values are rounded back to integers to prevent compatibility issues.
+#' Whether values should be rounded (`FALSE` by default). Note that input
+#' values are usually counts and thus integers; if `TRUE`, the interpolated
+#' values produced by `method = "bilinear"` are rounded back to integers to
+#' prevent compatibility issues.
 #'
 #' @param fill
-#' Fill value of the empty areas created by the rotation.
+#' Value used to fill the empty areas created by the rotation (`NA` by default).
 #'
 #' @param verbose
-#' Print progress messages.
+#' Whether progress messages should be printed to the terminal.
 #'
-#' @returns
+#' @return
 #' SpatRaster if input was SpatRaster,
 #' matrix if input was matrix, array if input was array
 #'
 #' @examples
-#' # TODO
+#' rotate_image(matrix(1:9, ncol = 3), 90)
 #'
 #' @export
 rotate_image <- function(

@@ -7,12 +7,21 @@
 get_image_scale(obj, contains.outlier = FALSE, verbose = FALSE)
 }
 \arguments{
-\item{obj}{TODO}
+\item{obj}{An object coercible to a \code{SpatRaster} (see \link{as.SpatRaster}) containing the
+image stack.}
 
-\item{contains.outlier}{TODO}
+\item{contains.outlier}{Whether the estimated range should account for outliers.}
 
-\item{verbose}{Print progress messages.}
+\item{verbose}{Whether progress messages should be printed to the terminal.}
+}
+\value{
+The estimated signal value limits.
 }
 \description{
 Returns a meaningful image scale for plotting
+}
+\examples{
+file <- system.file("extdata/sandworm_rf_median.tif", package = "RLumImage")
+get_image_scale(file)
+
 }

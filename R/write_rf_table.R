@@ -1,34 +1,44 @@
 #' Saves single-grain IR-RF measurements
 #'
-#' Writes a *.rf file, see Mittelstrass and Kreutzer (2021) for details.
-#' Open the resulting *.rf file with Luminescence::read_RF2R() for further use.
+#' Writes a *.rf file, see Mittelstraß and Kreutzer (2021) for details.
+#' Open the resulting *.rf file with [Luminescence::read_RF2R] for further use.
 #'
 #' @param rois
-#' List regions-of-interests (ROIs) as returned by `apply_rois()`
+#' List of regions of interest (ROIs) as returned by [apply_rois].
 #'
 #' @param file
 #' File path of the *.rf file to write.
 #'
-#' @param curve.selection Numeric vector of length 2.
-#' Indices of RF_nat and RF_reg curves in `$curve` list of ROI objects.
+#' @param curve.selection
+#' Numeric vector of length 2 storing the indices of RF_nat and RF_reg curves
+#' in `$curves` list of ROI objects.
 #'
 #' @param class
-#' Mineral class(es) which shall be used. If 'NA', all ROIs are taken.
-#' Can be a single character string or a vector.
+#' Mineral classes to write out. If `NA`, all ROIs are taken.
 #'
 #' @param meta
-#' List of additional 'info' for the XML header
+#' List of additional 'info' for the XML header.
 #'
-#' @param verbose Print progress messages.
+#' @param verbose
+#' Whether progress messages should be printed to the terminal.
 #'
+#' @return
+#' The name of the file written to is returned invisibly.
+#'
+#' @references
+#' Mittelstraß, D., Kreutzer, S., 2021. Spatially resolved infrared
+#' radiofluorescence: single-grain K-feldspar dating using CCD imaging.
+#' Geochronology 3, 299–319. \doi{10.5194/gchron-3-299-2021}
+#'
+#' @export
 write_rf_table <- function(
-    rois,
-    file,
-    curve.selection = c(1, 2),
-    class = NA,
-    meta = NULL,
-    verbose = TRUE
-    ){
+  rois,
+  file,
+  curve.selection = c(1, 2),
+  class = NA,
+  meta = NULL,
+  verbose = TRUE
+) {
 
   ## Changelog
   ## 2026-08-25, DM: Initial implementation.
@@ -78,7 +88,7 @@ write_rf_table <- function(
     N <- N + 1
   }
 
-  if (verbose) cat("Select", N, "from", length(rois), "regions-of-interests.\n")
+  if (verbose) cat("Select", N, "from", length(rois), "regions of interests.\n")
 
   if (N == 0)
     stop("[save_roi_table()]: No entry of the 'rois' list matches the filter arguments.")

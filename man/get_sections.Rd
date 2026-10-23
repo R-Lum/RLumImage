@@ -12,25 +12,31 @@ get_sections(
   show.X.line = TRUE,
   show.Y.line = TRUE,
   legend = FALSE,
-  colors = c("red", "black")
+  col = c("red", "black")
 )
 }
 \arguments{
-\item{obj}{TODO}
+\item{obj}{An object coercible to a \code{SpatRaster} (see \link{as.SpatRaster}) containing the
+image stack.}
 
-\item{coordinate}{TODO}
+\item{coordinate}{Numeric vector of length 2 giving the column and row index (1-based) of the
+pixel at which the sections are taken. If \code{NA} (default), the centre of the
+image is used.}
 
-\item{plot}{TODO}
+\item{plot}{Whether plots should be generated (\code{TRUE} by default).}
 
 \item{ylim}{Optional y-axis limits.}
 
-\item{show.X.line}{TODO}
+\item{show.X.line}{Whether to plot the section along the X-direction (a fixed row) (\code{TRUE} by
+default).}
 
-\item{show.Y.line}{TODO}
+\item{show.Y.line}{Whether to plot the section along the Y-direction (a fixed column) (\code{TRUE} by
+default).}
 
-\item{legend}{TODO}
+\item{legend}{Whether a legend should be added to the plot (\code{FALSE} by default).}
 
-\item{colors}{TODO}
+\item{col}{Vector of colours used to build a colour ramp for the individual records
+(\code{c("red", "black")} by default).}
 }
 \value{
 TODO
@@ -39,6 +45,7 @@ TODO
 Return and plot single columns and rows (lines) of an image stack
 }
 \examples{
-# TODO
+file <- system.file("extdata/sandworm_rf_median.tif", package = "RLumImage")
+get_sections(file)
 
 }

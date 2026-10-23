@@ -1,13 +1,21 @@
 #' Returns a meaningful image scale for plotting
 #'
 #' @param obj
-#' TODO
+#' An object coercible to a `SpatRaster` (see [as.SpatRaster]) containing the
+#' image stack.
 #'
 #' @param contains.outlier
-#' TODO
+#' Whether the estimated range should account for outliers.
 #'
 #' @param verbose
-#' Print progress messages.
+#' Whether progress messages should be printed to the terminal.
+#'
+#' @return
+#' The estimated signal value limits.
+#'
+#' @examples
+#' file <- system.file("extdata/sandworm_rf_median.tif", package = "RLumImage")
+#' get_image_scale(file)
 #'
 #' @export
 get_image_scale <- function(obj,

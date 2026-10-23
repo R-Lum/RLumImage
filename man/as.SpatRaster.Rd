@@ -7,13 +7,17 @@
 as.SpatRaster(obj, noflip = TRUE, warnings = FALSE, verbose = TRUE)
 }
 \arguments{
-\item{obj}{TODO}
+\item{obj}{A \code{SpatRaster} or an object coercible to one, i.e. a file path, a matrix,
+a 3-dimensional array, a numeric vector (of length 4 at least), or a nested
+list as returned by \link{import_lexsyg_images}.}
 
-\item{noflip}{'noflip = TRUE' ensures that no coordinate system transformation happens}
+\item{noflip}{Whether no coordinate system transformation should happen (\code{TRUE} by
+default).}
 
-\item{warnings}{TODO}
+\item{warnings}{Whether warnings produced by \link[terra:rast]{terra::rast} should be reported (\code{FALSE} by
+default).}
 
-\item{verbose}{Print progress messages.}
+\item{verbose}{Whether progress messages should be printed to the terminal.}
 }
 \description{
 Converts an array, a matrix or an image file (usually a TIFF file) to a terra::SpatRaster object

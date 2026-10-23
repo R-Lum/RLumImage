@@ -17,42 +17,37 @@ apply_fft_filter(
 )
 }
 \arguments{
-\item{obj}{A \code{SpatRaster} or object coercible to a \code{SpatRaster} (see
-\code{\link[=as.SpatRaster]{as.SpatRaster()}}) containing the image stack.}
+\item{obj}{An object coercible to a \code{SpatRaster} (see \link{as.SpatRaster}) containing the
+image stack.}
 
-\item{shortpass}{Numeric (pixels) or \code{NA}. Structures \emph{shorter} than this
-period are kept (high-pass); structures longer than it are suppressed. If
-\code{NA}, no high-frequency / short-structure limit is applied and only the
-\code{longpass} cut-off matters.}
+\item{shortpass}{Numeric (pixels) or \code{NA}.
+Structures \emph{shorter} than this period are kept (high-pass); structures
+longer than it are suppressed. If \code{NA}, no high-frequency / short-structure
+limit is applied and only the \code{longpass} cut-off matters.}
 
-\item{longpass}{Numeric (pixels) or \code{NA}. Structures \emph{longer} than this
-period are kept (low-pass); structures shorter than it are suppressed. If
-\code{NA}, no low-frequency / long-structure limit is applied and only the
-\code{shortpass} cut-off matters.
-
+\item{longpass}{Numeric (pixels) or \code{NA}.
+Structures \emph{longer} than this period are kept (low-pass); structures shorter
+than it are suppressed. If \code{NA}, no low-frequency / long-structure limit is
+applied and only the \code{shortpass} cut-off matters.
 Providing both \code{shortpass} and \code{longpass} builds a band-pass that keeps
-periods between \code{longpass} and \code{shortpass}; this requires
-\code{shortpass > longpass}.}
+periods between \code{longpass} and \code{shortpass}; this requires \code{shortpass > longpass}.}
 
-\item{transition}{Numeric (fractional) or \code{NA}. Relative width of the cosine-tapered
-transition between the stop and pass bands at each cut-off frequency. Thus, this smooths
-the filter edges and reduces the appearance of \emph{ripples}. Hard cut-off is applied if
-set to \code{NA} or \code{0}.}
+\item{transition}{Numeric (fractional) or \code{NA}.
+Relative width of the cosine-tapered transition between the stop and pass
+bands at each cut-off frequency. Thus, this smooths the filter edges and
+reduces the appearance of \emph{ripples}. A hard cut-off is applied if set to
+\code{NA} or 0.}
 
-\item{preserve.offset}{Logical. A short-pass or band-pass filter removes the
-zero-frequency (DC) term, i.e. the mean / offset of the image. If \code{TRUE}
-(the default), the original layer mean is added back after filtering so
-that absolute signal levels are retained (relevant for dosimetry / RL
-data). A pure long-pass keeps the DC term and is therefore unaffected.}
+\item{preserve.offset}{Whether the original layer mean should be added back after filtering (\code{TRUE}
+by default). See details.}
 
-\item{plot}{Logical. If \code{TRUE} (default), plot the filtered image(s) with
-\code{\link[=plot_image]{plot_image()}}.}
+\item{plot}{Whether to plot the filtered images with \link{plot_image} (\code{TRUE} by default).}
 
-\item{plot.extended}{Logical. If \code{TRUE}, also plot diagnostic images: the FFT
-magnitude spectrum of the last layer, the frequency mask, and the
-unfiltered - filtered difference.}
+\item{plot.extended}{Whether to plot additional diagnostic images: the FFT magnitude spectrum of
+the last layer, the frequency mask, and the unfiltered - filtered difference
+(\code{FALSE} by default). It is ignored if \code{plot = FALSE}.}
 
-\item{verbose}{Print progress messages.}
+\item{verbose}{Whether progress messages should be printed to the terminal.}
 }
 \value{
 A \code{terra::SpatRaster} with the same dimensions, number of layers and
@@ -66,21 +61,30 @@ multi-layer stack is filtered independently. Filter edges on the frequency
 mask are smoothed with a cosine taper.
 }
 \details{
-FFT filters can be used to extract or remove features in images based on their
-spatial size. For example, signal-cross talk can be removed by applying a short-pass filter
-with a cut-off value sufficiently larger than the grain diameters (recommended are ~2x the
-average diameter).
+FFT filters can be used to extract or remove features in images based on
+their spatial size. For example, signal cross-talk can be removed by
+applying a short-pass filter with a cut-off value sufficiently larger than
+the grain diameters (recommended are ~2x the average diameter).
 
-However, FFT filters have two issues: (a) They can add \emph{ripples}, image artefacts induced by
-the lose of the phase information in the Fourier back-transformation of the the image. This
-effect can be reduced by selecting a suitable \code{transition} value. (b) They do not smooth out
-image noise like median filter or Savitzky-Golay filter do. Instead, the signal-to-noise ratio
-of an image might be worse after a FFT filter.
+However, FFT filters have two issues:
+\enumerate{
+\item They can add \emph{ripples}, image artefacts induced by the loss of the phase
+information in the Fourier back-transformation of the image. This effect
+can be reduced by selecting a suitable \code{transition} value.
+\item They do not smooth out image noise like median filter or Savitzky-Golay
+filter do. Instead, the signal-to-noise ratio of an image might be worse
+after a FFT filter.
+}
+
+A short-pass or band-pass filter removes the zero-frequency (DC) term,
+i.e. the mean / offset of the image. The original layer mean can be added
+back after filtering by setting \code{preserve.offset = TRUE}, so that absolute
+signal levels are retained (relevant for dosimetry / RL data). A pure
+long-pass keeps the DC term and is therefore unaffected.
 }
 \examples{
-\dontrun{ # TODO
 # Band-pass keeping structures between 3 and 50 px in an image stack
-f <- apply_fft_filter(image, shortpass = 50, longpass = 3, plot = FALSE)
-}
+file <- system.file("extdata/sandworm_rf_median.tif", package = "RLumImage")
+f <- apply_fft_filter(file, shortpass = 50, longpass = 3, plot = FALSE)
 
 }

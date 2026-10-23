@@ -14,11 +14,13 @@ plot_image_difference(
 )
 }
 \arguments{
-\item{objA}{First image (coercible to SpatRaster); minuend of the difference.}
+\item{objA}{An object coercible to a \code{SpatRaster} (see \link{as.SpatRaster}) containing the
+image stack; the minuend of the difference.}
 
-\item{objB}{Second image (coercible to SpatRaster); subtrahend of the difference.}
+\item{objB}{An object coercible to a \code{SpatRaster} (see \link{as.SpatRaster}) containing the
+image stack; the subtrahend of the difference.}
 
-\item{range}{Numeric vector of length 2 giving the color scale limits. If \code{NA} (default),
+\item{range}{Numeric vector of length 2 giving the colour scale limits. If \code{NA} (default),
 a symmetric range is estimated from the difference image via \link{get_image_scale}.}
 
 \item{cor.label}{Whether the Pearson correlation coefficient between objA and objB should
@@ -30,7 +32,8 @@ be reported in the image label (\code{TRUE} by default).}
 \code{max.layer} and \code{contains.outlier}).}
 }
 \value{
-Returns invisibly the difference image as SpatRaster object.
+Returns invisibly the difference image as SpatRaster object; the difference
+image is plotted as a side effect.
 }
 \description{
 Computes and plots the pixel-wise difference between two images

@@ -15,32 +15,34 @@ rescale_image(
 )
 }
 \arguments{
-\item{obj}{Image or image stack or file path. See \code{as.SpatRaster} for allowed objects.}
+\item{obj}{An object coercible to a \code{SpatRaster} (see \link{as.SpatRaster}) containing the
+image stack.}
 
 \item{scale}{Zoom factor (> 1 zooms in, < 1 zooms out; default: 1).}
 
 \item{centre}{Scaling centre as a fraction of the extent (x, y), each in [0, 1]
-(default: c(0.5, 0.5)).}
+(\code{c(0.5, 0.5)} by default).}
 
-\item{layer}{Integer vector of layer indices to rescale; NA rescales all layers
-(default: NA).}
+\item{layer}{Indices of layers to rescale. If \code{NA} (default), all layers are rescaled.}
 
-\item{fill}{Fill value for the empty areas created by zooming out (default: NA).}
+\item{fill}{Value used to fill the empty areas created by zooming out (\code{NA} by default).}
 
-\item{method}{Interpolation method for estimating the new cell values, forwarded
-to \code{terra::resample} ('bilinear' or 'near'; default: 'bilinear').}
+\item{method}{Interpolation method for estimating the new cell values, one of \code{"bilinear"}
+(default) or \code{"near"}.}
 
-\item{verbose}{Print progress messages.}
+\item{verbose}{Whether progress messages should be printed to the terminal.}
 }
 \value{
 A \code{terra::SpatRaster} with the same dimensions as the input, with the
-selected layer(s) shifted by the given fractional offsets.
+selected layers rescaled by the given factor.
 }
 \description{
 Scales the image content by \code{scale} relative to \code{centre} and warps it back
 onto the original grid so the output keeps the same extent and resolution.
 }
 \examples{
-# TODO
+## Rescale image to 90 \%
+file <- system.file("extdata/sandworm_rf_median.tif", package = "RLumImage")
+rescale_image(file, scale = 0.9)
 
 }

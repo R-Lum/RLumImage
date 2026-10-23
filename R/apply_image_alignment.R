@@ -4,7 +4,8 @@
 #' parameters estimated by align_images().
 #'
 #' @param obj
-#' Image stack (coercible to SpatRaster) to align.
+#' An object coercible to a `SpatRaster` (see [as.SpatRaster]) containing the
+#' image stack.
 #'
 #' @param alignment
 #' An object of class `RLumImage.Alignment` as returned by [align_images].
@@ -15,15 +16,15 @@
 #' preserve intensity values.
 #'
 #' @param force.alignment
-#' If TRUE (default), apply the alignment parameters even if align_images()
+#' If `TRUE` (default), apply the alignment parameters even if [align_images]
 #' did not report a successful convergence (with a warning).
 #'
 #' @param verbose
-#' If TRUE (default), print progress/status messages.
+#' Whether progress messages should be printed to the terminal.
 #'
-#' @returns
-#' Aligned image stack (SpatRaster), or NULL if alignment was unsuccessful
-#' and force.alignment = FALSE.
+#' @return
+#' Aligned image stack (`SpatRaster`), or `NULL` if alignment was unsuccessful
+#' and `force.alignment = FALSE`.
 #'
 #' @examples
 #' # TODO

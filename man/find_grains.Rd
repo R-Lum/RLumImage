@@ -18,46 +18,48 @@ find_grains(
 )
 }
 \arguments{
-\item{obj}{A \code{SpatRaster} or object coercible to a \code{SpatRaster} (see
-\code{\link[=as.SpatRaster]{as.SpatRaster()}}) containing the image. If it has multiple layers, a
-representative median image is created first.}
+\item{obj}{An object coercible to a \code{SpatRaster} (see \link{as.SpatRaster}) containing the
+image stack. If it contains multiple layers, a representative median image
+is created first.}
 
-\item{r}{Numeric (pixels). Radius of the circular ROI placed around each
-detected signal maximum.}
+\item{r}{Radius in pixels of the circular ROI placed around each detected signal
+maximum.}
 
-\item{threshold}{Numeric (cts/px) or \code{NA}. Minimum mean signal within a ROI,
-relative to the estimated local background, for it to count as a grain.
-Either \code{threshold} or \code{grain.density} must be given.}
+\item{threshold}{Numeric (cts/px) or \code{NA}.
+Minimum mean signal within a ROI, relative to the estimated local background,
+for it to count as a grain. Either \code{threshold} or \code{grain.density} must be
+given.}
 
-\item{grain.density}{Numeric or \code{NA}. Fraction of pixels expected to belong
-to grains. If \code{threshold} is \code{NA}, the threshold is derived from this
-density as the corresponding quantile of the FFT filtered image.}
+\item{grain.density}{Fraction of pixels expected to belong to grains. If \code{NA}, the threshold is
+derived from this density as the corresponding quantile of the FFT filtered
+image. Either \code{threshold} or \code{grain.density} must be given.}
 
-\item{fft.filter}{Numeric vector of length 3 \code{c(shortpass, longpass, transition)}, \code{shortpass} and \code{longpass} given as multiples of \code{r}. Passed
-to \code{\link[=apply_fft_filter]{apply_fft_filter()}} to build the search image.}
+\item{fft.filter}{Numeric vector of length 3 (shortpass, longpass, transition), with shortpass
+and longpass given as multiples of \code{r}. It is passed to \link{apply_fft_filter}
+to build the search image.}
 
-\item{allow.overlap}{Logical. If \code{FALSE} (default), the ROI is removed from
-the search image after detection (set to \code{NA}), preventing overlapping
-grains. If \code{TRUE}, detected ROIs can overlap. Not recommended.}
+\item{allow.overlap}{Whether the detected ROIs can overlap. If \code{FALSE} (default), the ROI is
+removed from the search image after detection and set to \code{NA}, preventing
+overlapping grains. Setting \code{TRUE} is not recommended.}
 
-\item{default.class}{TODO}
+\item{default.class}{Mineral class assigned to all detected ROIs (\code{"Unclassified"} by default).}
 
-\item{plot}{Logical. If \code{TRUE} (default), plot the detected ROIs over the
-input image.}
+\item{plot}{Whether to plot the filtered images with \link{plot_image} (\code{TRUE} by default).}
 
-\item{plot.extended}{Logical. If \code{TRUE}, also plot the FFT filtered image, the
-ROI residual image, and combinations thereof as diagnostic plots.}
+\item{plot.extended}{Whether to plot additional diagnostic images: the FFT filtered image, the
+ROI residual image, and combinations thereof (\code{FALSE} by default). It is
+ignored if \code{plot = FALSE}.}
 
-\item{verbose}{Print progress messages.}
+\item{verbose}{Whether progress messages should be printed to the terminal.}
 }
 \value{
-A named list of ROIs in the same format as \code{\link[=apply_rois]{apply_rois()}} /
-\code{\link[=select_grains]{select_grains()}}, sorted by mean \code{average} signal in descending order.
-Returns an empty list if no grains are found.
+A named list of ROIs in the same format as \link{apply_rois} and \link{select_grains},
+sorted by mean average signal in descending order. Returns an empty list if
+no grains are found.
 }
 \description{
 The function iteratively finds the pixel of maximum signal in an FFT
-filtered copy of the image, defines a circular region-of-interest (ROI)
+filtered copy of the image, defines a circular region of interest (ROI)
 around it, and removes it before searching for the next maximum. Grains are
 only kept if their mean signal within the ROI exceeds the estimated local
 background by the given \code{threshold}. This avoids detecting FFT filter

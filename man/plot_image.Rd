@@ -24,39 +24,42 @@ plot_image(
 )
 }
 \arguments{
-\item{obj}{Image or stack of images (coercible to SpatRaster) to plot.}
+\item{obj}{An object coercible to a \code{SpatRaster} (see \link{as.SpatRaster}) containing the
+image stack.}
 
-\item{title}{Plot title(s), forwarded to terra::plot(). Accepts also vectors, then each
-image in a sequence of image gets a specific title.}
+\item{title}{Plot title(s), forwarded to \link[terra:plot]{terra::plot}. Accepts also vectors, in which
+case each image in a sequence of image gets a specific title.}
 
 \item{label}{Text label drawn in the bottom-left corner of the image (e.g. a file name).
-works only for single images.}
+Works only for single images.}
 
-\item{range}{Numeric vector of length 2 giving the color scale limits. If NA (default),
-a range is estimated via get_image_scale().}
+\item{range}{Numeric vector of length 2 giving the colour scale limits. If \code{NA} (default),
+a range is estimated via \link{get_image_scale}.}
 
 \item{color.scale}{Currently without effect; reserved for future use.}
 
-\item{wavelength}{Wavelength (nm) used to generate the color ramp via wavelength_to_rgb().}
+\item{wavelength}{Wavelength (nm) used to generate the colour ramp via \link{wavelength_to_rgb}.}
 
-\item{legend}{If TRUE (default), draw a color legend. Only applied for single-layer images.}
+\item{legend}{Whether a colour legend should be drawn (\code{TRUE} by default). Only applied
+for single-layer images.}
 
-\item{axes}{If TRUE (default), draw axes. Only applied for single-layer images.}
+\item{axes}{Whether axes should be drawn (\code{TRUE} by default). Only applied for
+single-layer images.}
 
 \item{margin}{Plot margin (all sides except right, if legend is drawn).}
 
 \item{max.layer}{Maximum number of layers to plot for multi-layer images.}
 
-\item{contains.outlier}{If TRUE, the estimated range accounts for outliers and out-of-range
-values are shown in white.}
+\item{contains.outlier}{Whether the estimated range accounts for outliers and out-of-range values
+should be shown in white (\code{FALSE} by default).}
 
-\item{rois}{Optional regions-of-interest to overlay on the image as circles. Accepts
-either the named list returned by \code{select_grains()} or a
-\code{data.frame} with (at least) the columns \code{x_coord}, \code{y_coord},
-\code{radius_px} and \code{class} (and, optionally, \code{id}). Only used
-for single-layer images; ignored (with a warning) for multi-layer stacks.}
+\item{rois}{Optional regions of interest to overlay on the image as circles. Accepts
+either the named list returned by \link{select_grains} or a data frame with (at
+least) columns \code{x_coord}, \code{y_coord}, \code{radius_px} and \code{class} (optionally,
+\code{id}). Only used for single-layer images; ignored (with a warning) for
+multi-layer stacks.}
 
-\item{roi.lwd}{TODO}
+\item{roi.lwd}{Line width to be used for the regions of interest.}
 
 \item{roi.ids}{Whether the ROI ids should be printed at the centre of each ROI overlay
 (\code{FALSE} by default). Only applied together with \code{rois}.}
@@ -64,16 +67,21 @@ for single-layer images; ignored (with a warning) for multi-layer stacks.}
 \item{roi.cex}{Scaling factor to control the font size for the ROI ids. Only applied
 if \code{roi.ids = TRUE}.}
 
-\item{classes}{Named character vector mapping ROI class labels to display colours, e.g.
-\code{c("Quartz" = "yellow", "Other" = "magenta")}. Used only together with
-\code{rois}. Defaults to the same five preset mineral classes used by
-\code{select_grains()}. Classes present in \code{rois} but missing from
-this vector are drawn in white and trigger a warning.}
+\item{classes}{Named character vector (or list) mapping mineral class labels to display
+colours, e.g. \code{c(Quartz = "yellow", Other = "magenta")}. Used only together
+with \code{rois}. Defaults to the same five preset mineral classes used by
+\link{select_grains}. Classes present in \code{rois} but missing from this vector are
+drawn in white and trigger a warning.}
 }
 \value{
-Invisibly returns NULL; the image is plotted as a side effect.
+Returns \code{NULL} invisibly; the image is plotted as a side effect.
 }
 \description{
 Displays a single- or multi-layer SpatRaster (or object coercible to one)
-as a false-color image with a custom wavelength-based color ramp.
+as a false-colour image with a custom wavelength-based colour ramp.
+}
+\examples{
+file <- system.file("extdata/sandworm_rf_median.tif", package = "RLumImage")
+plot_image(file)
+
 }

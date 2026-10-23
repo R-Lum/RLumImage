@@ -7,40 +7,39 @@
 select_grains(obj, prev_rois = NULL, classes = NULL, verbose = TRUE)
 }
 \arguments{
-\item{obj}{An object coercible to a \code{terra::SpatRaster} by
-\code{\link[=as.SpatRaster]{as.SpatRaster()}}, typically a file path or a multi-layer image stack.}
+\item{obj}{An object coercible to a \code{SpatRaster} (see \link{as.SpatRaster}) containing the
+image stack.}
 
-\item{prev_rois}{Optional. A list of ROI objects (as returned by a previous
-call to \code{select_grains()}) used to pre-populate the session with
-existing ROIs. \code{NULL} (default) starts with an empty canvas.}
+\item{prev_rois}{A list of ROI objects (as returned by a previous call to \link{select_grains})
+used to pre-populate the session with existing ROIs. \code{NULL} (default) starts
+with an empty canvas.}
 
-\item{classes}{A named vector (or list) mapping mineral class labels to
-display colours, e.g. \code{c("Quartz" = "yellow", "Other" = "magenta")}.
-Used for the class selector, the ROI overlay in \code{\link[=plot_image]{plot_image()}} and the
-colour swatches in the ROI table. Defaults to five preset mineral classes.}
+\item{classes}{Named character vector (or list) mapping mineral class labels to display
+colours, e.g. \code{c(Quartz = "yellow", Other = "magenta")}. Used for the class
+selector, the ROI overlay in \link{plot_image} and the colour swatches in the ROI
+table. Defaults to five preset mineral classes.}
 
-\item{verbose}{Print progress messages during setup and on user actions.}
+\item{verbose}{Whether progress messages should be printed to the terminal.}
 }
 \value{
-A list of ROI objects, one per grain, each in the format produced
-by \code{\link[=set_roi]{set_roi()}} and consumed by \code{\link[=apply_rois]{apply_rois()}}. Each ROI holds a circular
-\code{mask}, its position (\code{col_min}, \code{row_min}) and
-\code{shape}, the assigned mineral \code{class}, \code{info} (with
-\code{source} and the mean signal \code{average}) and an \code{overlay}
-describing the circle for plotting.
+A list of ROI objects, one per grain, each in the format produced by
+\link{set_roi} and consumed by \link{apply_rois}. Each ROI holds a circular \code{mask},
+its position (\code{col_min}, \code{row_min}) and \code{shape}, the assigned mineral
+\code{class}, \code{info} (with \code{source} and the mean signal \code{average}) and an
+\code{overlay} describing the circle for plotting.
 }
 \description{
 Opens an interactive \pkg{shiny} app that lets the user place circular
 regions of interest (ROIs) on a reference image derived from a
 luminescence image stack, assign a mineral class to each ROI, and - after
 closing the app - return the resulting per-grain ROIs in the format used
-by \code{\link[=set_roi]{set_roi()}} and \code{\link[=apply_rois]{apply_rois()}}.
+by \link{set_roi} and \link{apply_rois}.
 }
 \details{
 The image stack is combined into a single reference image (pixel-wise
 mean) for display and for mapping mouse clicks to raster coordinates.
 ROIs can be placed manually by clicking on the image, or detected
-automatically via \code{\link[=find_grains]{find_grains()}} (which replaces the current ROI set).
+automatically via \link{find_grains} (which replaces the current ROI set).
 The mineral class and the ROI radius are set before placement; ROI ids
 follow the order in which the grains are placed or, after sorting,
 the top-to-bottom, left-to-right order.

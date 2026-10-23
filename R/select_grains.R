@@ -4,36 +4,40 @@
 #' regions of interest (ROIs) on a reference image derived from a
 #' luminescence image stack, assign a mineral class to each ROI, and - after
 #' closing the app - return the resulting per-grain ROIs in the format used
-#' by [set_roi()] and [apply_rois()].
+#' by [set_roi] and [apply_rois].
 #'
 #' The image stack is combined into a single reference image (pixel-wise
 #' mean) for display and for mapping mouse clicks to raster coordinates.
 #' ROIs can be placed manually by clicking on the image, or detected
-#' automatically via [find_grains()] (which replaces the current ROI set).
+#' automatically via [find_grains] (which replaces the current ROI set).
 #' The mineral class and the ROI radius are set before placement; ROI ids
 #' follow the order in which the grains are placed or, after sorting,
 #' the top-to-bottom, left-to-right order.
 #'
-#' @param obj An object coercible to a \code{terra::SpatRaster} by
-#'   [as.SpatRaster()], typically a file path or a multi-layer image stack.
+#' @param obj
+#' An object coercible to a `SpatRaster` (see [as.SpatRaster]) containing the
+#' image stack.
 #'
-#' @param prev_rois Optional. A list of ROI objects (as returned by a previous
-#'   call to \code{select_grains()}) used to pre-populate the session with
-#'   existing ROIs. \code{NULL} (default) starts with an empty canvas.
+#' @param prev_rois
+#' A list of ROI objects (as returned by a previous call to [select_grains])
+#' used to pre-populate the session with existing ROIs. `NULL` (default) starts
+#' with an empty canvas.
 #'
-#' @param classes A named vector (or list) mapping mineral class labels to
-#'   display colours, e.g. \code{c("Quartz" = "yellow", "Other" = "magenta")}.
-#'   Used for the class selector, the ROI overlay in [plot_image()] and the
-#'   colour swatches in the ROI table. Defaults to five preset mineral classes.
+#' @param classes
+#' Named character vector (or list) mapping mineral class labels to display
+#' colours, e.g. `c(Quartz = "yellow", Other = "magenta")`. Used for the class
+#' selector, the ROI overlay in [plot_image] and the colour swatches in the ROI
+#' table. Defaults to five preset mineral classes.
 #'
-#' @param verbose Print progress messages during setup and on user actions.
+#' @param verbose
+#' Whether progress messages should be printed to the terminal.
 #'
-#' @return A list of ROI objects, one per grain, each in the format produced
-#'   by [set_roi()] and consumed by [apply_rois()]. Each ROI holds a circular
-#'   \code{mask}, its position (\code{col_min}, \code{row_min}) and
-#'   \code{shape}, the assigned mineral \code{class}, \code{info} (with
-#'   \code{source} and the mean signal \code{average}) and an \code{overlay}
-#'   describing the circle for plotting.
+#' @return
+#' A list of ROI objects, one per grain, each in the format produced by
+#' [set_roi] and consumed by [apply_rois]. Each ROI holds a circular `mask`,
+#' its position (`col_min`, `row_min`) and `shape`, the assigned mineral
+#' `class`, `info` (with `source` and the mean signal `average`) and an
+#' `overlay` describing the circle for plotting.
 #'
 #' @examples
 #' \dontrun{
@@ -43,10 +47,12 @@
 #'   # Resume a previous session and add more ROIs
 #'   rois2 <- select_grains("path/to/image_stack.tif", prev_rois = rois)
 #' }
-select_grains <- function(obj,
-                          prev_rois = NULL,
-                          classes = NULL,
-                          verbose = TRUE) {
+select_grains <- function(
+  obj,
+  prev_rois = NULL,
+  classes = NULL,
+  verbose = TRUE
+) {
 
   ## ------ Changelog ------
   ## 2026-09-14, DM: Reworked to store ROIs in the set_roi() list structure

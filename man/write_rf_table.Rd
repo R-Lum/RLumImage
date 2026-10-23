@@ -14,21 +14,28 @@ write_rf_table(
 )
 }
 \arguments{
-\item{rois}{List regions-of-interests (ROIs) as returned by \code{apply_rois()}}
+\item{rois}{List of regions of interest (ROIs) as returned by \link{apply_rois}.}
 
 \item{file}{File path of the *.rf file to write.}
 
-\item{curve.selection}{Numeric vector of length 2.
-Indices of RF_nat and RF_reg curves in \verb{$curve} list of ROI objects.}
+\item{curve.selection}{Numeric vector of length 2 storing the indices of RF_nat and RF_reg curves
+in \verb{$curves} list of ROI objects.}
 
-\item{class}{Mineral class(es) which shall be used. If 'NA', all ROIs are taken.
-Can be a single character string or a vector.}
+\item{class}{Mineral classes to write out. If \code{NA}, all ROIs are taken.}
 
-\item{meta}{List of additional 'info' for the XML header}
+\item{meta}{List of additional 'info' for the XML header.}
 
-\item{verbose}{Print progress messages.}
+\item{verbose}{Whether progress messages should be printed to the terminal.}
+}
+\value{
+The name of the file written to is returned invisibly.
 }
 \description{
-Writes a *.rf file, see Mittelstrass and Kreutzer (2021) for details.
-Open the resulting *.rf file with Luminescence::read_RF2R() for further use.
+Writes a *.rf file, see Mittelstraß and Kreutzer (2021) for details.
+Open the resulting *.rf file with \link[Luminescence:read_RF2R]{Luminescence::read_RF2R} for further use.
+}
+\references{
+Mittelstraß, D., Kreutzer, S., 2021. Spatially resolved infrared
+radiofluorescence: single-grain K-feldspar dating using CCD imaging.
+Geochronology 3, 299–319. \doi{10.5194/gchron-3-299-2021}
 }

@@ -1,16 +1,17 @@
 #' Transform wavelength into RGB value
 #'
 #' @param wl
-#' Wavelength to convert.
+#' Wavelength to convert. **Note:** This is silently clamped between 300 and
+#' 1000 nanometres.
 #'
 #' @param factor
 #' Scaling factor (1 by default).
 #'
-#' @returns
-#' TODO
+#' @return
+#' A hexadecimal string representing the wavelength colour in RGB format.
 #'
 #' @examples
-#' # TODO
+#' wavelength_to_rgb(420)
 #'
 #' @export
 wavelength_to_rgb <- function(wl, factor = 1) {

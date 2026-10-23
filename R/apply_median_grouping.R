@@ -12,9 +12,9 @@
 #' Number of images (or layers) to combine together.
 #'
 #' @param verbose
-#' Print progress messages.
+#' Whether progress messages should be printed to the terminal.
 #'
-#' @returns
+#' @return
 #' An image stack.
 #'
 #' @examples
