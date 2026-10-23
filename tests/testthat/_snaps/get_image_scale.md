@@ -11,7 +11,7 @@
     Code
       get_image_scale(img_2lyr, contains.outlier = TRUE, verbose = TRUE)
     Output
-      Reasonable signal value limits for plotting are: 2 - 121 
+      Reasonable signal value limits for plotting are: 3 - 181 
       10% 99% 
-        2 121 
+        3 181 
 
