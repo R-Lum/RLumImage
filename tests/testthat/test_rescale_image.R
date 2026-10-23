@@ -25,4 +25,6 @@ test_that("check functionality", {
                 "Rescale 1 images to 90 %")
   expect_output(rescale_image(img_2lyr, layer = 1:2, fill = 0),
                 "Rescale 2 images to 100 %")
+  expect_output(rescale_image(c(img_2lyr, img_2lyr), layer = 2:3, fill = 0),
+                "Rescale 4 images to 100 %")
 })
