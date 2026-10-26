@@ -17,7 +17,7 @@
 #' image stack. If it contains multiple layers, a representative median image
 #' is created first.
 #'
-#' @param r
+#' @param radius
 #' Radius in pixels of the circular ROI placed around each detected signal
 #' maximum.
 #'
@@ -33,7 +33,7 @@
 #'
 #' @param fft.filter
 #' Numeric vector of length 3 (shortpass, longpass, transition), with shortpass
-#' and longpass given as multiples of `r`. It is passed to [apply_fft_filter]
+#' and longpass given as multiples of `radius`. It is passed to [apply_fft_filter]
 #' to build the search image.
 #'
 #' @param allow.overlap
@@ -70,16 +70,18 @@
 #' }
 #'
 #' @export
-find_grains <- function(obj,
-                        r = 6, # Pixel
-                        threshold = NA, # Minimum intensity compared to the local background [cts/px]
-                        grain.density = NA, # Only active if threshold is not defined
-                        fft.filter = c(4, 1, 1), # Fractional (shortpass, longpass, transition)
-                        allow.overlap = FALSE, # Not recommended
-                        default.class = "Unclassified",
-                        plot = TRUE,
-                        plot.extended = FALSE, # Plots also FFT-filtered images
-                        verbose = TRUE){
+find_grains <- function(
+  obj,
+  radius = 6,
+  threshold = NA,
+  grain.density = NA,
+  fft.filter = c(4, 1, 1),
+  allow.overlap = FALSE, # Not recommended
+  default.class = "Unclassified",
+  plot = TRUE,
+  plot.extended = FALSE, # Plots also FFT-filtered images
+  verbose = TRUE
+) {
 
   ## ------ Changelog ------
   ## 2026-09-07, DM: Original version
@@ -140,8 +142,8 @@ find_grains <- function(obj,
   # How does a ROI look like? Here, it is a circle
   # Build a matrix which later is used a mask for all operations
 
-  m <- floor(r + 1) # Middle point
-  d <- m + floor(r) # Edge length
+  m <- floor(radius + 1) # Middle point
+  d <- m + floor(radius) # Edge length
 
   # Calculate the distances of each cell to the middle point (later, the maximum)
   grid_rows <- rep(1:d, each = d)
@@ -149,7 +151,7 @@ find_grains <- function(obj,
   distances_sq <- (grid_rows - m)^2 + (grid_cols - m)^2
 
   # Now create a 2-D TRUE/FALSE matrix
-  circular_roi_mask <- matrix(distances_sq <= r^2, ncol = d)
+  circular_roi_mask <- matrix(distances_sq <= radius^2, ncol = d)
 
   if (verbose) cat("Created circular ROI mask with edge length",
                    d, "containing", sum(circular_roi_mask), "pixels.\n")
@@ -157,11 +159,14 @@ find_grains <- function(obj,
   # -------------- Prepare search image --------------
 
   # FFT filter
+  shortpass <- fft.filter[1] * radius
+  longpass <- fft.filter[2] * radius
+  transition <- fft.filter[3]
   img_peaks <- apply_fft_filter(
     img,
-    shortpass = fft.filter[1] * r,
-    longpass = fft.filter[2] * r,
-    transition = fft.filter[3],
+    shortpass = shortpass,
+    longpass = longpass,
+    transition = transition,
     preserve.offset = FALSE,
     plot = FALSE,
     verbose = verbose)
@@ -204,10 +209,10 @@ find_grains <- function(obj,
 
 
     # Define the bounds of the circular region
-    row_min <- coords[1] - r
-    row_max <- coords[1] + r
-    col_min <- coords[2] - r
-    col_max <- coords[2] + r
+    row_min <- coords[1] - radius
+    row_max <- coords[1] + radius
+    col_min <- coords[2] - radius
+    col_max <- coords[2] + radius
 
     if (row_min < 1
         || row_max > nrows
@@ -282,7 +287,7 @@ find_grains <- function(obj,
       class   = default.class,
       overlay = list(x = terra::xFromCol(img, xymax$x[i]),
                      y = terra::yFromRow(img, xymax$y[i]),
-                     r = r),
+                     r = radius),
       info    = list(source_function = "find_grains",
                      source_obj = source_obj,
                      source_ncols = ncols,
@@ -299,11 +304,11 @@ find_grains <- function(obj,
   # Plotting
   if (plot) {
 
-    msg_text <- paste0("r = ", r, ", threshold = ", formatC(threshold))
+    msg_text <- paste0("radius = ", radius, ", threshold = ", formatC(threshold))
     if (plot.extended) {
 
-      fft_label <- paste0("Band-pass ", fft.filter[2] * r, " - ", fft.filter[1] * r,
-                          " px (transition = ", fft.filter[3], ")")
+      fft_label <- paste0("Band-pass ", longpass, " - ", shortpass,
+                          " px (transition = ", transition, ")")
 
       plot_image(img, label = "original",
                  title = "Input image")

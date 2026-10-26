@@ -6,7 +6,7 @@
 \usage{
 find_grains(
   obj,
-  r = 6,
+  radius = 6,
   threshold = NA,
   grain.density = NA,
   fft.filter = c(4, 1, 1),
@@ -22,7 +22,7 @@ find_grains(
 image stack. If it contains multiple layers, a representative median image
 is created first.}
 
-\item{r}{Radius in pixels of the circular ROI placed around each detected signal
+\item{radius}{Radius in pixels of the circular ROI placed around each detected signal
 maximum.}
 
 \item{threshold}{Numeric (cts/px) or \code{NA}.
@@ -35,7 +35,7 @@ derived from this density as the corresponding quantile of the FFT filtered
 image. Either \code{threshold} or \code{grain.density} must be given.}
 
 \item{fft.filter}{Numeric vector of length 3 (shortpass, longpass, transition), with shortpass
-and longpass given as multiples of \code{r}. It is passed to \link{apply_fft_filter}
+and longpass given as multiples of \code{radius}. It is passed to \link{apply_fft_filter}
 to build the search image.}
 
 \item{allow.overlap}{Whether the detected ROIs can overlap. If \code{FALSE} (default), the ROI is

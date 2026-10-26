@@ -148,7 +148,7 @@
 <polyline points='59.47,559.73 59.47,16.27 602.93,16.27 602.93,559.73 59.47,559.73 ' style='stroke-width: 0.75;' />
 </g>
 <g clip-path='url(#cpNTkuNDd8NjAyLjkzfDE2LjI3fDU1OS43Mw==)'>
-<text x='86.64' y='532.56' style='font-size: 9.60px; font-weight: bold; fill: #FFFFFF; font-family: sans;' textLength='91.27px' lengthAdjust='spacingAndGlyphs'>r = 6, threshold = 850</text>
+<text x='86.64' y='532.56' style='font-size: 9.60px; font-weight: bold; fill: #FFFFFF; font-family: sans;' textLength='114.23px' lengthAdjust='spacingAndGlyphs'>radius = 6, threshold = 850</text>
 <polyline points='480.33,347.97 480.25,346.95 480.00,345.95 479.60,345.01 479.05,344.15 478.38,343.38 477.58,342.73 476.69,342.22 475.74,341.85 474.73,341.65 473.71,341.61 472.69,341.73 471.70,342.02 470.78,342.46 469.94,343.04 469.20,343.75 468.58,344.57 468.10,345.47 467.78,346.45 467.62,347.46 467.62,348.48 467.78,349.50 468.10,350.47 468.58,351.38 469.20,352.19 469.94,352.90 470.78,353.49 471.70,353.93 472.69,354.21 473.71,354.33 474.73,354.29 475.74,354.09 476.69,353.72 477.58,353.21 478.38,352.56 479.05,351.80 479.60,350.93 480.00,349.99 480.25,348.99 480.33,347.97 ' style='stroke-width: 0.75; stroke: #FF0000;' />
 </g>
 </svg>
