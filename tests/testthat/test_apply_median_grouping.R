@@ -9,11 +9,8 @@ test_that("input validation", {
 test_that("snapshot tests", {
   testthat::skip_on_cran()
 
-  expect_error(expect_warning( # TODO
   expect_output(apply_median_grouping(c(img_2lyr, img_1lyr), window.size = 2),
-                "Number of images is not a multiple of the window size"),
-  "'x' is NULL so the result will be NULL"),
-  "replacement has length zero")
+                "Number of images is not a multiple of the window size")
 })
 
 test_that("snapshot tests", {
