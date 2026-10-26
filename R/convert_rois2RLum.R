@@ -53,6 +53,9 @@ convert_rois2RLum <- function(rois, originator = NULL) {
   if (!is.list(rois) || is.null(names(rois)) || length(rois) == 0)
     stop("[convert_rois2RLum()] 'rois' must be a non-empty named list.")
 
+  if (all(c("mask", "col_min", "row_min") %in% names(rois)))
+    rois <- list(rois)
+
   out <- vector(mode = "list", length = length(rois))
   names(out) <- names(rois)
 
