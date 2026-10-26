@@ -144,7 +144,7 @@ import_lexsyg_images <- function(
   #merge xsyg files
   if(length(xsyg_file_rest)>0){
 
-    for(xsyg_i in 1:length(xsyg_file_rest)){
+    for (xsyg_i in seq_along(xsyg_file_rest)) {
     lex_i <- Luminescence::read_XSYG2R(xsyg_file_rest[xsyg_i],
                                      fastForward = TRUE,
                                      verbose = FALSE,
@@ -157,7 +157,7 @@ import_lexsyg_images <- function(
 
   # Get sequence information
   record_table <- data.frame(NULL)
-  for (aliquot_no in 1:length(lex)) {
+  for (aliquot_no in seq_along(lex)) {
 
     no <- 1
     for(record in lex[[aliquot_no]]@records)
@@ -185,14 +185,16 @@ import_lexsyg_images <- function(
           stop("[import_lexsyg_images()] XSYG file does not contain any recordType information. Please check versions of R package Luminescence and LexStudio.")
         }
 
-        if("recordType" %in% slotNames(record)) recordType_OldLexStudio <- record@recordType
-
         #to get measurement temperature
         stepID <- info[["parentID"]]
+
         #get heating record of the same step
-        Heating_record <- which(sapply(1:length(lex[[aliquot_no]]@records), function(x) lex[[aliquot_no]]@records[[x]]@info[["parentID"]]==stepID &
-                 ifelse(is.null(lex[[aliquot_no]]@records[[x]]@info[["stimulator"]]), FALSE, lex[[aliquot_no]]@records[[x]]@info[["stimulator"]]=="heating element") &
-                 ifelse(is.null(lex[[aliquot_no]]@records[[x]]@curveType), FALSE, lex[[aliquot_no]]@records[[x]]@curveType=="measured")))
+        vals <- sapply(lex[[aliquot_no]]@records,
+                       function(x) x@info[["parentID"]] == stepID &&
+                                   isTRUE(x@info[["stimulator"]] == "heating element") &&
+                                   isTRUE(x@curveType == "measured"))
+        Heating_record <- which(vals)
+
         #get maximum measured T of the same step
         maxMeasuredT <- ifelse(length(Heating_record)==0, NA, round(max(lex[[aliquot_no]]@records[[Heating_record]]@data[,2])))
 
@@ -231,7 +233,8 @@ import_lexsyg_images <- function(
 
   files$time <- files$time + timezone_offset
 
-  if (verbose & timezone_offset>0) cat("\n   Corrected for time zone offset of ", timezone_offset/3600, " h...")
+  if (verbose && timezone_offset > 0)
+    cat("\n   Corrected for time zone offset of", timezone_offset / 3600, "h...")
 
   # Determine a sensible upper time bound for the *last* record, instead of
   # using Inf (which would greedily assign every later TIFF file to it).
@@ -247,7 +250,7 @@ import_lexsyg_images <- function(
 
   # Now assign the xsyg infos to the file table
   file_i <- 1
-  for (i in 1:nrow(record_table)) {
+  for (i in seq_along(nrow(record_table))) {
 
     # Time limits of the current record
     start_time <- record_table$time[i]

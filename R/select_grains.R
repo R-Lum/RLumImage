@@ -169,7 +169,7 @@ select_grains <- function(
 
     if (length(roi_list) == 0L) return(data.frame())
     data.frame(
-      id = 1:length(roi_list),
+      id = seq_along(roi_list),
       class = vapply(roi_list, function(r) r$class, character(1)),
    #   area = vapply(roi_list, function(r) sum(r$mask), numeric(1)),
       avg_signal = vapply(roi_list, function(r) r$info$average, numeric(1)),

@@ -88,7 +88,7 @@ apply_rois <- function(
 
     ylab_interval <- ""
     if (x.interval != 1)
-      ylab_time_interval <- paste0(formatC(x.interval), " ")
+      ylab_interval <- paste0(formatC(x.interval), " ")
 
     ylab <- paste0("Signal [avg cts / ", ylab_interval, x.unit,"]")
   }
@@ -107,8 +107,6 @@ apply_rois <- function(
   for (roi_name in names(rois)) {
 
     roi <- rois[[roi_name]]
-
-    pixel_vector <- rep(0, nlyrs)
 
     # Define the bounds of the ROI
     row_min <- roi$row_min

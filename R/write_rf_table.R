@@ -56,7 +56,7 @@ write_rf_table <- function(
   # the information which is needed
   grains <- list()
   N <- 0
-  for(i in 1:length(rois)){
+  for (i in seq_along(rois)) {
 
     roi <- rois[[i]]
     grain <- list()
@@ -143,8 +143,10 @@ write_rf_table <- function(
 
     # Set the first two columns
     if (is.null(df_nat) || is.null(df_reg)) {
-      df_nat <- data.frame(no = 1:length(grain[[1]]$x), x = grain[[1]]$x)
-      df_reg <- data.frame(no = 1:length(grain[[2]]$x), x = grain[[2]]$x)
+      df_nat <- data.frame(no = seq_along(grain[[1]]$x),
+                           x = grain[[1]]$x)
+      df_reg <- data.frame(no = seq_along(grain[[2]]$x),
+                           x = grain[[2]]$x)
     }
 
     # Set the column for the RF signal
@@ -157,11 +159,11 @@ write_rf_table <- function(
     "<Natural>",
     paste(names(df_nat), collapse = "\t"))
 
-  for(i in 1:nrow(df_nat))
+  for (i in seq_along(nrow(df_nat))) {
     natural_block <- c(
       natural_block,
       paste(df_nat[i, ], collapse = "\t"))
-
+  }
   natural_block <- c(natural_block, "</Natural>")
 
   # ----- <Bleached> block -----

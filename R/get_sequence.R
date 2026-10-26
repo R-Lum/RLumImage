@@ -38,27 +38,16 @@ get_sequence <- function(
   if (!is.list(obj)) stop("[get_sequence()] Input object must be of type list.")
 
   # Is input object a list of lists (multiple aliquots) or just a list (one aliquot selected)?
-  if (is.list(obj[[1]])) {
-
-    seq <- obj[[1]]
-
-  }else{
-    seq <- obj
-  }
+  seq <- if (is.list(obj[[1]])) obj[[1]] else obj
 
   # Extract sequence data
-  tab <- data.frame(NULL)
-  for (i in 1:length(seq)) {
-    rec <- seq[[i]]
-
-    files <- nrow(rec$imageFiles)
-    interval <- as.numeric(rec$detectionInterval)
-
+  tab <- NULL
+  for (rec in seq) {
     # Build table
-    row <- data.frame(files = files,
+    row <- data.frame(files = nrow(rec$imageFiles),
                       recordType = rec$recordType,
                       wavelength = rec$detectionWavelength,
-                      interval = interval,
+                      interval = as.numeric(rec$detectionInterval),
                       maxMeasuredT = rec$maxMeasuredT)
 
     tab <- rbind(tab, row)

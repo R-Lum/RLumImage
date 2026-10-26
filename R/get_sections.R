@@ -72,7 +72,7 @@ get_sections <- function(
 
   # X section
   if (show.X.line) {
-    matplot(x = 1:nrow(secs$X),
+    matplot(x = seq_len(nrow(secs$X)),
             y = secs$X,
             col = cols,
             ylim = ylim,
@@ -89,7 +89,7 @@ get_sections <- function(
 
   # Y section
   if (show.Y.line) {
-    matplot(x = 1:nrow(secs$Y),
+    matplot(x = seq_len(nrow(secs$Y)),
             y = secs$Y,
             col = cols,
             ylim = ylim,
