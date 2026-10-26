@@ -42,7 +42,7 @@ apply_median_grouping <- function(
 
   if (n_layers %% window.size != 0) {
     msg <- "Number of images is not a multiple of the window size. Any excess images are disregarded."
-    ifelse(verbose, cat(msg, "\n"), warning(msg))
+    if (verbose) cat(msg, "\n") else warning(msg)
   }
 
   # Define the grouping index, for example:
