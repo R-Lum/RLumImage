@@ -96,9 +96,9 @@ write_rf_table <- function(
   # ----- Header line -----
   header_fields <- c(
     "macro_version=0.1.0", # ToDo: Remove this after release of Luminescence 1.4
-    "rlumimage_version=0.0.1",  # ToDo: Set dynamically
+    paste0("rlumimage_version=", packageVersion("RLumImage")),
     paste0("terra_version=", packageVersion("terra")),
-    paste0("r_version=", paste0(version$major, ".", version$minor)),
+    paste0("r_version=", getRversion()),
 
     # Assume that the curve descriptor of the first RF_nat is the same as for all other curves
     paste0("curveDescriptor=\"", grains[[1]][[1]]$curveDescriptor, "\""),
