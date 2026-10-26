@@ -30,19 +30,26 @@ zone of the image files.}
 }
 \value{
 Returns a nested list, structured as:
-
-├─ \verb{[[aliquot position]]}
-│		├─ \verb{[[1]]}
-│		│   ├─ position
-│		│   ├─ recordNumber
-│		│   ├─ recordType
-│		│   ├─ detectionInterval
-│		│   ├─ detectionWavelength
-│		│   └─ imageFiles (data.frame)
-│		│   	├─ file
-│		│   	├─ time
-│		│   	└─ channel
+\itemize{
+\item \verb{[[aliquot position]]}
+\itemize{
+\item \verb{[[1]]}
+\itemize{
+\item position
+\item recordNumber
+\item recordType
+\item detectionInterval
+\item detectionWavelength
+\item imageFiles (data.frame)
+\itemize{
+\item file
+\item time
+\item channel
 ...	...
+}
+}
+}
+}
 }
 \description{
 Imports TIFF files recorded from lexsyg research readers using LexStudio 2.

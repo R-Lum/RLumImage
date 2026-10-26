@@ -32,17 +32,17 @@
 #' @return
 #' Returns a nested list, structured as:
 #'
-#' ├─ `[[aliquot position]]`
-#' │		├─ `[[1]]`
-#' │		│   ├─ position
-#' │		│   ├─ recordNumber
-#' │		│   ├─ recordType
-#' │		│   ├─ detectionInterval
-#' │		│   ├─ detectionWavelength
-#' │		│   └─ imageFiles (data.frame)
-#' │		│   	├─ file
-#' │		│   	├─ time
-#' │		│   	└─ channel
+#' - `[[aliquot position]]`
+#' 	- `[[1]]`
+#' 	   - position
+#' 	   - recordNumber
+#' 	   - recordType
+#' 	   - detectionInterval
+#' 	   - detectionWavelength
+#' 	   - imageFiles (data.frame)
+#' 	       + file
+#' 	       + time
+#' 	       + channel
 #' ...	...
 #'
 #'
