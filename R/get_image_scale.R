@@ -18,11 +18,12 @@
 #' get_image_scale(file)
 #'
 #' @export
-get_image_scale <- function(obj,
-                            contains.outlier = FALSE,
-                            verbose = FALSE){
+get_image_scale <- function(
+  obj,
+  contains.outlier = FALSE,
+  verbose = FALSE
+) {
   img_all <- as.SpatRaster(obj)
-
   img <- terra::median(img_all)
 
   # ToDo's
@@ -31,13 +32,8 @@ get_image_scale <- function(obj,
   # - for contains.outlier = TRUE, use Pych statistics
 
   # Use quantiles to set contrast limits
-  if (contains.outlier) {
+  contrast_quantiles <- if (contains.outlier) c(0.1, 0.99) else c(0.2, 0.9999)
 
-    contrast_quantiles <- c(0.1, 0.99)
-  }else{
-
-    contrast_quantiles <- c(0.2, 0.9999)
-  }
   # Get pixel values as numeric vector
   # Don't use all pixel values to speed up calculation
   n_pixels <- terra::ncell(img)
