@@ -29,4 +29,5 @@ test_that("snapshot tests", {
 
   expect_snapshot(get_sequence(obj))
   expect_snapshot(get_sequence(obj, print.friendly = TRUE))
+  expect_snapshot(get_sequence(c(obj, obj), print.friendly = TRUE))
 })

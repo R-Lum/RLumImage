@@ -22,4 +22,5 @@ test_that("check functionality", {
   testthat::skip_on_cran()
 
   expect_snapshot(convert_rois2RLum(list(first = roi)))
+  expect_snapshot(convert_rois2RLum(rois.sandworm))
 })

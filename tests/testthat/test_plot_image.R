@@ -34,6 +34,12 @@ test_that("graphical snapshot tests", {
   vdiffr::expect_doppelganger("rois",
                               plot_image(img_1lyr, rois = rois,
                                          roi.ids = TRUE))
+  vdiffr::expect_doppelganger("rois sandworm",
+                              plot_image(img_1lyr, rois = rois.sandworm,
+                                         roi.ids = TRUE))
+
+  ## regression tests
+  set.seed(1)
   expect_warning(
   vdiffr::expect_doppelganger("issue 9",
                               plot_image(img_1lyr, rois = rois,
