@@ -12,6 +12,13 @@ test_that("input validation", {
                "No TIFF file could be matched to any XSYG record")
 })
 
+test_that("check functionality", {
+  testthat::skip_on_cran()
+
+  expect_warning(import_lexsyg_images(c(xsyg, xsyg), verbose = FALSE),
+                 "Multiple heating records found, keeping")
+})
+
 test_that("snapshot tests", {
   testthat::skip_on_cran()
 

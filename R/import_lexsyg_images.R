@@ -160,12 +160,13 @@ import_lexsyg_images <- function(
                                      verbose = FALSE,
                                      txtProgressBar = FALSE)
 
-    lex[[1]] <- merge_RLum(objects = list(lex[[1]], lex_i[[1]]))
+    lex[[1]] <- merge_RLum(object = list(lex[[1]], lex_i[[1]]))
      }
     }
 
 
   # Get sequence information
+  warning.shown <- FALSE
   record_table <- data.frame(NULL)
   for (aliquot_no in seq_along(lex)) {
 
@@ -203,6 +204,13 @@ import_lexsyg_images <- function(
                                    isTRUE(x@info[["stimulator"]] == "heating element") &&
                                    isTRUE(x@curveType == "measured"))
         Heating_record <- which(vals)
+        if (length(Heating_record) > 1) {
+          if (!warning.shown) {
+            warning("Multiple heating records found, keeping only the first. This can happen if the same XSYG file is provided twice.")
+            warning.shown <- TRUE
+          }
+          Heating_record <- Heating_record[1]
+        }
 
         #get maximum measured T of the same step
         maxMeasuredT <- ifelse(length(Heating_record)==0, NA, round(max(lex[[aliquot_no]]@records[[Heating_record]]@data[,2])))
