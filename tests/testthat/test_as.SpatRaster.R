@@ -22,7 +22,7 @@ test_that("check functionality", {
                    img_2lyr)
 
   ## warnings
-  img_warn <- test_path("_data/rast_unknown_extent.tif")
+  img_warn <- test_path("_data/tiff-tests/rast_unknown_extent.tif")
   expect_warning(as.SpatRaster(img_warn, warning = TRUE, verbose = FALSE),
                  "[rast] unknown extent", fixed = TRUE)
   expect_silent(as.SpatRaster(img_warn, warning = FALSE, verbose = FALSE))
