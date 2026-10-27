@@ -409,7 +409,7 @@ select_grains <- function(
 
       found <- find_grains(
         obj           = ref_img,
-        r             = input$radius,
+        radius        = input$radius,
         threshold     = input$fg_threshold,
         grain.density = input$fg_grain_density,
         default.class = names(which(classes == input$roi_color)),
