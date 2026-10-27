@@ -100,9 +100,8 @@ import_lexsyg_images <- function(
 
   if (verbose) cat("#1 Use creation date of the TIFF files as time stamp and sort them ...")
 
-    # Create file table and sort the for their creating data
-  files <- data.frame(NULL)
-  for (file in tif_files) {
+  # Read the TIFF files creation time
+  file.times <- sapply(tif_files, function(file) {
 
     # Get creation time: first try to extract the ModifyTime field present
     # in the EXIF metadata
@@ -115,14 +114,19 @@ import_lexsyg_images <- function(
       recorded_at <- min(info$ctime, info$mtime)
     }
 
-    files <- rbind(files,
-                   data.frame(file = file,
-                              time = recorded_at, # + timezone_offset,
-                              position = 0, type = "unknown",
-                              channel = 0, recordNumber = -1,
-                              interval = 0, wavelength = NA,
-                              maxMeasuredT= NA))
-  }
+    recorded_at # + timezone_offset
+  }, USE.NAMES = FALSE)
+
+  # Create file table with placeholders
+  files <- data.frame(file = tif_files,
+                      time = as.POSIXct(file.times),
+                      position = 0,
+                      type = "unknown",
+                      channel = 0,
+                      recordNumber = -1,
+                      interval = 0,
+                      wavelength = NA,
+                      maxMeasuredT = NA)
 
   # Sort files
   files <- files[order(files$time),]
