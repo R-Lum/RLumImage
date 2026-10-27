@@ -5,6 +5,20 @@ test_that("input validation", {
 
   expect_error(import_lexsyg_images("not-existing.xsyg"),
                "XSYG file does not exist")
-  expect_error(import_lexsyg_images(xsyg, verbose = FALSE),
+  expect_error(import_lexsyg_images(xsyg, folder = tempdir()),
+               "Folder does not contain any TIFF images")
+  expect_error(import_lexsyg_images(xsyg, folder = test_path("_data/tiff-tests"),
+                                    verbose = FALSE),
                "No TIFF file could be matched to any XSYG record")
+})
+
+test_that("snapshot tests", {
+  testthat::skip_on_cran()
+
+  scrub_current_date <- function(output) {
+    gsub("(Images were recorded between .* and) .*", "\\1", output)
+  }
+
+  expect_snapshot(import_lexsyg_images(xsyg),
+                  transform = scrub_current_date)
 })

@@ -58,6 +58,12 @@ matched to any record) are always reported via \code{warning()} and excluded
 from the result.
 }
 \details{
+File matching happens according to the date stored in the TIFF file metadata
+for files produced by LexStudio 2 version 2.34.2 and above. Files produced
+with older versions resort to using the file modification time: however,
+this is unreliable as file attributes may be reset in different ways
+depending on the operating system when files are copied or moved.
+
 \strong{Important note}: This function is complicated and might break if the
 data structure of lexsyg image recording is changed. Thus, this function
 needs to be reworked once LexStudio is updated for better image recording.

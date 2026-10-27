@@ -5,6 +5,12 @@
 #' matched to any record) are always reported via `warning()` and excluded
 #' from the result.
 #'
+#' File matching happens according to the date stored in the TIFF file metadata
+#' for files produced by LexStudio 2 version 2.34.2 and above. Files produced
+#' with older versions resort to using the file modification time: however,
+#' this is unreliable as file attributes may be reset in different ways
+#' depending on the operating system when files are copied or moved.
+#'
 #' **Important note**: This function is complicated and might break if the
 #' data structure of lexsyg image recording is changed. Thus, this function
 #' needs to be reworked once LexStudio is updated for better image recording.
@@ -108,12 +114,16 @@ import_lexsyg_images <- function(
   files <- data.frame(NULL)
   for (file in tif_files) {
 
-    # Get creation time
-    recorded_at <- as.numeric(file.info(file)$ctime)
-    alt_recorded_at <- as.numeric(file.info(file)$mtime)
+    # Get creation time: first try to extract the ModifyTime field present
+    # in the EXIF metadata
+    info <- tiff::readTIFF(file, info = TRUE, payload = FALSE)
+    recorded_at <- as.POSIXct(info$date.time, format = "%Y:%m:%d %H:%M:%S")
 
-    if (alt_recorded_at < recorded_at)
-      recorded_at <- alt_recorded_at
+    # Alternatively, fall back to use the file properties
+    if (length(recorded_at) == 0) {
+      info <- file.info(file)
+      recorded_at <- min(info$ctime, info$mtime)
+    }
 
     files <- rbind(files,
                    data.frame(file = file,
@@ -166,8 +176,7 @@ import_lexsyg_images <- function(
 
       if (isTRUE(info$detector == detector)) {
 
-        start_time <- as.numeric(strptime(info$startDate,
-                                          format = "%Y%m%d%H%M%S"))
+        start_time <- as.POSIXct(info$startDate, format = "%Y%m%d%H%M%S")
 
         # Extract the central emission wavelength from the filter, if available
         wavelength <- suppressWarnings(as.numeric(sub(".*?(\\d+)\\s*nm.*", "\\1",
@@ -231,10 +240,11 @@ import_lexsyg_images <- function(
                                                                     format = "%Y%m%d%H%M%S")))))/3600), #difference between xsyg and tif "change time", rounded to hours (time zone)
                                  get_time_difference(file=tif_files[1], city=city, country=country))
 
-  files$time <- files$time + timezone_offset
 
-  if (verbose && timezone_offset > 0)
-    cat("\n   Corrected for time zone offset of", timezone_offset / 3600, "h...")
+  # TODO(mcol): seems incorrect and breaks coverage
+  ## files$time <- files$time + timezone_offset
+  ## if (verbose && timezone_offset > 0)
+  ##   cat("\n   Corrected for time zone offset of", timezone_offset / 3600, "h...")
 
   # Determine a sensible upper time bound for the *last* record, instead of
   # using Inf (which would greedily assign every later TIFF file to it).

@@ -22,6 +22,7 @@ Imports:
   stats,
   terra,
   tidygeocoder,
+  tiff,
   utils
 Suggests: 
   sf,
