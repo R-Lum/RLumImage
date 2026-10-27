@@ -250,7 +250,7 @@ import_lexsyg_images <- function(
 
   # Now assign the xsyg infos to the file table
   file_i <- 1
-  for (i in seq_along(nrow(record_table))) {
+  for (i in seq_len(nrow(record_table))) {
 
     # Time limits of the current record
     start_time <- record_table$time[i]
