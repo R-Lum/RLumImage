@@ -1,5 +1,6 @@
 #' Automatically align two single-layer SpatRaster images
 #'
+#' @description
 #' Estimates the horizontal shift, vertical shift and rotation angle that
 #' best aligns `moving` onto `fixed`, using image correlation as the
 #' similarity metric and [stats::optim] for the parameter search.

@@ -34,6 +34,10 @@ The name of the file written to is returned invisibly.
 Writes a *.rf file, see Mittelstraß and Kreutzer (2021) for details.
 Open the resulting *.rf file with \link[Luminescence:read_RF2R]{Luminescence::read_RF2R} for further use.
 }
+\examples{
+# TODO
+
+}
 \references{
 Mittelstraß, D., Kreutzer, S., 2021. Spatially resolved infrared
 radiofluorescence: single-grain K-feldspar dating using CCD imaging.

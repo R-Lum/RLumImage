@@ -16,6 +16,9 @@
 #' @param verbose
 #' Whether progress messages should be printed to the terminal.
 #'
+#' @return
+#' A `SpatRaster` object.
+#'
 #' @examples
 #' file <- system.file("extdata/sandworm_rf_median.tif", package = "RLumImage")
 #' obj <- as.SpatRaster(file)

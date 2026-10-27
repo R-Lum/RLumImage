@@ -60,9 +60,9 @@ A list representing a single ROI object, compatible with \link{apply_rois} and
 \link{select_grains}.
 }
 \description{
-Creates a new ROI object or edits an existing one. ROIs define regions within an
-image, typically used for extracting luminescence signal time series. This function
-supports setting the ROI shape, position, and metadata like mineral class.
+ROIs define regions within an image, typically used for extracting
+luminescence signal time series. This function supports setting the ROI
+shape, position, and metadata like mineral class.
 }
 \examples{
 # TODO

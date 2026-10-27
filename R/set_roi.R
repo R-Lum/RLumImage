@@ -1,8 +1,9 @@
 #' Create or edit a region of interest (ROI) object
 #'
-#' Creates a new ROI object or edits an existing one. ROIs define regions within an
-#' image, typically used for extracting luminescence signal time series. This function
-#' supports setting the ROI shape, position, and metadata like mineral class.
+#' @description
+#' ROIs define regions within an image, typically used for extracting
+#' luminescence signal time series. This function supports setting the ROI
+#' shape, position, and metadata like mineral class.
 #'
 #' @param roi
 #' A ROI object (list) to edit. If `NULL` (default), a new ROI is created.

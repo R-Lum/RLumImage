@@ -19,7 +19,7 @@ import_lexsyg_images(
 
 \item{folder}{Folder where the TIFF files are stored. Defaults to the XSYG file's directory.}
 
-\item{detector}{Short name of the detector in LexStudio 2.}
+\item{detector}{Short name of the detector in LexStudio 2 ("EMCCD" by default).}
 
 \item{verbose}{Whether progress messages should be printed to the terminal.}
 
@@ -56,8 +56,7 @@ Imports TIFF files recorded from lexsyg research readers using LexStudio 2.
 TIFF files that fall outside the XSYG recording time range (i.e. cannot be
 matched to any record) are always reported via \code{warning()} and excluded
 from the result.
-}
-\details{
+
 File matching happens according to the date stored in the TIFF file metadata
 for files produced by LexStudio 2 version 2.34.2 and above. Files produced
 with older versions resort to using the file modification time: however,

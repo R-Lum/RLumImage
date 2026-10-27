@@ -1,5 +1,6 @@
 #' Apply ROIs to an image stack
 #'
+#' @description
 #' Extract mean values within circular regions of interest (ROIs) across
 #' an image stack and optionally plot the time series.
 #'

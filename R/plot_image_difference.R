@@ -1,7 +1,8 @@
 #' Function for creating a difference image
 #'
+#' @description
 #' Computes and plots the pixel-wise difference between two images
-#' (objA - objB) using [plot_image].
+#' (`objA` - `objB`) using [plot_image].
 #'
 #' @param objA
 #' An object coercible to a `SpatRaster` (see [as.SpatRaster]) containing the

@@ -1,5 +1,6 @@
 #' Searches for TIFF files and assigns them to XSYG sequence data
 #'
+#' @description
 #' Imports TIFF files recorded from lexsyg research readers using LexStudio 2.
 #' TIFF files that fall outside the XSYG recording time range (i.e. cannot be
 #' matched to any record) are always reported via `warning()` and excluded
@@ -23,7 +24,7 @@
 #' Folder where the TIFF files are stored. Defaults to the XSYG file's directory.
 #'
 #' @param detector
-#' Short name of the detector in LexStudio 2.
+#' Short name of the detector in LexStudio 2 ("EMCCD" by default).
 #'
 #' @param verbose
 #' Whether progress messages should be printed to the terminal.

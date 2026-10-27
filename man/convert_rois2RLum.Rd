@@ -23,8 +23,7 @@ Converts the per-ROI curve lists stored in a ROI object (as returned by
 \link{apply_rois} and \link{set_roi}) into \code{Luminescence::RLum.Data.Curve} objects
 and combines all curves of one ROI into a \code{Luminescence::RLum.Analysis}
 object. The output is a named list of \code{RLum.Analysis} objects, one per ROI.
-}
-\details{
+
 Each entry of \code{rois$curves} (a list with elements \code{x}, \code{y}, \code{recordType},
 \code{detectionInterval}, \code{curveDescriptor}, and \code{source_obj}) is translated into
 an \code{RLum.Data.Curve} object, where

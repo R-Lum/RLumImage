@@ -59,8 +59,7 @@ short-pass (high-pass), a long-pass (low-pass), or a band-pass filter,
 depending on which of \code{shortpass} / \code{longpass} are given. Each layer of a
 multi-layer stack is filtered independently. Filter edges on the frequency
 mask are smoothed with a cosine taper.
-}
-\details{
+
 FFT filters can be used to extract or remove features in images based on
 their spatial size. For example, signal cross-talk can be removed by
 applying a short-pass filter with a cut-off value sufficiently larger than

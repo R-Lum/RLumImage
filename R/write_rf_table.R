@@ -1,5 +1,6 @@
 #' Saves single-grain IR-RF measurements
 #'
+#' @description
 #' Writes a *.rf file, see Mittelstraß and Kreutzer (2021) for details.
 #' Open the resulting *.rf file with [Luminescence::read_RF2R] for further use.
 #'
@@ -24,6 +25,9 @@
 #'
 #' @return
 #' The name of the file written to is returned invisibly.
+#'
+#' @examples
+#' # TODO
 #'
 #' @references
 #' Mittelstraß, D., Kreutzer, S., 2021. Spatially resolved infrared

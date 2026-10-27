@@ -19,6 +19,9 @@ default).}
 
 \item{verbose}{Whether progress messages should be printed to the terminal.}
 }
+\value{
+A \code{SpatRaster} object.
+}
 \description{
 Converts an array, a matrix or an image file (usually a TIFF file) to a terra::SpatRaster object
 }

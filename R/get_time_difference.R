@@ -7,6 +7,9 @@
 #' Location where the measurement was performed, used to determine the time
 #' zone.
 #'
+#' @return
+#' A numeric offset.
+#'
 #' @author
 #' Mariana Sontag-González, University of Oxford\cr
 #'

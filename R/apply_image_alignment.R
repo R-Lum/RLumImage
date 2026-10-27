@@ -1,5 +1,6 @@
 #' Apply image alignment results from align_images() on a stack of images
 #'
+#' @description
 #' Shifts and rotates an image stack according to the dx, dy and angle
 #' parameters estimated by align_images().
 #'

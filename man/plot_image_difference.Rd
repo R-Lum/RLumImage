@@ -37,5 +37,5 @@ image is plotted as a side effect.
 }
 \description{
 Computes and plots the pixel-wise difference between two images
-(objA - objB) using \link{plot_image}.
+(\code{objA} - \code{objB}) using \link{plot_image}.
 }

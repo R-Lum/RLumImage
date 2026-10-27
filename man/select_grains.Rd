@@ -34,8 +34,7 @@ regions of interest (ROIs) on a reference image derived from a
 luminescence image stack, assign a mineral class to each ROI, and - after
 closing the app - return the resulting per-grain ROIs in the format used
 by \link{set_roi} and \link{apply_rois}.
-}
-\details{
+
 The image stack is combined into a single reference image (pixel-wise
 mean) for display and for mapping mouse clicks to raster coordinates.
 ROIs can be placed manually by clicking on the image, or detected
@@ -46,10 +45,13 @@ the top-to-bottom, left-to-right order.
 }
 \examples{
 \dontrun{
-  # Select grains in a multi-layer image stack
-  rois <- select_grains("path/to/image_stack.tif")
+file <- system.file("extdata/sandworm_rf_median.tif", package = "RLumImage")
 
-  # Resume a previous session and add more ROIs
-  rois2 <- select_grains("path/to/image_stack.tif", prev_rois = rois)
+# Select grains in a multi-layer image stack
+rois <- select_grains(file)
+
+# Resume a previous session and add more ROIs
+rois2 <- select_grains(file, prev_rois = rois)
 }
+
 }

@@ -1,5 +1,6 @@
 #' Convert a ROI list into a list of `RLum.Analysis` objects
 #'
+#' @description
 #' Converts the per-ROI curve lists stored in a ROI object (as returned by
 #' [apply_rois] and [set_roi]) into `Luminescence::RLum.Data.Curve` objects
 #' and combines all curves of one ROI into a `Luminescence::RLum.Analysis`

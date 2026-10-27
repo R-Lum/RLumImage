@@ -64,8 +64,7 @@ around it, and removes it before searching for the next maximum. Grains are
 only kept if their mean signal within the ROI exceeds the estimated local
 background by the given \code{threshold}. This avoids detecting FFT filter
 ripples as grains.
-}
-\details{
+
 The detection threshold can either be given directly (\code{threshold}) or be
 derived from a target \code{grain.density} (the fraction of pixels expected to be
 part of grains). The returned ROIs are sorted by their mean \code{average} signal

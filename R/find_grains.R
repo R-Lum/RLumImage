@@ -1,5 +1,6 @@
 #' Automatically detects single grains (local signal maxima) in an image.
 #'
+#' @description
 #' The function iteratively finds the pixel of maximum signal in an FFT
 #' filtered copy of the image, defines a circular region of interest (ROI)
 #' around it, and removes it before searching for the next maximum. Grains are

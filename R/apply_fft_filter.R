@@ -1,6 +1,7 @@
 #' Applies a Fast Fourier Transform (FFT) filter to one or multiple grey-scale
 #' images.
 #'
+#' @description
 #' The filter operates on the spatial frequency domain and can act as a
 #' short-pass (high-pass), a long-pass (low-pass), or a band-pass filter,
 #' depending on which of `shortpass` / `longpass` are given. Each layer of a

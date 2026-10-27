@@ -1,5 +1,6 @@
 #' Interactively select grains (regions of interest) in a luminescence image stack
 #'
+#' @description
 #' Opens an interactive \pkg{shiny} app that lets the user place circular
 #' regions of interest (ROIs) on a reference image derived from a
 #' luminescence image stack, assign a mineral class to each ROI, and - after
@@ -41,12 +42,16 @@
 #'
 #' @examples
 #' \dontrun{
-#'   # Select grains in a multi-layer image stack
-#'   rois <- select_grains("path/to/image_stack.tif")
+#' file <- system.file("extdata/sandworm_rf_median.tif", package = "RLumImage")
 #'
-#'   # Resume a previous session and add more ROIs
-#'   rois2 <- select_grains("path/to/image_stack.tif", prev_rois = rois)
+#' # Select grains in a multi-layer image stack
+#' rois <- select_grains(file)
+#'
+#' # Resume a previous session and add more ROIs
+#' rois2 <- select_grains(file, prev_rois = rois)
 #' }
+#'
+#' @export
 select_grains <- function(
   obj,
   prev_rois = NULL,

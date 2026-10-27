@@ -1,5 +1,6 @@
 #' Plot spatially resolved luminescence images
 #'
+#' @description
 #' Displays a single- or multi-layer SpatRaster (or object coercible to one)
 #' as a false-colour image with a custom wavelength-based colour ramp.
 #'
