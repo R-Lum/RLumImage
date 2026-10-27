@@ -84,17 +84,7 @@ import_lexsyg_images <- function(
 
   ### --------------- Input checks ------------------
 
-  if(length(xsyg_file)>1) {
-
-    #sort by time
-    xsyg_file <- xsyg_file[order(as.numeric(file.info(xsyg_file)$mtime))]
-
-    #separate first and rest
-    xsyg_file_rest <- xsyg_file[-1]
-    xsyg_file <- xsyg_file[1]
-  } else { xsyg_file_rest <- NULL}
-
-  if (!file.exists(xsyg_file))
+  if (!all(file.exists(xsyg_file)))
     stop("[import_lexsyg_images()] XSYG file does not exist.")
 
   if (is.na(folder)) folder <- dirname(xsyg_file)
@@ -146,24 +136,19 @@ import_lexsyg_images <- function(
   if (verbose) cat("#2 Read XSYG file and get sequence data ...")
 
   # Read lexsyg data
-  lex <- Luminescence::read_XSYG2R(xsyg_file[1],
-                                   fastForward = TRUE,
-                                   verbose = FALSE,
-                                   txtProgressBar = FALSE)
+  if (length(xsyg_file) > 1) {
+    #sort by time
+    xsyg_file <- xsyg_file[order(file.info(xsyg_file)$mtime)]
+  }
 
-  #merge xsyg files
-  if(length(xsyg_file_rest)>0){
+  lex <- unlist(lapply(xsyg_file, Luminescence::read_XSYG2R,
+                       fastForward = TRUE,
+                       verbose = FALSE,
+                       txtProgressBar = FALSE))
 
-    for (xsyg_i in seq_along(xsyg_file_rest)) {
-    lex_i <- Luminescence::read_XSYG2R(xsyg_file_rest[xsyg_i],
-                                     fastForward = TRUE,
-                                     verbose = FALSE,
-                                     txtProgressBar = FALSE)
-
-    lex[[1]] <- merge_RLum(object = list(lex[[1]], lex_i[[1]]))
-     }
-    }
-
+  if (length(xsyg_file) > 1) {
+    lex <- list(merge_RLum(lex))
+  }
 
   # Get sequence information
   warning.shown <- FALSE
