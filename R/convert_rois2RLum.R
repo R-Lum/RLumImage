@@ -68,8 +68,7 @@ convert_rois2RLum <- function(rois, originator = NULL) {
     records <- lapply(roi$curves, function(curve) {
 
       if (!is.list(curve) || is.null(curve$x) || is.null(curve$y))
-        stop(paste0("[convert_rois2RLum()] Curve entry of ROI '",
-                    roi_name, "' is malformed."))
+        stop("[convert_rois2RLum()] Curve entry of ROI '", roi_name, "' is malformed.")
 
       # Combine x and y into the 2-column data matrix
       curve_data <- cbind(x = as.numeric(curve$x),
