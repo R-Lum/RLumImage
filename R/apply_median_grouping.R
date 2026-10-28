@@ -57,7 +57,7 @@ apply_median_grouping <- function(
   result <- terra::tapp(
     x     = stack,
     index = group_index,
-    fun   = median,
+    fun   = stats::median,
     na.rm = TRUE
   )
 

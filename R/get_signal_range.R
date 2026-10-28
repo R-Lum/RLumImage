@@ -44,7 +44,7 @@ get_signal_range <- function(
   vals <- terra::spatSample(img, size = n_sample,
                             method = "random", na.rm = TRUE)[[1]]
 
-  range <- quantile(vals, probs = contrast_quantiles, na.rm = TRUE)
+  range <- stats::quantile(vals, probs = contrast_quantiles, na.rm = TRUE)
 
   # Ensure rounded return values
   range <- c(floor(range[1]), ceiling(range[2]))

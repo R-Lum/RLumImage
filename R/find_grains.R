@@ -137,7 +137,7 @@ find_grains <- function(
   values <- terra::as.matrix(img, wide = TRUE)
 
   # Set 20 % quantile of pixel intensity as estimated background (also needed later)
-  est_background <- quantile(values, probs = 0.2, na.rm = TRUE)
+  est_background <- stats::quantile(values, probs = 0.2, na.rm = TRUE)
 
   # -------------- Build pixel mask ---------------
   # How does a ROI look like? Here, it is a circle
@@ -179,13 +179,13 @@ find_grains <- function(
   if (is.na(threshold)) {
 
     # The grain density set by the user determines the threshold value
-    threshold <- quantile(peaks, probs = 1 - grain_density, na.rm = TRUE)
+    threshold <- stats::quantile(peaks, probs = 1 - grain_density, na.rm = TRUE)
 
     if(verbose) cat("Calculate threshold for ", 100 * grain.density,
                     "% grain density:",  formatC(threshold), " px/cts.\n")
   }else{
 
-    if (threshold < quantile(peaks, probs = 0.25, na.rm = TRUE))
+    if (threshold < stats::quantile(peaks, probs = 0.25, na.rm = TRUE))
       warning("[find_grains()] Threshold is very low for this image. Grain finding might take longer and return more ROIs than expected.")
 
     if (threshold > max(peaks, na.rm = TRUE))

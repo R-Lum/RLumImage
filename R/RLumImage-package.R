@@ -33,7 +33,6 @@
 #' @importFrom grDevices col2rgb colorRampPalette dev.off png rgb
 #' @importFrom graphics axis box matplot rect
 #' @importFrom methods slotNames
-#' @importFrom stats median quantile
 #' @import Luminescence
 #' @import shiny
 #' @import utils
