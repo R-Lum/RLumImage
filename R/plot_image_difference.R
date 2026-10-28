@@ -14,7 +14,7 @@
 #'
 #' @param range
 #' Numeric vector of length 2 giving the colour scale limits. If `NA` (default),
-#' a symmetric range is estimated from the difference image via [get_image_scale].
+#' a symmetric range is estimated from the difference image via [get_signal_range].
 #'
 #' @param cor.label
 #' Whether the Pearson correlation coefficient between objA and objB should
@@ -55,7 +55,7 @@ plot_image_difference <- function(
 
   if (is.na(range)) {
     # Get a reasonable upper limit for the image range ...
-    diff_range <- get_image_scale(abs(img_diff),
+    diff_range <- get_signal_range(abs(img_diff),
                                 contains.outlier = TRUE,
                                 verbose = FALSE)
 

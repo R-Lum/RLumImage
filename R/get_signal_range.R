@@ -15,10 +15,10 @@
 #'
 #' @examples
 #' file <- system.file("extdata/sandworm_rf_median.tif", package = "RLumImage")
-#' get_image_scale(file)
+#' get_signal_range(file)
 #'
 #' @export
-get_image_scale <- function(
+get_signal_range <- function(
   obj,
   contains.outlier = FALSE,
   verbose = FALSE

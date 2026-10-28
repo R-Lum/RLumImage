@@ -21,7 +21,7 @@ image stack; the minuend of the difference.}
 image stack; the subtrahend of the difference.}
 
 \item{range}{Numeric vector of length 2 giving the colour scale limits. If \code{NA} (default),
-a symmetric range is estimated from the difference image via \link{get_image_scale}.}
+a symmetric range is estimated from the difference image via \link{get_signal_range}.}
 
 \item{cor.label}{Whether the Pearson correlation coefficient between objA and objB should
 be reported in the image label (\code{TRUE} by default).}

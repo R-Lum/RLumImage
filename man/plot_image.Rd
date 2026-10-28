@@ -34,7 +34,7 @@ case each image in a sequence of image gets a specific title.}
 Works only for single images.}
 
 \item{range}{Numeric vector of length 2 giving the colour scale limits. If \code{NA} (default),
-a range is estimated via \link{get_image_scale}.}
+a range is estimated via \link{get_signal_range}.}
 
 \item{color.scale}{Currently without effect; reserved for future use.}
 

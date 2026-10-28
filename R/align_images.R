@@ -188,7 +188,7 @@ align_images <- function(
   result$after <- img_fix - aligned
 
   if (plot) {
-    diff_range <- get_image_scale(
+    diff_range <- get_signal_range(
       abs(result$before),
       contains.outlier = TRUE)
 

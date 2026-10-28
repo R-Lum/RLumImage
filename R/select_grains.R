@@ -101,7 +101,7 @@ select_grains <- function(
   names(ref_img) <- "reference"
 
   # Determine a sensible display range for the brightness slider
-  img_scale        <- get_image_scale(ref_img, contains.outlier = FALSE)
+  img_scale        <- get_signal_range(ref_img, contains.outlier = FALSE)
   img_scale_margin <- ceiling(diff(img_scale) / 2)
 
   nrows_img <- terra::nrow(img_stack)

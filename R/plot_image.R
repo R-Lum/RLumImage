@@ -18,7 +18,7 @@
 #'
 #' @param range
 #' Numeric vector of length 2 giving the colour scale limits. If `NA` (default),
-#' a range is estimated via [get_image_scale].
+#' a range is estimated via [get_signal_range].
 #'
 #' @param color.scale
 #' Currently without effect; reserved for future use.
@@ -123,7 +123,7 @@ plot_image <- function(
 
   # If no range is set, calculate one
   if (any(is.na(range)))
-    range <- get_image_scale(img, contains.outlier = contains.outlier)
+    range <- get_signal_range(img, contains.outlier = contains.outlier)
 
   # Create custom color ramp
   col_gradient <- sapply(
