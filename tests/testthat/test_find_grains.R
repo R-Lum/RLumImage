@@ -44,3 +44,12 @@ test_that("graphical snapshot tests", {
                               find_grains(img_2lyr, threshold = 850))
   })
 })
+
+test_that("regression tests", {
+  testthat::skip_on_cran()
+
+  ## issue 18
+  res <- find_grains(img_1lyr, threshold = 100, plot = FALSE, verbose = FALSE)
+  expect_equal(res[[1]]$info$source_function,
+               "find_grains")
+})
