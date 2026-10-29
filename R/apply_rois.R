@@ -9,10 +9,8 @@
 #' image stack.
 #'
 #' @param rois
-#' A named list of ROI objects, each with fields `mask` (a logical matrix
-#' defining the ROI shape), `row_min` and `col_min` (the top-left corner of
-#' the ROI bounding box in the image), and `class`. This is the format returned
-#' by [find_grains] and [select_grains].
+#' A named list of `RLumImage.ROI` objects as returned by [find_grains] and
+#' [select_grains].
 #'
 #' @param record.type
 #' Placeholder for future functionality (not currently used).
@@ -45,7 +43,7 @@
 #' Whether progress messages should be printed to the terminal.
 #'
 #' @return
-#' A named list of ROI objects in the same format as the input `rois`, each
+#' A named list of `RLumImage.ROI` objects, each
 #' extended with a `curves` list holding the extracted mean signal series
 #' (`x`, `y`, `recordType`, `detectionInterval`, `curveDescriptor`, and
 #' `source_obj`).
@@ -83,6 +81,10 @@ apply_rois <- function(
   nrows <- terra::nrow(imgs)
   ncols <- terra::ncol(imgs)
   nlyrs <- terra::nlyr(imgs)
+
+  all.classes <- vapply(rois, function(x) class(x)[1], FUN.VALUE = character(1))
+  if (any(all.classes != "RLumImage.ROI"))
+    stop("[apply_rois()] 'rois' must be a list of 'RLumImage.ROI' objects")
 
   # Set x-axis and y-axis labels in accordance to the time unit
   if (is.na(ylab)) {

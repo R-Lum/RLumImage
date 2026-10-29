@@ -53,8 +53,8 @@
 #' parameters should be reported (`TRUE` by default).
 #'
 #' @return
-#' A list representing a single ROI object, compatible with [apply_rois] and
-#' [select_grains].
+#' An `RLumImage.ROI` object representing a single region of interest,
+#' compatible with [apply_rois] and [select_grains].
 #'
 #' @examples
 #' # TODO
@@ -237,5 +237,6 @@ set_roi <- function(
     roi$info$source_nrows <- terra::nrow(img)
   }
 
+  class(roi) <- "RLumImage.ROI"
   return(roi)
 }

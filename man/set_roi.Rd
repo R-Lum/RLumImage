@@ -56,8 +56,8 @@ image from which the ROI originates. Its dimensions are stored in the ROI's
 parameters should be reported (\code{TRUE} by default).}
 }
 \value{
-A list representing a single ROI object, compatible with \link{apply_rois} and
-\link{select_grains}.
+An \code{RLumImage.ROI} object representing a single region of interest,
+compatible with \link{apply_rois} and \link{select_grains}.
 }
 \description{
 ROIs define regions within an image, typically used for extracting

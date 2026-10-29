@@ -22,10 +22,8 @@ apply_rois(
 \item{obj}{An object coercible to a \code{SpatRaster} (see \link{as.SpatRaster}) containing the
 image stack.}
 
-\item{rois}{A named list of ROI objects, each with fields \code{mask} (a logical matrix
-defining the ROI shape), \code{row_min} and \code{col_min} (the top-left corner of
-the ROI bounding box in the image), and \code{class}. This is the format returned
-by \link{find_grains} and \link{select_grains}.}
+\item{rois}{A named list of \code{RLumImage.ROI} objects as returned by \link{find_grains} and
+\link{select_grains}.}
 
 \item{record.type}{Placeholder for future functionality (not currently used).}
 
@@ -49,7 +47,7 @@ used.}
 \item{verbose}{Whether progress messages should be printed to the terminal.}
 }
 \value{
-A named list of ROI objects in the same format as the input \code{rois}, each
+A named list of \code{RLumImage.ROI} objects, each
 extended with a \code{curves} list holding the extracted mean signal series
 (\code{x}, \code{y}, \code{recordType}, \code{detectionInterval}, \code{curveDescriptor}, and
 \code{source_obj}).

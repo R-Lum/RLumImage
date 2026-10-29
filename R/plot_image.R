@@ -115,6 +115,10 @@ plot_image <- function(
   # Import image
   img <- as.SpatRaster(obj, warnings = FALSE, verbose = FALSE)
 
+  valid.rois <- vapply(rois, inherits, "RLumImage.ROI", FUN.VALUE = logical(1))
+  if (!all(valid.rois))
+    stop("[apply_rois()] 'rois' must be a list of 'RLumImage.ROI' objects")
+
   # If image is a single-image file, display the file name
   if (any(is.na(label))
       && inherits(obj, "character")

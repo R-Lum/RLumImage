@@ -21,9 +21,8 @@ table. Defaults to five preset mineral classes.}
 \item{verbose}{Whether progress messages should be printed to the terminal.}
 }
 \value{
-A list of ROI objects, one per grain, each in the format produced by
-\link{set_roi} and consumed by \link{apply_rois}. Each ROI holds a circular \code{mask},
-its position (\code{col_min}, \code{row_min}) and \code{shape}, the assigned mineral
+A list of x\code{RLumImage.ROI} objects, one per grain. Each ROI holds a circular
+\code{mask}, its position (\code{col_min}, \code{row_min}) and \code{shape}, the assigned mineral
 \code{class}, \code{info} (with \code{source} and the mean signal \code{average}) and an
 \code{overlay} describing the circle for plotting.
 }
