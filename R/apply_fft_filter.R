@@ -101,31 +101,28 @@ apply_fft_filter <- function(
   img <- as.SpatRaster(obj, verbose = verbose)
 
   # Validate filter cut-offs
-  if (is.na(shortpass) && is.na(longpass))
+  is_shortpass <- !is.na(shortpass)
+  is_longpass <- !is.na(longpass)
+  if (!(is_shortpass || is_longpass))
     stop("[apply_fft_filter()]: at least one of 'shortpass'/'longpass' must be given.")
-
-  if (!is.na(shortpass) && !is.na(longpass) && shortpass < longpass)
-    stop("[apply_fft_filter()]: 'longpass' must be smaller than 'shortpass'.")
-
-  if (!is.na(shortpass) && shortpass <= 0)
+  if (is_shortpass && shortpass <= 0)
     stop("[apply_fft_filter()]: 'shortpass' must be positive (in pixels).")
-
-  if (!is.na(longpass) && longpass <= 0)
+  if (is_longpass && longpass <= 0)
     stop("[apply_fft_filter()]: 'longpass' must be positive (in pixels).")
+  if (is_shortpass && is_longpass && shortpass < longpass)
+    stop("[apply_fft_filter()]: 'longpass' must be smaller than 'shortpass'.")
 
   if (is.na(transition)) transition <- 0
   if (transition < 0)
     stop("[apply_fft_filter()]: 'transition' must be zero or larger.")
 
   # Message text for plots and console texts
-  if (is.na(shortpass) && !is.na(longpass)) {
-    msg_text <- paste("FFT long-pass", longpass, "px")
-  } else if (!is.na(shortpass) && is.na(longpass)) {
-    msg_text <- paste("FFT short-pass", shortpass, "px")
-  } else {
-    msg_text <- paste("FFT band-pass", longpass, "-", shortpass, "px")
-  }
-
+  msg_text <- if (is_shortpass && is_longpass)
+                paste("FFT band-pass", longpass, "-", shortpass, "px")
+              else if (!is_longpass)
+                paste("FFT short-pass", shortpass, "px")
+              else
+                paste("FFT long-pass", longpass, "px")
   if (verbose) cat("Apply", msg_text, "\n")
 
   nrows <- terra::nrow(img)
@@ -190,11 +187,11 @@ apply_fft_filter <- function(
   sp_mask <- lp_mask <- 1
 
   # Build short-pass mask
-  if (!is.na(shortpass))
+  if (is_shortpass)
     sp_mask <- taper_cosine(freq2d, shortpass, transition)
 
   # Build long-pass mask
-  if (!is.na(longpass))
+  if (is_longpass)
     lp_mask <- taper_cosine(freq2d, longpass, transition, rev = TRUE)
 
   # Combine both masks for creating a band-pass
@@ -219,7 +216,8 @@ apply_fft_filter <- function(
     # If a short-pass filter is used, the zero-frequency data point in the inverse matrix
     # is also filtered out. This data-point represents the offset of the image.
     # Thus, we have to reconstruct it manually
-    if (preserve.offset && !is.na(shortpass)) layer_mean <- mean(mat)
+    if (preserve.offset && is_shortpass)
+      layer_mean <- mean(mat)
 
     # Fast Fourier transformation of the image
     inverse <- stats::fft(mat)
