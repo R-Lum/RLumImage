@@ -6,6 +6,7 @@
       [RLumImage.ROI]
       	 shape: rectangle
       	 bounding box: 4 x 4 px at (42, 67)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 1
 
@@ -19,6 +20,7 @@
       [RLumImage.ROI]
       	 shape: rectangle
       	 bounding box: 5 x 5 px at (42, 67)
+      	 number of curves: 2
       	 mineral class: arbitrary
       	 additional info elements: 6
 

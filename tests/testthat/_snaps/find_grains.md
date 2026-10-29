@@ -12,6 +12,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (385, 307)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -19,6 +20,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (229, 286)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -26,6 +28,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (377, 213)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -33,6 +36,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (321, 302)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -40,6 +44,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (356, 279)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -47,6 +52,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (209, 274)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -54,6 +60,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (315, 212)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -61,6 +68,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (291, 321)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -68,6 +76,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (303, 267)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -75,6 +84,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (231, 129)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -82,6 +92,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (238, 204)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -89,6 +100,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (280, 150)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -96,6 +108,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (165, 196)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -103,6 +116,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (331, 263)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -121,6 +135,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (385, 307)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -128,6 +143,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (229, 286)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -135,6 +151,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (377, 213)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -142,6 +159,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (321, 302)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -149,6 +167,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (356, 279)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -156,6 +175,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (209, 274)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -163,6 +183,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (315, 212)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -170,6 +191,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (291, 321)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -177,6 +199,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (303, 267)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -184,6 +207,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (231, 129)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -191,6 +215,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (238, 204)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -198,6 +223,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (280, 150)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -205,6 +231,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (165, 196)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -212,6 +239,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (157, 256)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
@@ -219,6 +247,7 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (331, 263)
+      	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
       
