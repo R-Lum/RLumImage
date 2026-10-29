@@ -5,7 +5,7 @@
 #' Open the resulting *.rf file with [Luminescence::read_RF2R] for further use.
 #'
 #' @param rois
-#' List of regions of interest (ROIs) as returned by [apply_rois].
+#' A list `RLumImage.ROI` objects as returned by [apply_rois].
 #'
 #' @param file
 #' File path of the *.rf file to write.
@@ -53,7 +53,9 @@ write_rf_table <- function(
   ## - Take over global meta data from ROIs object to header
   ## - Select RF_nat and RF_reg curves via RecordType and/or DetectionWavelength
 
-  if (length(rois) == 0L) stop("[save_roi_table()]: 'rois' is empty.")
+  valid.rois <- vapply(rois, inherits, "RLumImage.ROI", FUN.VALUE = logical(1))
+  if (!is.list(rois) || length(rois) == 0 || !all(valid.rois))
+    stop("[write_rf_table()] 'rois' must be a list of 'RLumImage.ROI' objects")
 
   # ----- Data reduction -----
   # Reduce the ROI list to only those with the correct class and to only

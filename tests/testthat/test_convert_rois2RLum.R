@@ -10,7 +10,10 @@ test_that("input validation", {
   testthat::skip_on_cran()
 
   expect_error(convert_rois2RLum(sandworm.file),
-               "'rois' must be a non-empty named list")
+               "'rois' must be a list of 'RLumImage.ROI' objects")
+  expect_error(convert_rois2RLum(set_roi(mask = matrix(rep(TRUE, 16), ncol = 4),
+                                         col_min = 42, row_min = 67)),
+               "'rois' must be a list of 'RLumImage.ROI' objects")
   expect_error(convert_rois2RLum(roi.err),
                "Curve entry of ROI 'err' is malformed")
 })
@@ -26,8 +29,8 @@ test_that("regression tests", {
   testthat::skip_on_cran()
 
   ## issue 13
-  res <- convert_rois2RLum(set_roi(mask = matrix(rep(TRUE, 16), ncol = 4),
-                                   col_min = 42, row_min = 67))
+  res <- convert_rois2RLum(list(set_roi(mask = matrix(rep(TRUE, 16), ncol = 4),
+                                        col_min = 42, row_min = 67)))
   expect_type(res, "list")
   expect_null(res[[1]])
 })

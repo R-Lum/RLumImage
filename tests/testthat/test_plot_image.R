@@ -1,22 +1,31 @@
-rois <- list(ROI_1 = list(shape = "circle",
+rois <- list(ROI_1 = structure(list(shape = "circle",
                           class = "Unclassified",
                           overlay = list(x = 391, y = 201, r = 6)),
-             ROI_2 = list(shape = "rectangle",
+                          class = "RLumImage.ROI"),
+             ROI_2 = structure(list(shape = "rectangle",
                           class = "Intentional error",
                           row_min = 274, col_min = 212,
-                          overlay = list(dx = 8, dy = 10)))
+                          overlay = list(dx = 8, dy = 10)),
+                          class = "RLumImage.ROI"))
+rois.fail <- list(structure(list(shape = "circle"), class = "RLumImage.ROI"),
+                  structure(list(shape = "rectangle"), class = "RLumImage.ROI"))
 
 test_that("check functionality", {
   testthat::skip_on_cran()
 
-  expect_warning(plot_image(img_1lyr,
-                            rois = list(ROI_1 = list(shape = "circle"))),
-                 "ROI overlay data missing")
-  expect_warning(plot_image(img_2lyr,
-                            rois = list(ROI_1 = list(shape = "circle"))),
+  expect_error(plot_image(img_1lyr,
+                          rois = list(ROI_1 = list(shape = "circle"))),
+               "'rois' must be a list of 'RLumImage.ROI' objects")
+})
+
+test_that("check functionality", {
+  testthat::skip_on_cran()
+
+  expect_warning(plot_image(img_2lyr, rois = rois),
                  "'rois' overlay is only supported for single-layer images")
-  expect_warning(plot_image(img_1lyr,
-                            rois = list(ROI_1 = list(shape = "rectangle"))),
+  expect_warning(plot_image(img_1lyr, rois = rois.fail[1]),
+                 "ROI overlay data missing")
+  expect_warning(plot_image(img_1lyr, rois = rois.fail[2]),
                  "Rectangle ROI dimensions missing")
 })
 

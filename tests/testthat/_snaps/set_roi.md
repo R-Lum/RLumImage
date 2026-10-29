@@ -3,41 +3,11 @@
     Code
       set_roi(mask = matrix(rep(TRUE, 16), ncol = 4), col_min = 42, row_min = 67)
     Output
-      $mask
-           [,1] [,2] [,3] [,4]
-      [1,] TRUE TRUE TRUE TRUE
-      [2,] TRUE TRUE TRUE TRUE
-      [3,] TRUE TRUE TRUE TRUE
-      [4,] TRUE TRUE TRUE TRUE
-      
-      $col_min
-      [1] 42
-      
-      $row_min
-      [1] 67
-      
-      $shape
-      [1] "rectangle"
-      
-      $class
-      [1] "Unclassified"
-      
-      $info
-      $info$source_function
-      [1] "set_roi"
-      
-      
-      $overlay
-      $overlay$dx
-      [1] 4
-      
-      $overlay$dy
-      [1] 4
-      
-      
-      $curves
-      list()
-      
+      [RLumImage.ROI]
+      	 shape: rectangle
+      	 bounding box: 4 x 4 px at (42, 67)
+      	 mineral class: Unclassified
+      	 additional info elements: 1
 
 ---
 
@@ -46,72 +16,9 @@
         other = "info"), source.image = sandworm.file, class = "arbitrary")
     Output
       Load image file sandworm_rf_median.tif into system memory.
-      $mask
-           [,1] [,2] [,3] [,4] [,5]
-      [1,] TRUE TRUE TRUE TRUE TRUE
-      [2,] TRUE TRUE TRUE TRUE TRUE
-      [3,] TRUE TRUE TRUE TRUE TRUE
-      [4,] TRUE TRUE TRUE TRUE TRUE
-      [5,] TRUE TRUE TRUE TRUE TRUE
-      
-      $col_min
-      [1] 42
-      
-      $row_min
-      [1] 67
-      
-      $shape
-      [1] "rectangle"
-      
-      $class
-      [1] "arbitrary"
-      
-      $info
-      $info$hello
-      [1] "world"
-      
-      $info$source_function
-      [1] "set_roi"
-      
-      $info$other
-      [1] "info"
-      
-      $info$source_obj
-      [1] "sandworm.file"
-      
-      $info$source_ncols
-      [1] 512
-      
-      $info$source_nrows
-      [1] 512
-      
-      
-      $overlay
-      $overlay$dx
-      [1] 5
-      
-      $overlay$dy
-      [1] 5
-      
-      
-      $curves
-      $curves$curve1
-        x    y
-      1 1 11.3
-      2 2 13.2
-      
-      $curves[[2]]
-          x         y
-      1   1 41.569219
-      2   2 36.482873
-      3   3 31.622777
-      4   4 27.000000
-      5   5 22.627417
-      6   6 18.520259
-      7   7 14.696938
-      8   8 11.180340
-      9   9  8.000000
-      10 10  5.196152
-      
-      
+      [RLumImage.ROI]
+      	 shape: rectangle
+      	 bounding box: 5 x 5 px at (42, 67)
+      	 mineral class: arbitrary
+      	 additional info elements: 6
 

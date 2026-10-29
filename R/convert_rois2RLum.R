@@ -2,9 +2,9 @@
 #'
 #' @description
 #' Converts the per-ROI curve lists stored in a ROI object (as returned by
-#' [apply_rois] and [set_roi]) into `Luminescence::RLum.Data.Curve` objects
+#' [apply_rois]) into `Luminescence::RLum.Data.Curve` objects
 #' and combines all curves of one ROI into a `Luminescence::RLum.Analysis`
-#' object. The output is a named list of `RLum.Analysis` objects, one per ROI.
+#' object. The output is a list of `RLum.Analysis` objects, one per ROI.
 #'
 #' Each entry of `rois$curves` (a list with elements `x`, `y`, `recordType`,
 #' `detectionInterval`, `curveDescriptor`, and `source_obj`) is translated into
@@ -19,7 +19,7 @@
 #' and `info`), with the ROI's `class` stored in `info$class`.
 #'
 #' @param rois
-#' A named list of ROI objects as returned by [apply_rois], [set_roi],
+#' A list of `RLumImage.ROI` objects as returned by [apply_rois],
 #' [find_grains] or [select_grains]. Each ROI is a list with (at least) a
 #' `curves` element holding a list of per-curve lists.
 #'
@@ -28,8 +28,8 @@
 #' If `NULL`, defaults to the name of this function.
 #'
 #' @return
-#' A named list of `Luminescence::RLum.Analysis` objects, one per ROI.
-#' Each list element maintains the name of the corresponding ROI.
+#' A list of `Luminescence::RLum.Analysis` objects, one per ROI. Each list
+#' element maintains the name of the corresponding ROI, if this is available.
 #'
 #' @seealso
 #' [Luminescence::set_RLum()], [Luminescence::RLum.Analysis-class],
@@ -51,11 +51,9 @@ convert_rois2RLum <- function(rois, originator = NULL) {
     originator <- "convert_rois2RLum"
 
   # Sanity check of the input
-  if (!is.list(rois) || is.null(names(rois)) || length(rois) == 0)
-    stop("[convert_rois2RLum()] 'rois' must be a non-empty named list.")
-
-  if (all(c("mask", "col_min", "row_min") %in% names(rois)))
-    rois <- list(rois)
+  valid.rois <- vapply(rois, inherits, "RLumImage.ROI", FUN.VALUE = logical(1))
+  if (!is.list(rois) || length(rois) == 0 || !all(valid.rois))
+    stop("[convert_rois2RLum()] 'rois' must be a list of 'RLumImage.ROI' objects")
 
   out <- vector(mode = "list", length = length(rois))
   names(out) <- names(rois)

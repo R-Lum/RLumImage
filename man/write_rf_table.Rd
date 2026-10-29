@@ -14,7 +14,7 @@ write_rf_table(
 )
 }
 \arguments{
-\item{rois}{List of regions of interest (ROIs) as returned by \link{apply_rois}.}
+\item{rois}{A list \code{RLumImage.ROI} objects as returned by \link{apply_rois}.}
 
 \item{file}{File path of the *.rf file to write.}
 

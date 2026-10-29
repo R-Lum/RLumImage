@@ -1,8 +1,8 @@
 #' Automatically detects single grains (local signal maxima) in an image.
 #'
 #' @description
-#' The function iteratively finds the pixel of maximum signal in an FFT
-#' filtered copy of the image, defines a circular region of interest (ROI)
+#' The function iteratively finds the pixel of maximum signal in an
+#' FFT-filtered copy of the image, defines a circular region of interest (ROI)
 #' around it, and removes it before searching for the next maximum. Grains are
 #' only kept if their mean signal within the ROI exceeds the estimated local
 #' background by the given `threshold`. This avoids detecting FFT filter
@@ -10,8 +10,8 @@
 #'
 #' The detection threshold can either be given directly (`threshold`) or be
 #' derived from a target `grain.density` (the fraction of pixels expected to be
-#' part of grains). The returned ROIs are sorted by their mean `average` signal
-#' in descending order.
+#' part of grains). The returned ROIs are sorted in descending order by their
+#' average signal.
 #'
 #' @param obj
 #' An object coercible to a `SpatRaster` (see [as.SpatRaster]) containing the
@@ -57,9 +57,8 @@
 #' Whether progress messages should be printed to the terminal.
 #'
 #' @return
-#' A named list of ROIs in the same format as [apply_rois] and [select_grains],
-#' sorted by mean average signal in descending order. Returns an empty list if
-#' no grains are found.
+#' A named list of `RLumImage.ROI` objects sorted in descending order by their
+#' average signal. The list may be empty if no grains are found.
 #'
 #' @examples
 #' file <- system.file("extdata/sandworm_rf_median.tif", package = "RLumImage")

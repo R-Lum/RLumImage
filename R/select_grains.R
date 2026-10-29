@@ -33,9 +33,8 @@
 #' Whether progress messages should be printed to the terminal.
 #'
 #' @return
-#' A list of ROI objects, one per grain, each in the format produced by
-#' [set_roi] and consumed by [apply_rois]. Each ROI holds a circular `mask`,
-#' its position (`col_min`, `row_min`) and `shape`, the assigned mineral
+#' A list of x`RLumImage.ROI` objects, one per grain. Each ROI holds a circular
+#' `mask`, its position (`col_min`, `row_min`) and `shape`, the assigned mineral
 #' `class`, `info` (with `source` and the mean signal `average`) and an
 #' `overlay` describing the circle for plotting.
 #'
@@ -191,6 +190,9 @@ select_grains <- function(
   # ── 3. Pre-populate from a previous call if supplied ──────────────────────
   # rois is expected to be a list of ROI objects (set_roi() format), as
   # returned by a previous select_grains() call.
+  valid.rois <- vapply(rois, inherits, "RLumImage.ROI", FUN.VALUE = logical(1))
+  if (!all(valid.rois))
+    stop("'rois' must be a list of 'RLumImage.ROI' objects")
   init_rois <- rois
 
 
@@ -338,7 +340,7 @@ select_grains <- function(
 
     # Central reactive value: a list of ROI objects (set_roi() format).
     # Every observer either reads from or writes to this value, triggering
-    # reactive re-rendering wherever it is consumed.
+    # reactive re-rendering whenever it is consumed.
     rois <- shiny::reactiveVal(init_rois)
 
 
