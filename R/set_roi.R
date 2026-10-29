@@ -221,7 +221,8 @@ set_roi <- function(
   }
 
   # Tell that this ROI was edited by this function
-  roi$info$source_function <- "set_roi"
+  if (is.null(info$source_function))
+    roi$info$source_function <- "set_roi"
 
   # Update info(source_XXX = ...) parameters
   if (!is.null(source.image)) {
