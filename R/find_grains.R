@@ -62,13 +62,13 @@
 #' no grains are found.
 #'
 #' @examples
-#' \dontrun{ # TODO
+#' file <- system.file("extdata/sandworm_rf_median.tif", package = "RLumImage")
+#'
 #' # Detect grains in a single image, threshold given directly
-#' grains <- find_grains(image, r = 6, threshold = 15)
+#' grains <- find_grains(file, radius = 6, threshold = 15)
 #'
 #' # Estimate the threshold from a target grain density
-#' grains <- find_grains(image, r = 6, grain.density = 0.001)
-#' }
+#' grains <- find_grains(file, radius = 6, grain.density = 0.01)
 #'
 #' @export
 find_grains <- function(
@@ -77,10 +77,10 @@ find_grains <- function(
   threshold = NA,
   grain.density = NA,
   fft.filter = c(4, 1, 1),
-  allow.overlap = FALSE, # Not recommended
+  allow.overlap = FALSE,
   default.class = "Unclassified",
   plot = TRUE,
-  plot.extended = FALSE, # Plots also FFT-filtered images
+  plot.extended = FALSE,
   verbose = TRUE
 ) {
 

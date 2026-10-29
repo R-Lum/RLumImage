@@ -71,12 +71,12 @@ part of grains). The returned ROIs are sorted by their mean \code{average} signa
 in descending order.
 }
 \examples{
-\dontrun{ # TODO
+file <- system.file("extdata/sandworm_rf_median.tif", package = "RLumImage")
+
 # Detect grains in a single image, threshold given directly
-grains <- find_grains(image, r = 6, threshold = 15)
+grains <- find_grains(file, radius = 6, threshold = 15)
 
 # Estimate the threshold from a target grain density
-grains <- find_grains(image, r = 6, grain.density = 0.001)
-}
+grains <- find_grains(file, radius = 6, grain.density = 0.01)
 
 }
