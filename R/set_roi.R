@@ -108,11 +108,9 @@ set_roi <- function(
 
 
     if (is.null(shape)){
-      shape <- "irregular"
-
       # Set shape to 'rectangle' automatically
-      if (ncol(mask) * nrow(mask) == sum(mask))
-        shape <- "rectangle"
+      shape <- if (ncol(mask) * nrow(mask) == sum(mask)) "rectangle"
+               else "irregular"
     }else{
       # Ensure that it doesn't matter how the user did set cases
       shape <- tolower(shape)
@@ -135,14 +133,12 @@ set_roi <- function(
       # ToDo: Add checks or set overlay automatically
     }
 
-    if (is.null(class)) class <- "Unclassified"
-
     roi <- list(
       mask    = mask,
       col_min = col_min,
       row_min = row_min,
       shape   = shape,
-      class   = class,
+      class   = class %||% "Unclassified",
       info    = info,
       overlay = overlay,
       curves  = curves
