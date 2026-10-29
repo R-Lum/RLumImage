@@ -27,6 +27,10 @@ test_that("check functionality", {
                  "[rast] unknown extent", fixed = TRUE)
   expect_silent(as.SpatRaster(img_warn, warning = FALSE, verbose = FALSE))
 
+  ## object from import_lexsyg_image()
+  obj <- list(imageFiles = list(file = sandworm.file)) # TODO
+  expect_silent(as.SpatRaster(obj, verbose = FALSE))
+
   ## more coverage
   expect_silent(as.SpatRaster(sandworm.file, warning = TRUE, noflip = FALSE,
                               verbose = FALSE))
