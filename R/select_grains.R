@@ -19,10 +19,9 @@
 #' An object coercible to a `SpatRaster` (see [as.SpatRaster]) containing the
 #' image stack.
 #'
-#' @param prev_rois
+#' @param rois
 #' A list of ROI objects (as returned by a previous call to [select_grains])
-#' used to pre-populate the session with existing ROIs. `NULL` (default) starts
-#' with an empty canvas.
+#' used to pre-populate the session with existing ROIs.
 #'
 #' @param classes
 #' Named character vector (or list) mapping mineral class labels to display
@@ -48,13 +47,13 @@
 #' rois <- select_grains(file)
 #'
 #' # Resume a previous session and add more ROIs
-#' rois2 <- select_grains(file, prev_rois = rois)
+#' rois2 <- select_grains(file, rois = rois)
 #' }
 #'
 #' @export
 select_grains <- function(
   obj,
-  prev_rois = NULL,
+  rois = list(),
   classes = NULL,
   verbose = TRUE
 ) {
@@ -190,13 +189,9 @@ select_grains <- function(
 
 
   # ── 3. Pre-populate from a previous call if supplied ──────────────────────
-  # prev_rois is expected to be a list of ROI objects (set_roi() format), as
+  # rois is expected to be a list of ROI objects (set_roi() format), as
   # returned by a previous select_grains() call.
-  if (!is.null(prev_rois) && length(prev_rois) > 0L) {
-    init_rois <- prev_rois
-  } else {
-    init_rois <- list()
-  }
+  init_rois <- rois
 
 
   # ── 4. UI definition ──────────────────────────────────────────────────────

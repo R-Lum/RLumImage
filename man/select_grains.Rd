@@ -4,15 +4,14 @@
 \alias{select_grains}
 \title{Interactively select grains (regions of interest) in a luminescence image stack}
 \usage{
-select_grains(obj, prev_rois = NULL, classes = NULL, verbose = TRUE)
+select_grains(obj, rois = list(), classes = NULL, verbose = TRUE)
 }
 \arguments{
 \item{obj}{An object coercible to a \code{SpatRaster} (see \link{as.SpatRaster}) containing the
 image stack.}
 
-\item{prev_rois}{A list of ROI objects (as returned by a previous call to \link{select_grains})
-used to pre-populate the session with existing ROIs. \code{NULL} (default) starts
-with an empty canvas.}
+\item{rois}{A list of ROI objects (as returned by a previous call to \link{select_grains})
+used to pre-populate the session with existing ROIs.}
 
 \item{classes}{Named character vector (or list) mapping mineral class labels to display
 colours, e.g. \code{c(Quartz = "yellow", Other = "magenta")}. Used for the class
@@ -51,7 +50,7 @@ file <- system.file("extdata/sandworm_rf_median.tif", package = "RLumImage")
 rois <- select_grains(file)
 
 # Resume a previous session and add more ROIs
-rois2 <- select_grains(file, prev_rois = rois)
+rois2 <- select_grains(file, rois = rois)
 }
 
 }
