@@ -242,8 +242,7 @@ plot_image <- function(
       }
 
       # Number of polygons to the draw circle
-      polygon_n <- 4 + r^2
-      if (polygon_n > 300) polygon_n <- 300
+      polygon_n <- min(4 + r^2, 300)
       polygon_t <- seq(0, 2 * pi, length.out = polygon_n)
 
       # Convert pixel radius to spatial units separately for x and y,
