@@ -96,12 +96,12 @@ rotate_image <- function(
   # Extract dimensions
   nrows <- dim(arr)[1]
   ncols <- dim(arr)[2]
-  nlays <- dim(arr)[3]
+  nlyrs <- dim(arr)[3]
 
   # Console output
   if (verbose) {
    cat(sprintf("Rotate %s %g\u00b0 %s.\n", # \u00b0 is °
-               if (nlays > 1) paste(nlays, "images") else "image",
+               if (nlyrs > 1) paste(nlyrs, "images") else "image",
                round(abs(angle), 2),
                if (angle < 0) "counter-clockwise" else "clockwise"))
   }
@@ -135,7 +135,7 @@ rotate_image <- function(
     src_y >= 1 & src_y <= nrows
 
   # Initialize output with fill value
-  out <- array(fill, dim = c(nrows * ncols, nlays))
+  out <- array(fill, dim = c(nrows * ncols, nlyrs))
 
   if (method == "near") {
 
@@ -144,7 +144,7 @@ rotate_image <- function(
 
     idx <- (jj - 1) * nrows + ii
 
-    for (k in seq_len(nlays)) {
+    for (k in seq_len(nlyrs)) {
       out[inside, k] <- arr[, , k][idx]
     }
 
@@ -177,7 +177,7 @@ rotate_image <- function(
     w22 <-  wx      *  wy
 
     # Interpolate each layer identically
-    for (k in seq_len(nlays)) {
+    for (k in seq_len(nlyrs)) {
       layer <- arr[, , k]
       out[valid, k] <-
         w11[valid] * layer[idx11[valid]] +
@@ -189,7 +189,7 @@ rotate_image <- function(
     if (round) out <- round(out)
   }
 
-  out <- array(out, dim = c(nrows, ncols, nlays))
+  out <- array(out, dim = c(nrows, ncols, nlyrs))
 
   if (is_raster) {
 

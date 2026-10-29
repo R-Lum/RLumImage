@@ -68,14 +68,14 @@ rescale_image <- function(
   # Check whether input is a SpatRaster
   img <- as.SpatRaster(obj, verbose = verbose)
 
-  nlays <- terra::nlyr(img)
+  nlyrs <- terra::nlyr(img)
 
   # Validate layer indices (NA means rescale all layers)
   rescale_all <- identical(layer, NA)
   if (rescale_all)
-    layer <- seq_len(nlays)
-  else if (!is.numeric(layer) || any(is.na(layer)) || any(layer < 1) || any(layer > nlays))
-    stop("[rescale_image()] 'layer' must be a vector of valid layer indices between 1 and ", nlays, ".")
+    layer <- seq_len(nlyrs)
+  else if (!is.numeric(layer) || any(is.na(layer)) || any(layer < 1) || any(layer > nlyrs))
+    stop("[rescale_image()] 'layer' must be a vector of valid layer indices between 1 and ", nlyrs, ".")
 
   if (verbose)
     cat("Rescale", length(layer), "images to", scale * 100, "% ... ")
