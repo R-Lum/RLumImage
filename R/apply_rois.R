@@ -4,9 +4,13 @@
 #' Extract mean values within circular regions of interest (ROIs) across
 #' an image stack and optionally plot the time series.
 #'
+#' If `obj` is a list of images, each image is processed separately and one
+#' curve per image is appended to the `curves` list of every ROI, in the order
+#' of the images.
+#'
 #' @param obj
-#' An object coercible to a `SpatRaster` (see [as.SpatRaster]) containing the
-#' image stack.
+#' An object coercible to a `SpatRaster` (see [as.SpatRaster]) or a list of
+#' them. All images in the list must have the same dimensions.
 #'
 #' @param rois
 #' A named list of `RLumImage.ROI` objects as returned by [find_grains] and
@@ -43,10 +47,10 @@
 #' Whether progress messages should be printed to the terminal.
 #'
 #' @return
-#' A named list of `RLumImage.ROI` objects, each
-#' extended with a `curves` list holding the extracted mean signal series
-#' (`x`, `y`, `recordType`, `detectionInterval`, `curveDescriptor`, and
-#' `source_obj`).
+#' A named list of `RLumImage.ROI` objects, each extended with a `curves`
+#' list (of length equal to the number of images in `obj`) holding the
+#' extracted mean signal series (`x`, `y`, `recordType`, `detectionInterval`,
+#' `curveDescriptor`, and `source_obj`).
 #'
 #' @examples
 #' # TODO
@@ -66,7 +70,6 @@ apply_rois <- function(
   verbose = TRUE
 ) {
   ## ToDo's:
-  ## - (!) If input obj is a list of records, apply this function for each record.
   ## - (!) Add 'class' selection argument (one or multi-element vector)
   ## - (!) Revise plotting: Sometimes nothing is plotted. Why?
   ## - Accept RLumImage sequence object (like given back from import_lexsyg_images()) as input obj
@@ -76,15 +79,23 @@ apply_rois <- function(
   ## - Currently, if you apply apply_rois() on the same image stack twice, you get two identical curve entries.
   ##   Later, when the image stacks carry meta-data and an object-ID this should not happen, but the curve entry
   ##   should be overwritten automatically (maybe with a console message)
+  if (!(.is.coercible(obj) || inherits(obj, "list") && length(obj) > 0 &&
+        all(vapply(obj, .is.coercible, logical(1))))) {
+    stop("[apply_rois()] 'obj' must be an object coercible to a 'SpatRaster' or a list of them")
+  }
 
-  imgs <- as.SpatRaster(obj, verbose = verbose)
-  nrows <- terra::nrow(imgs)
-  ncols <- terra::ncol(imgs)
-  nlyrs <- terra::nlyr(imgs)
+  objname <- deparse(substitute(obj))
+  if (!inherits(obj, "list"))
+    obj <- list(obj)
 
   valid.rois <- vapply(rois, inherits, "RLumImage.ROI", FUN.VALUE = logical(1))
   if (length(rois) == 0 || !all(valid.rois))
     stop("[apply_rois()] 'rois' must be a list of 'RLumImage.ROI' objects")
+
+  ## Assume all images have the same dimensions
+  imgs <- as.SpatRaster(obj[[1]], verbose = verbose)
+  nrows <- terra::nrow(imgs)
+  ncols <- terra::ncol(imgs)
 
   # Set x-axis and y-axis labels in accordance to the time unit
   if (is.na(ylab)) {
@@ -97,15 +108,8 @@ apply_rois <- function(
             else sprintf("Time [%s]", x.unit)
   }
 
-  x_axis <- x.interval * c(1:nlyrs)
-
-  # Just extend the input ROI file
-  out <- rois
-  y_mat <- matrix(nrow = nlyrs, ncol = 0) # For plotting
-
-  for (idx in seq_along(rois)) {
-
-    roi <- rois[[idx]]
+  # Precompute the ROI bounding boxes
+  roi_indices <- lapply(rois, function(roi) {
 
     # Define the bounds of the ROI
     row_min <- roi$row_min
@@ -119,34 +123,58 @@ apply_rois <- function(
     }
 
     # Get the row and column indices for the ROI bounding box
-    row_indices <- row_min:row_max
-    col_indices <- col_min:col_max
+    list(row = row_min:row_max, col = col_min:col_max)
+  })
 
-    # Apply the mask to get only pixels within the ROI shape
-    roi_pixels <- imgs[row_indices, col_indices, ][roi$mask, , drop = FALSE]
+  # Just extend the input ROI file
+  out <- rois
+  y_by_roi <- if (plot) vector("list", length(rois)) else NULL
 
-    # Calculate mean values for each layer
-    roi_means <- as.numeric(colMeans(roi_pixels, na.rm = TRUE))
+  # Loop over all images
+  for (img_idx in seq_along(obj)) {
 
-    curve <- list(
-      x = x_axis,
-      y = roi_means,
-      recordType = record.type,
-      detectionInterval = x.interval,
-      curveDescriptor = paste0(c(xlab, ylab), collapse = ";"),
-      source_obj = deparse(substitute(obj))
-    )
+    if (img_idx > 1)
+      imgs <- as.SpatRaster(obj[[img_idx]], verbose = verbose)
 
-    # Append curve to existing ones
-    i <- length(out[[idx]]$curves) + 1
-    out[[idx]]$curves[[i]] <- curve
+    if (terra::nrow(imgs) != nrows || terra::ncol(imgs) != ncols)
+      stop("[apply_rois()] All images must have the same dimensions.")
 
-    if (plot) y_mat <- cbind(y_mat, roi_means)
+    for (idx in seq_along(rois)) {
+
+      # Apply the mask to get only pixels within the ROI shape
+      row_indices <- roi_indices[[idx]]$row
+      col_indices <- roi_indices[[idx]]$col
+      roi_pixels <- imgs[row_indices, col_indices, ][rois[[idx]]$mask, , drop = FALSE]
+
+      # Calculate mean values for each layer
+      roi_means <- as.numeric(colMeans(roi_pixels, na.rm = TRUE))
+
+      curve <- list(
+          x = x.interval * seq_along(roi_means),
+          y = roi_means,
+          recordType = record.type,
+          detectionInterval = x.interval,
+          curveDescriptor = paste0(c(xlab, ylab), collapse = ";"),
+          source_obj = objname
+      )
+
+      # Append curve to existing ones
+      i <- length(out[[idx]]$curves) + 1
+      out[[idx]]$curves[[i]] <- curve
+
+      if (plot) y_by_roi[[idx]] <- c(y_by_roi[[idx]], list(roi_means))
+    }
   }
-
 
   ### Optional plotting ###
   if (plot) {
+
+    ys <- unlist(y_by_roi, recursive = FALSE)
+    max_nlyrs <- max(vapply(ys, length, numeric(1)))
+    x_axis <- x.interval * seq_len(max_nlyrs)
+    y_mat <- do.call(cbind, lapply(ys, function(y) {
+      c(y, rep(NA_real_, max_nlyrs - length(y)))
+    }))
 
     if (is.null(col)) col <- seq_along(out)
 

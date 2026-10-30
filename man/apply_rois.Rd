@@ -19,8 +19,8 @@ apply_rois(
 )
 }
 \arguments{
-\item{obj}{An object coercible to a \code{SpatRaster} (see \link{as.SpatRaster}) containing the
-image stack.}
+\item{obj}{An object coercible to a \code{SpatRaster} (see \link{as.SpatRaster}) or a list of
+them. All images in the list must have the same dimensions.}
 
 \item{rois}{A named list of \code{RLumImage.ROI} objects as returned by \link{find_grains} and
 \link{select_grains}.}
@@ -47,14 +47,18 @@ used.}
 \item{verbose}{Whether progress messages should be printed to the terminal.}
 }
 \value{
-A named list of \code{RLumImage.ROI} objects, each
-extended with a \code{curves} list holding the extracted mean signal series
-(\code{x}, \code{y}, \code{recordType}, \code{detectionInterval}, \code{curveDescriptor}, and
-\code{source_obj}).
+A named list of \code{RLumImage.ROI} objects, each extended with a \code{curves}
+list (of length equal to the number of images in \code{obj}) holding the
+extracted mean signal series (\code{x}, \code{y}, \code{recordType}, \code{detectionInterval},
+\code{curveDescriptor}, and \code{source_obj}).
 }
 \description{
 Extract mean values within circular regions of interest (ROIs) across
 an image stack and optionally plot the time series.
+
+If \code{obj} is a list of images, each image is processed separately and one
+curve per image is appended to the \code{curves} list of every ROI, in the order
+of the images.
 }
 \examples{
 # TODO

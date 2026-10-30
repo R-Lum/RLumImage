@@ -86,3 +86,9 @@ as.SpatRaster <- function(
 
   stop("[as.SpatRaster()]: Image argument invalid. Must be either an array, a matrix, a numeric vector, a terra::SpatRaster object or a file path")
 }
+
+.is.coercible <- function(obj) {
+  inherits(obj, c("SpatRaster", "character", "matrix")) ||
+    (is.array(obj) && length(dim(obj)) == 3) ||
+    (is.numeric(obj) && length(obj) > 3)
+}

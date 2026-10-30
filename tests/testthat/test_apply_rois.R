@@ -8,6 +8,10 @@ fail4 <- list(structure(list(col_min = 1000, mask = matrix(TRUE)), class = "RLum
 test_that("input validation", {
   testthat::skip_on_cran()
 
+  expect_error(apply_rois(list(), verbose = FALSE),
+               "'obj' must be an object coercible to a 'SpatRaster' or a list of them")
+  expect_error(apply_rois(iris, verbose = FALSE),
+               "'obj' must be an object coercible to a 'SpatRaster' or a list of them")
   expect_error(apply_rois(sandworm.file, verbose = FALSE),
                'argument "rois" is missing, with no default')
   expect_error(apply_rois(sandworm.file, rois = 90, verbose = FALSE),
@@ -16,6 +20,9 @@ test_that("input validation", {
                "'rois' must be a list of 'RLumImage.ROI' objects")
   expect_error(apply_rois(sandworm.file, rois = list(iris), verbose = FALSE),
                "'rois' must be a list of 'RLumImage.ROI' objects")
+  expect_error(apply_rois(list(img_1lyr, terra::aggregate(img_1lyr, 2)),
+                          rois.sandworm, plot = FALSE, verbose = FALSE),
+               "All images must have the same dimensions")
   expect_error(apply_rois(img_1lyr, rois = fail1, verbose = FALSE),
                "ROI extends beyond image boundaries")
   expect_error(apply_rois(img_1lyr, rois = fail2, verbose = FALSE),
@@ -38,6 +45,20 @@ test_that("check functionality", {
   res <- apply_rois(img_1lyr, rois.applied, plot = FALSE, verbose = FALSE)
   expect_length(res[[1]]$curves,
                 2)
+  res2 <- apply_rois(list(img_1lyr, img_1lyr), rois.sandworm,
+                     plot = FALSE, verbose = FALSE)
+  expect_length(res2[[1]]$curves,
+                2)
+  expect_length(res2,
+                length(res))
+
+  ## images may have different numbers of layers
+  res3 <- apply_rois(list(img_2lyr, img_1lyr), rois.sandworm[1],
+                     plot = FALSE, verbose = FALSE)
+  expect_equal(vapply(res3[[1]]$curves, function(x) length(x$x), numeric(1)),
+               c(2, 1))
+  expect_equal(vapply(res3[[1]]$curves, function(x) length(x$y), numeric(1)),
+               c(2, 1))
 })
 
 test_that("snapshot tests", {
@@ -45,6 +66,9 @@ test_that("snapshot tests", {
 
   SW({
   expect_snapshot_value(apply_rois(img_2lyr, rois.applied,
+                                   plot = FALSE),
+                        style = "json2")
+  expect_snapshot_value(apply_rois(list(img_1lyr, img_2lyr), rois.applied,
                                    plot = FALSE),
                         style = "json2")
   })
