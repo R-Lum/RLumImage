@@ -23,10 +23,6 @@
 #' [find_grains] or [select_grains]. Each ROI is a list with (at least) a
 #' `curves` element holding a list of per-curve lists.
 #'
-#' @param originator
-#' Name to be stored in the `originator` slot of every generated object.
-#' If `NULL`, defaults to the name of this function.
-#'
 #' @return
 #' A list of `Luminescence::RLum.Analysis` objects, one per ROI. Each list
 #' element maintains the name of the corresponding ROI, if this is available.
@@ -42,13 +38,10 @@
 #' }
 #'
 #' @export
-convert_rois2RLum <- function(rois, originator = NULL) {
+convert_rois2RLum <- function(rois) {
 
   ## ------ Changelog ------
   ## 2026-09-26, DM & DeepSeek v4: First version
-
-  if (missing(originator) || is.null(originator))
-    originator <- "convert_rois2RLum"
 
   # Sanity check of the input
   valid.rois <- vapply(rois, inherits, "RLumImage.ROI", FUN.VALUE = logical(1))
@@ -82,7 +75,7 @@ convert_rois2RLum <- function(rois, originator = NULL) {
 
       Luminescence::set_RLum(
         class = "RLum.Data.Curve",
-        originator = originator,
+        originator = "convert_rois2RLum", # set manually because of lapply()
         recordType = record_type,
         curveType = "measured",
         data = curve_data,
@@ -95,7 +88,6 @@ convert_rois2RLum <- function(rois, originator = NULL) {
 
     out[[idx]] <- Luminescence::set_RLum(
       class = "RLum.Analysis",
-      originator = originator,
       records = records,
       info = roi_info
     )
