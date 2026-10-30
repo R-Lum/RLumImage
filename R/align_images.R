@@ -161,22 +161,11 @@ align_images <- function(
   result$dy <- opt$par[2] / conversion_dy
   result$angle <- opt$par[3]
   result$optim <- opt
+  class(result) <- "RLumImage.Alignment"
 
   # Console output
   if (verbose) {
-    iterations <- opt$counts[["function"]]
-    msg <- switch(as.character(opt$convergence),
-                  "0" = paste("Image alignment successful after",
-                              iterations, "iterations"),
-                  "1" = paste("Image alignment failed: Iteration maximum of",
-                              iterations, "reached"),
-                  paste("Image alignment failed with stats::optim() error code",
-                        paste0(opt$convergence, ":"), opt$message))
-
-    cat(msg, ".\n", sep = "")
-    cat(" dx =", round(result$dx, 4), "\n")
-    cat(" dy =", round(result$dy, 4), "\n")
-    cat(" angle =", paste0(round(result$angle, 2), "\u00b0\n")) # \u00b0 is °
+    print(result)
   }
 
   # Create difference images
@@ -198,6 +187,5 @@ align_images <- function(
   }
 
   ## return
-  structure(result,
-            class = "RLumImage.Alignment")
+  result
 }
