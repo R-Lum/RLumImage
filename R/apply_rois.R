@@ -88,17 +88,13 @@ apply_rois <- function(
 
   # Set x-axis and y-axis labels in accordance to the time unit
   if (is.na(ylab)) {
-
-    ylab_interval <- ""
-    if (x.interval != 1)
-      ylab_interval <- paste0(formatC(x.interval), " ")
-
-    ylab <- paste0("Signal [avg cts / ", ylab_interval, x.unit,"]")
+    ylab <- sprintf("Signal [avg cts / %s]",
+                    paste(c(if (x.interval != 1) formatC(x.interval), x.unit),
+                          collapse = " "))
   }
   if (is.na(xlab)) {
-    xlab <- paste0("Time [", x.unit, "]")
-    if (tolower(x.unit) == "gy")
-      xlab <- paste0("Dose [Gy]")
+    xlab <- if (tolower(x.unit) == "gy") "Dose [Gy]"
+            else sprintf("Time [%s]", x.unit)
   }
 
   x_axis <- x.interval * c(1:nlyrs)
