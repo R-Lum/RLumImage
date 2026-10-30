@@ -31,13 +31,11 @@ get_time_difference <- function(file, city = NA, country = NA) {
   }
 
   # 3. Find coordinates of the city
-  location <- data.frame(
-    city = city,
-    country = country
-  )
-
   coords <- tidygeocoder::geocode(
-    location,
+    data.frame(
+        city = city,
+        country = country
+    ),
     city = city,
     country = country,
     method = "osm"
