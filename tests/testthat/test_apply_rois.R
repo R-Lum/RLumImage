@@ -1,9 +1,9 @@
 rois.applied <- apply_rois(img_1lyr, rois.sandworm,
                           plot = FALSE, verbose = FALSE)
-fail1 <- list(R1 = structure(list(row_min = 0), class = "RLumImage.ROI"))
-fail2 <- list(R2 = structure(list(col_min = 0), class = "RLumImage.ROI"))
-fail3 <- list(R3 = structure(list(row_min = 1000, mask = matrix(TRUE)), class = "RLumImage.ROI"))
-fail4 <- list(R4 = structure(list(col_min = 1000, mask = matrix(TRUE)), class = "RLumImage.ROI"))
+fail1 <- list(structure(list(row_min = 0), class = "RLumImage.ROI"))
+fail2 <- list(structure(list(col_min = 0), class = "RLumImage.ROI"))
+fail3 <- list(structure(list(row_min = 1000, mask = matrix(TRUE)), class = "RLumImage.ROI"))
+fail4 <- list(structure(list(col_min = 1000, mask = matrix(TRUE)), class = "RLumImage.ROI"))
 
 test_that("input validation", {
   testthat::skip_on_cran()

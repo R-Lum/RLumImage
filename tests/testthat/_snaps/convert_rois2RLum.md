@@ -92,3 +92,27 @@
       	 >> This is an empty object, which cannot be used for further analysis! <<
       
 
+---
+
+    Code
+      convert_rois2RLum(unname(rois.sandworm[1:2]))
+    Output
+      [[1]]
+      
+       [RLum.Analysis-class]
+      	 originator: convert_rois2RLum()
+      	 protocol: NA
+      	 additional info elements:  1
+      	 number of records: 0
+      	 >> This is an empty object, which cannot be used for further analysis! <<
+      
+      [[2]]
+      
+       [RLum.Analysis-class]
+      	 originator: convert_rois2RLum()
+      	 protocol: NA
+      	 additional info elements:  1
+      	 number of records: 0
+      	 >> This is an empty object, which cannot be used for further analysis! <<
+      
+

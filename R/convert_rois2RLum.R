@@ -58,15 +58,15 @@ convert_rois2RLum <- function(rois, originator = NULL) {
   out <- vector(mode = "list", length = length(rois))
   names(out) <- names(rois)
 
-  for (roi_name in names(rois)) {
+  for (idx in seq_along(rois)) {
 
-    roi <- rois[[roi_name]]
+    roi <- rois[[idx]]
 
     # Convert every curve into an RLum.Data.Curve object
     records <- lapply(roi$curves, function(curve) {
 
       if (!is.list(curve) || is.null(curve$x) || is.null(curve$y))
-        stop("[convert_rois2RLum()] Curve entry of ROI '", roi_name, "' is malformed.")
+        stop("[convert_rois2RLum()] Curve entry of rois[[", idx, "]] is malformed.")
 
       # Combine x and y into the 2-column data matrix
       curve_data <- cbind(x = as.numeric(curve$x),
@@ -93,7 +93,7 @@ convert_rois2RLum <- function(rois, originator = NULL) {
     # Collect the whole ROI in an RLum.Analysis object
     roi_info <- list(class = roi$class)
 
-    out[[roi_name]] <- Luminescence::set_RLum(
+    out[[idx]] <- Luminescence::set_RLum(
       class = "RLum.Analysis",
       originator = originator,
       records = records,

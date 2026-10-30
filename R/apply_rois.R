@@ -107,9 +107,9 @@ apply_rois <- function(
   out <- rois
   y_mat <- matrix(nrow = nlyrs, ncol = 0) # For plotting
 
-  for (roi_name in names(rois)) {
+  for (idx in seq_along(rois)) {
 
-    roi <- rois[[roi_name]]
+    roi <- rois[[idx]]
 
     # Define the bounds of the ROI
     row_min <- roi$row_min
@@ -141,8 +141,9 @@ apply_rois <- function(
       source_obj = deparse(substitute(obj))
     )
 
-    i <- length(out[[roi_name]]$curves) + 1
-    out[[roi_name]]$curves[[i]] <- curve
+    # Append curve to existing ones
+    i <- length(out[[idx]]$curves) + 1
+    out[[idx]]$curves[[i]] <- curve
 
     if (plot) y_mat <- cbind(y_mat, roi_means)
   }

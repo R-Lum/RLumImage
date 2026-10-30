@@ -15,7 +15,7 @@ test_that("input validation", {
                                          col_min = 42, row_min = 67)),
                "'rois' must be a list of 'RLumImage.ROI' objects")
   expect_error(convert_rois2RLum(roi.err),
-               "Curve entry of ROI 'err' is malformed")
+               "Curve entry of rois[[1]] is malformed", fixed = TRUE)
 })
 
 test_that("check functionality", {
@@ -23,6 +23,7 @@ test_that("check functionality", {
 
   expect_snapshot(convert_rois2RLum(list(first = roi)))
   expect_snapshot(convert_rois2RLum(rois.sandworm))
+  expect_snapshot(convert_rois2RLum(unname(rois.sandworm[1:2])))
 })
 
 test_that("regression tests", {
@@ -32,5 +33,4 @@ test_that("regression tests", {
   res <- convert_rois2RLum(list(set_roi(mask = matrix(rep(TRUE, 16), ncol = 4),
                                         col_min = 42, row_min = 67)))
   expect_type(res, "list")
-  expect_null(res[[1]])
 })
