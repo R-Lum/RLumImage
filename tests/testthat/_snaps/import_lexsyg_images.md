@@ -5,7 +5,7 @@
     Output
       Folder contains 1 TIFF files.
       
-      #1 Use creation date of the TIFF files as time stamp and sort them ...DONE
+      #1 Find creation time of the TIFF files and sort them ...DONE
          Images were recorded between 2026-05-08 20:40:28 and
       
       #2 Read XSYG file and get sequence data ...DONE

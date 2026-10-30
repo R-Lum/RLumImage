@@ -17,7 +17,8 @@ import_lexsyg_images(
 \arguments{
 \item{xsyg_file}{Path to the lexsyg XSYG file of the measured sequence.}
 
-\item{folder}{Folder where the TIFF files are stored. Defaults to the XSYG file's directory.}
+\item{folder}{Path to the folder where the TIFF files are stored. By default, the
+directory of the XSYG file is used.}
 
 \item{detector}{Short name of the detector in LexStudio 2 ("EMCCD" by default).}
 

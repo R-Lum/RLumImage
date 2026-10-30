@@ -21,7 +21,8 @@
 #' Path to the lexsyg XSYG file of the measured sequence.
 #'
 #' @param folder
-#' Folder where the TIFF files are stored. Defaults to the XSYG file's directory.
+#' Path to the folder where the TIFF files are stored. By default, the
+#' directory of the XSYG file is used.
 #'
 #' @param detector
 #' Short name of the detector in LexStudio 2 ("EMCCD" by default).
@@ -66,10 +67,7 @@ import_lexsyg_images <- function(
   city = NA,
   country = NA
 ) {
-
   ## ToDo
-  ## - (!) Read TIFF meta data and use that time stamp as first choice
-  ##   Fall back to file creating time stamp only if that in the meta data is not available
   ## - Add console output of XSYG basename and list of aliquot positions if verbose = TRUE
   ## - Revise 'ImageData' list structure and maybe add an empty 'Processing' list
   ## - Missing or unexpected meta data values in the XSYG have no error handling.
@@ -99,7 +97,8 @@ import_lexsyg_images <- function(
 
   ### --------------- Step 1 ------------------
 
-  if (verbose) cat("#1 Use creation date of the TIFF files as time stamp and sort them ...")
+  if (verbose)
+    cat("#1 Find creation time of the TIFF files and sort them ...")
 
   # Read the TIFF files creation time
   file.times <- sapply(tif_files, function(file) {
@@ -178,11 +177,13 @@ import_lexsyg_images <- function(
         # get recordType for different LexStudio version
         if (is.null(info$recordType) && "recordType" %in% slotNames(record)) {
           record_type <- record@recordType
-          warning("XSYG meta data parsed to RLum object misses 'recordType' in info list. Please check versions of R package Luminescence and LexStudio.")
+          warning("XSYG meta data parsed to RLum object misses 'recordType' in info list. ",
+                  "Please check versions of the Luminescence R package and LexStudio.")
         } else if (is.character(info$recordType)){
           record_type <- info$recordType
         } else {
-          stop("[import_lexsyg_images()] XSYG file does not contain any recordType information. Please check versions of R package Luminescence and LexStudio.")
+          stop("[import_lexsyg_images()] XSYG file does not contain any recordType information. ",
+               "Please check versions of the Luminescence R package and LexStudio.") # nocov
         }
 
         #to get measurement temperature
@@ -262,16 +263,12 @@ import_lexsyg_images <- function(
 
     # Time limits of the current record
     start_time <- record_table$time[i]
-
-    end_time <- last_record_end
-    if (i < nrow(record_table)) end_time <- record_table$time[i + 1]
+    end_time <- if (i < nrow(record_table)) record_table$time[i + 1]
+                else last_record_end
 
     rec_i <- 1
-    while(file_i <= nrow(files) && files$time[file_i] < end_time)
-    {
-
+    while (isTRUE(files$time[file_i] < end_time)) {
       if (files$time[file_i] >= start_time) {
-
         files$position[file_i] <- record_table$position[i]
         files$type[file_i] <- record_table$type[i]
         files$channel[file_i] <- rec_i
@@ -298,10 +295,9 @@ import_lexsyg_images <- function(
     if (verbose) cat(sum(unmatched), "TIFFs fall outside the XSYG time range and were excluded.\n")
 
     files <- files[!unmatched, , drop = FALSE]
+    if (nrow(files) < 1)
+      stop("[import_lexsyg_images()] No TIFF file could be matched to any XSYG record.")
   }
-
-  if (nrow(files) < 1)
-    stop("[import_lexsyg_images()] No TIFF file could be matched to any XSYG record.")
 
   if(verbose) cat("\n\n")
 
