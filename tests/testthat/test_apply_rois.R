@@ -12,6 +12,8 @@ test_that("input validation", {
                'argument "rois" is missing, with no default')
   expect_error(apply_rois(sandworm.file, rois = 90, verbose = FALSE),
                "'rois' must be a list of 'RLumImage.ROI' objects")
+  expect_error(apply_rois(sandworm.file, rois = list(), verbose = FALSE),
+               "'rois' must be a list of 'RLumImage.ROI' objects")
   expect_error(apply_rois(sandworm.file, rois = list(iris), verbose = FALSE),
                "'rois' must be a list of 'RLumImage.ROI' objects")
   expect_error(apply_rois(img_1lyr, rois = fail1, verbose = FALSE),

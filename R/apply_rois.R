@@ -82,8 +82,8 @@ apply_rois <- function(
   ncols <- terra::ncol(imgs)
   nlyrs <- terra::nlyr(imgs)
 
-  all.classes <- vapply(rois, function(x) class(x)[1], FUN.VALUE = character(1))
-  if (any(all.classes != "RLumImage.ROI"))
+  valid.rois <- vapply(rois, inherits, "RLumImage.ROI", FUN.VALUE = logical(1))
+  if (length(rois) == 0 || !all(valid.rois))
     stop("[apply_rois()] 'rois' must be a list of 'RLumImage.ROI' objects")
 
   # Set x-axis and y-axis labels in accordance to the time unit
