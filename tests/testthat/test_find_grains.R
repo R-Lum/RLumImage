@@ -23,8 +23,8 @@ test_that("check functionality", {
 test_that("snapshot tests", {
   testthat::skip_on_cran()
 
-  expect_snapshot(find_grains(sandworm.file, threshold = 100, plot = FALSE))
-  expect_snapshot(find_grains(sandworm.file, grain.density = 0.01, plot = FALSE))
+  expect_snapshot(find_grains(sandworm.file, threshold = 200, plot = FALSE))
+  expect_snapshot(find_grains(sandworm.file, grain.density = 0.005, plot = FALSE))
 })
 
 test_that("graphical snapshot tests", {

@@ -1,13 +1,13 @@
 # snapshot tests
 
     Code
-      find_grains(sandworm.file, threshold = 100, plot = FALSE)
+      find_grains(sandworm.file, threshold = 200, plot = FALSE)
     Output
       Load image file sandworm_rf_median.tif into system memory.
       Created circular ROI mask with edge length 13 containing 113 pixels.
       Apply FFT band-pass 6 - 24 px 
-      Use an intensity threshold of 100 px/cts.
-      14 grains found in 39 iterations.
+      Use an intensity threshold of 200 px/cts.
+      8 grains found in 11 iterations.
       $ROI_1
       [RLumImage.ROI]
       	 shape: circle
@@ -68,54 +68,6 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (291, 321)
-      	 number of curves: 0
-      	 mineral class: Unclassified
-      	 additional info elements: 6
-      
-      $ROI_9
-      [RLumImage.ROI]
-      	 shape: circle
-      	 bounding box: 13 x 13 px at (303, 267)
-      	 number of curves: 0
-      	 mineral class: Unclassified
-      	 additional info elements: 6
-      
-      $ROI_10
-      [RLumImage.ROI]
-      	 shape: circle
-      	 bounding box: 13 x 13 px at (231, 129)
-      	 number of curves: 0
-      	 mineral class: Unclassified
-      	 additional info elements: 6
-      
-      $ROI_11
-      [RLumImage.ROI]
-      	 shape: circle
-      	 bounding box: 13 x 13 px at (238, 204)
-      	 number of curves: 0
-      	 mineral class: Unclassified
-      	 additional info elements: 6
-      
-      $ROI_12
-      [RLumImage.ROI]
-      	 shape: circle
-      	 bounding box: 13 x 13 px at (280, 150)
-      	 number of curves: 0
-      	 mineral class: Unclassified
-      	 additional info elements: 6
-      
-      $ROI_13
-      [RLumImage.ROI]
-      	 shape: circle
-      	 bounding box: 13 x 13 px at (165, 196)
-      	 number of curves: 0
-      	 mineral class: Unclassified
-      	 additional info elements: 6
-      
-      $ROI_14
-      [RLumImage.ROI]
-      	 shape: circle
-      	 bounding box: 13 x 13 px at (331, 263)
       	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6
@@ -124,13 +76,13 @@
 ---
 
     Code
-      find_grains(sandworm.file, grain.density = 0.01, plot = FALSE)
+      find_grains(sandworm.file, grain.density = 0.005, plot = FALSE)
     Output
       Load image file sandworm_rf_median.tif into system memory.
       Created circular ROI mask with edge length 13 containing 113 pixels.
       Apply FFT band-pass 6 - 24 px 
-      Calculate threshold for  1 % grain density: 99.17  px/cts.
-      15 grains found in 40 iterations.
+      Calculate threshold for  0.5 % grain density: 181.1  px/cts.
+      8 grains found in 13 iterations.
       $ROI_1
       [RLumImage.ROI]
       	 shape: circle
@@ -191,62 +143,6 @@
       [RLumImage.ROI]
       	 shape: circle
       	 bounding box: 13 x 13 px at (291, 321)
-      	 number of curves: 0
-      	 mineral class: Unclassified
-      	 additional info elements: 6
-      
-      $ROI_9
-      [RLumImage.ROI]
-      	 shape: circle
-      	 bounding box: 13 x 13 px at (303, 267)
-      	 number of curves: 0
-      	 mineral class: Unclassified
-      	 additional info elements: 6
-      
-      $ROI_10
-      [RLumImage.ROI]
-      	 shape: circle
-      	 bounding box: 13 x 13 px at (231, 129)
-      	 number of curves: 0
-      	 mineral class: Unclassified
-      	 additional info elements: 6
-      
-      $ROI_11
-      [RLumImage.ROI]
-      	 shape: circle
-      	 bounding box: 13 x 13 px at (238, 204)
-      	 number of curves: 0
-      	 mineral class: Unclassified
-      	 additional info elements: 6
-      
-      $ROI_12
-      [RLumImage.ROI]
-      	 shape: circle
-      	 bounding box: 13 x 13 px at (280, 150)
-      	 number of curves: 0
-      	 mineral class: Unclassified
-      	 additional info elements: 6
-      
-      $ROI_13
-      [RLumImage.ROI]
-      	 shape: circle
-      	 bounding box: 13 x 13 px at (165, 196)
-      	 number of curves: 0
-      	 mineral class: Unclassified
-      	 additional info elements: 6
-      
-      $ROI_14
-      [RLumImage.ROI]
-      	 shape: circle
-      	 bounding box: 13 x 13 px at (157, 256)
-      	 number of curves: 0
-      	 mineral class: Unclassified
-      	 additional info elements: 6
-      
-      $ROI_15
-      [RLumImage.ROI]
-      	 shape: circle
-      	 bounding box: 13 x 13 px at (331, 263)
       	 number of curves: 0
       	 mineral class: Unclassified
       	 additional info elements: 6

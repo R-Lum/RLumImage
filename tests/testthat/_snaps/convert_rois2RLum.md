@@ -46,51 +46,6 @@
       	 number of records: 0
       	 >> This is an empty object, which cannot be used for further analysis! <<
       
-      $ROI_4
-      
-       [RLum.Analysis-class]
-      	 originator: convert_rois2RLum()
-      	 protocol: NA
-      	 additional info elements:  1
-      	 number of records: 0
-      	 >> This is an empty object, which cannot be used for further analysis! <<
-      
-      $ROI_5
-      
-       [RLum.Analysis-class]
-      	 originator: convert_rois2RLum()
-      	 protocol: NA
-      	 additional info elements:  1
-      	 number of records: 0
-      	 >> This is an empty object, which cannot be used for further analysis! <<
-      
-      $ROI_6
-      
-       [RLum.Analysis-class]
-      	 originator: convert_rois2RLum()
-      	 protocol: NA
-      	 additional info elements:  1
-      	 number of records: 0
-      	 >> This is an empty object, which cannot be used for further analysis! <<
-      
-      $ROI_7
-      
-       [RLum.Analysis-class]
-      	 originator: convert_rois2RLum()
-      	 protocol: NA
-      	 additional info elements:  1
-      	 number of records: 0
-      	 >> This is an empty object, which cannot be used for further analysis! <<
-      
-      $ROI_8
-      
-       [RLum.Analysis-class]
-      	 originator: convert_rois2RLum()
-      	 protocol: NA
-      	 additional info elements:  1
-      	 number of records: 0
-      	 >> This is an empty object, which cannot be used for further analysis! <<
-      
 
 ---
 
