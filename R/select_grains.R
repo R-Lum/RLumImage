@@ -33,7 +33,7 @@
 #' Whether progress messages should be printed to the terminal.
 #'
 #' @return
-#' A list of x`RLumImage.ROI` objects, one per grain. Each ROI holds a circular
+#' A list of `RLumImage.ROI` objects, one per grain. Each ROI holds a circular
 #' `mask`, its position (`col_min`, `row_min`) and `shape`, the assigned mineral
 #' `class`, `info` (with `source` and the mean signal `average`) and an
 #' `overlay` describing the circle for plotting.
@@ -64,7 +64,7 @@ select_grains <- function(
   ## ToDo's
   ## - Is it possible to start the app in fullscreen automatically in RStudio?
   ## - Make more use of the info text fields at the top (for example: dynamic informations)
-  ## - Update the value in the "Threshol" box after performing "find grains"
+  ## - Update the value in the "Threshold" box after performing "find grains"
   ## - Allow coloured and multispectral images
   ## - Reduce reaction time / improve performance. Ideas:
   ##    o Do not re-plot the whole image, just plot the ROI overlay (re-use the overlay code from plot_image.R)
