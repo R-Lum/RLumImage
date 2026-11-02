@@ -7,9 +7,8 @@
 convert_rois2RLum(rois)
 }
 \arguments{
-\item{rois}{A list of \code{RLumImage.ROI} objects as returned by \link{apply_rois},
-\link{find_grains} or \link{select_grains}. Each ROI is a list with (at least) a
-\code{curves} element holding a list of per-curve lists.}
+\item{rois}{A list of \code{RLumImage.ROI} objects as returned by \link{apply_rois}. Each ROI is
+a list with (at least) a \code{curves} element holding a list of per-curve lists.}
 }
 \value{
 A list of \code{Luminescence::RLum.Analysis} objects, one per ROI. Each list

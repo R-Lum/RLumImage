@@ -5,7 +5,7 @@
 #' Open the resulting *.rf file with [Luminescence::read_RF2R] for further use.
 #'
 #' @param rois
-#' A list `RLumImage.ROI` objects as returned by [apply_rois].
+#' A list of `RLumImage.ROI` objects as returned by [apply_rois].
 #'
 #' @param file
 #' File path of the *.rf file to write.
@@ -97,7 +97,7 @@ write_rf_table <- function(
   if (verbose) cat("Select", N, "from", length(rois), "regions of interests.\n")
 
   if (N == 0)
-    stop("[save_roi_table()]: No entry of the 'rois' list matches the filter arguments.")
+    stop("[write_rf_table()]: No entry of the 'rois' list matches the filter arguments.")
 
   # ----- Header line -----
   header_fields <- c(

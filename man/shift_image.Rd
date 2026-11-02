@@ -22,7 +22,7 @@ image stack.}
 the y-axis. For example dx = 0.5 shifts to the right by 50\% of the image
 width.}
 
-\item{layer}{Indices of layer to shift. If \code{NA} (default), all layers are rescaled.}
+\item{layer}{Indices of layer to shift. If \code{NA} (default), all layers are shifted.}
 
 \item{fill}{Value used to fill the empty areas created by shifting (\code{NA} by default).}
 

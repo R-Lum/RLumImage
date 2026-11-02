@@ -30,9 +30,9 @@ Minimum mean signal within a ROI, relative to the estimated local background,
 for it to count as a grain. Either \code{threshold} or \code{grain.density} must be
 given.}
 
-\item{grain.density}{Fraction of pixels expected to belong to grains. If \code{NA}, the threshold is
-derived from this density as the corresponding quantile of the FFT filtered
-image. Either \code{threshold} or \code{grain.density} must be given.}
+\item{grain.density}{Fraction of pixels expected to belong to grains. If \code{threshold} is \code{NA},
+the threshold is derived from this density as the corresponding quantile of
+the FFT filtered image. Either \code{threshold} or \code{grain.density} must be given.}
 
 \item{fft.filter}{Numeric vector of length 3 (shortpass, longpass, transition), with shortpass
 and longpass given as multiples of \code{radius}. It is passed to \link{apply_fft_filter}

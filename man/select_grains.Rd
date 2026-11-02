@@ -10,8 +10,8 @@ select_grains(obj, rois = list(), classes = NULL, verbose = TRUE)
 \item{obj}{An object coercible to a \code{SpatRaster} (see \link{as.SpatRaster}) containing the
 image stack.}
 
-\item{rois}{A list of ROI objects (as returned by a previous call to \link{select_grains})
-used to pre-populate the session with existing ROIs.}
+\item{rois}{A list of ROI objects (as returned by a previous call to \link{select_grains} or
+\link{find_grains}) used to pre-populate the session with existing ROIs.}
 
 \item{classes}{Named character vector (or list) mapping mineral class labels to display
 colours, e.g. \code{c(Quartz = "yellow", Other = "magenta")}. Used for the class
@@ -30,8 +30,7 @@ A list of \code{RLumImage.ROI} objects, one per grain. Each ROI holds a circular
 Opens an interactive \pkg{shiny} app that lets the user place circular
 regions of interest (ROIs) on a reference image derived from a
 luminescence image stack, assign a mineral class to each ROI, and - after
-closing the app - return the resulting per-grain ROIs in the format used
-by \link{set_roi} and \link{apply_rois}.
+closing the app - return the resulting per-grain ROIs.
 
 The image stack is combined into a single reference image (pixel-wise
 mean) for display and for mapping mouse clicks to raster coordinates.

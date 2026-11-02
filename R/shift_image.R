@@ -10,7 +10,7 @@
 #' width.
 #'
 #' @param layer
-#' Indices of layer to shift. If `NA` (default), all layers are rescaled.
+#' Indices of layer to shift. If `NA` (default), all layers are shifted.
 #'
 #' @param fill
 #' Value used to fill the empty areas created by shifting (`NA` by default).

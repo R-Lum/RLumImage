@@ -19,9 +19,8 @@
 #' and `info`), with the ROI's `class` stored in `info$class`.
 #'
 #' @param rois
-#' A list of `RLumImage.ROI` objects as returned by [apply_rois],
-#' [find_grains] or [select_grains]. Each ROI is a list with (at least) a
-#' `curves` element holding a list of per-curve lists.
+#' A list of `RLumImage.ROI` objects as returned by [apply_rois]. Each ROI is
+#' a list with (at least) a `curves` element holding a list of per-curve lists.
 #'
 #' @return
 #' A list of `Luminescence::RLum.Analysis` objects, one per ROI. Each list

@@ -45,10 +45,9 @@
 #' should be shown in white (`FALSE` by default).
 #'
 #' @param rois
-#' Optional regions of interest to overlay on the image as circles. Accepts
-#' either the named list returned by [select_grains] or a data frame with (at
-#' least) columns `x_coord`, `y_coord`, `radius_px` and `class` (optionally,
-#' `id`). Only used for single-layer images; ignored (with a warning) for
+#' An optional list of `RLumImage.ROI` objects as returned by [find_grains]
+#' and [select_grains], storing the regions of interest to overlay on the
+#' image. Only used for single-layer images; ignored (with a warning) for
 #' multi-layer stacks.
 #'
 #' @param roi.lwd
@@ -117,7 +116,7 @@ plot_image <- function(
 
   valid.rois <- vapply(rois, inherits, "RLumImage.ROI", FUN.VALUE = logical(1))
   if (!all(valid.rois))
-    stop("[apply_rois()] 'rois' must be a list of 'RLumImage.ROI' objects")
+    stop("[plot_image()] 'rois' must be a list of 'RLumImage.ROI' objects")
 
   # If image is a single-image file, display the file name
   if (any(is.na(label))
@@ -212,7 +211,7 @@ plot_image <- function(
   # check that all classes cover the classes used in rois
   missing <- setdiff(unlist(sapply(rois, function(x) x$class)), names(classes))
   if (length(missing) > 0) {
-    warning("[plot_image] Some mineral classes (", toString(sQuote(missing)),
+    warning("[plot_image()] Some mineral classes (", toString(sQuote(missing)),
             ") are missing from 'classes' and will be drawn in white")
   }
 

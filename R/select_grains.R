@@ -4,8 +4,7 @@
 #' Opens an interactive \pkg{shiny} app that lets the user place circular
 #' regions of interest (ROIs) on a reference image derived from a
 #' luminescence image stack, assign a mineral class to each ROI, and - after
-#' closing the app - return the resulting per-grain ROIs in the format used
-#' by [set_roi] and [apply_rois].
+#' closing the app - return the resulting per-grain ROIs.
 #'
 #' The image stack is combined into a single reference image (pixel-wise
 #' mean) for display and for mapping mouse clicks to raster coordinates.
@@ -20,8 +19,8 @@
 #' image stack.
 #'
 #' @param rois
-#' A list of ROI objects (as returned by a previous call to [select_grains])
-#' used to pre-populate the session with existing ROIs.
+#' A list of ROI objects (as returned by a previous call to [select_grains] or
+#' [find_grains]) used to pre-populate the session with existing ROIs.
 #'
 #' @param classes
 #' Named character vector (or list) mapping mineral class labels to display
@@ -345,7 +344,7 @@ select_grains <- function(
 
 
     # ── 5a. Reference image with ROI circle overlays ─────────────────────────
-    # ROI overlay drawing lives in plot_image() (rois/classes/show.numbers
+    # ROI overlay drawing lives in plot_image() (rois/classes/roi.ids
     # arguments); this just forwards the current reactive state.
     output$img_plot <- shiny::renderPlot({
 

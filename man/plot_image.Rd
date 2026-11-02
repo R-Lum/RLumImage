@@ -53,10 +53,9 @@ single-layer images.}
 \item{contains.outlier}{Whether the estimated range accounts for outliers and out-of-range values
 should be shown in white (\code{FALSE} by default).}
 
-\item{rois}{Optional regions of interest to overlay on the image as circles. Accepts
-either the named list returned by \link{select_grains} or a data frame with (at
-least) columns \code{x_coord}, \code{y_coord}, \code{radius_px} and \code{class} (optionally,
-\code{id}). Only used for single-layer images; ignored (with a warning) for
+\item{rois}{An optional list of \code{RLumImage.ROI} objects as returned by \link{find_grains}
+and \link{select_grains}, storing the regions of interest to overlay on the
+image. Only used for single-layer images; ignored (with a warning) for
 multi-layer stacks.}
 
 \item{roi.lwd}{Line width to be used for the regions of interest.}

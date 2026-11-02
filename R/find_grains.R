@@ -28,9 +28,9 @@
 #' given.
 #'
 #' @param grain.density
-#' Fraction of pixels expected to belong to grains. If `NA`, the threshold is
-#' derived from this density as the corresponding quantile of the FFT filtered
-#' image. Either `threshold` or `grain.density` must be given.
+#' Fraction of pixels expected to belong to grains. If `threshold` is `NA`,
+#' the threshold is derived from this density as the corresponding quantile of
+#' the FFT filtered image. Either `threshold` or `grain.density` must be given.
 #'
 #' @param fft.filter
 #' Numeric vector of length 3 (shortpass, longpass, transition), with shortpass

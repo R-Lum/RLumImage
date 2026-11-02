@@ -21,9 +21,9 @@
 #'
 #' **Funding**
 #'
-#' The work on 'LumImage' is supported through the DFG project “ARENICOLA:
+#' The work on 'RLumImage' is supported through the DFG project "ARENICOLA:
 #' Advanced RadiofluorescENce Imaging and grain Classification in
-#' Luminescence Applications” No 528704761 led by Dr Sebastian Kreutzer (PI
+#' Luminescence Applications" No 528704761 led by Dr Sebastian Kreutzer (PI
 #' at the LIAG Institute for Applied Geophysics, Hannover, Germany) and Dr
 #' Margret Fuchs (PI at the Helmholtz Institute Freiberg for Resource
 #' Technology (HIF), Freiberg, Germany).
