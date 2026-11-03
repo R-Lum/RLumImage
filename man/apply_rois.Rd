@@ -9,12 +9,9 @@ apply_rois(
   rois,
   record.type = NA,
   x.interval = 1,
-  plot = TRUE,
+  x.unit = "image",
   xlab = NA,
   ylab = NA,
-  x.unit = "image",
-  legend = TRUE,
-  col = NULL,
   verbose = TRUE
 )
 }
@@ -29,38 +26,37 @@ them. All images in the list must have the same dimensions.}
 
 \item{x.interval}{Time spacing between frames (1 by default).}
 
-\item{plot}{Whether to plot the time series (\code{TRUE} by default).}
+\item{x.unit}{X-axis unit, e.g. \code{"s"} or \code{"Gy"}, to be used in the automatic construction
+of axis labels.}
 
 \item{xlab}{X-axis label. If \code{NA} (default), it is constructed automatically.}
 
 \item{ylab}{Y-axis label. If \code{NA} (default), it is constructed automatically.}
 
-\item{x.unit}{X-axis unit, e.g. \code{"s"} or \code{"Gy"}, to be used in the automatic construction
-of axis labels.}
-
-\item{legend}{Whether a legend should be added to the plot (\code{TRUE} by default).
-TODO: This is currently not functional.}
-
-\item{col}{Colour specification for \link{matplot} lines. If \code{NULL}, default colours are
-used.}
-
 \item{verbose}{Whether progress messages should be printed to the terminal.}
 }
 \value{
-A named list of \code{RLumImage.ROI} objects, each extended with a \code{curves}
-list (of length equal to the number of images in \code{obj}) holding the
-extracted mean signal series (\code{x}, \code{y}, \code{recordType}, \code{detectionInterval},
-\code{curveDescriptor}, and \code{source_obj}).
+A named list of \link[=RLum.Analysis.ROI-class]{RLum.Analysis.ROI} objects, one for each
+element in \code{rois}. The extracted mean signal series are stored as
+\link[Luminescence:RLum.Data.Curve-class]{Luminescence::RLum.Data.Curve} objects in the \verb{@records} slot (one
+for each image in \code{obj} in the order provided). The corresponding ROI
+definition is stored in the \verb{@roi} slot, while the ROI's mineral class
+is stored in \code{info$class}.
 }
 \description{
-Extract mean values within circular regions of interest (ROIs) across
-an image stack and optionally plot the time series.
-
-If \code{obj} is a list of images, each image is processed separately and one
-curve per image is appended to the \code{curves} list of every ROI, in the order
-of the images.
+Extract mean values within regions of interest (ROIs) across an image stack.
+The extracted curves are returned as \link[Luminescence:RLum.Data.Curve-class]{Luminescence::RLum.Data.Curve}
+records stored in an \link[=RLum.Analysis.ROI-class]{RLum.Analysis.ROI} object together
+with the ROI definitions they were extracted from.
 }
 \examples{
-# TODO
+file <- system.file("extdata/sandworm_rf_median.tif", package = "RLumImage")
+img_1lyr <- as.SpatRaster(file, verbose = FALSE)
+rois <- find_grains(img_1lyr, radius = 6, grain.density = 0.005,
+                    verbose = FALSE, plot = FALSE)
+apply_rois(img_1lyr, rois)
 
+}
+\seealso{
+\link[=RLum.Analysis.ROI-class]{RLum.Analysis.ROI}, \link[Luminescence:RLum.Data.Curve-class]{Luminescence::RLum.Data.Curve}
 }

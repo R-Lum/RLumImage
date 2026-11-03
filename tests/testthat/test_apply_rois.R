@@ -1,5 +1,5 @@
 rois.applied <- apply_rois(img_1lyr, rois.sandworm,
-                          plot = FALSE, verbose = FALSE)
+                           verbose = FALSE)
 fail1 <- list(structure(list(row_min = 0), class = "RLumImage.ROI"))
 fail2 <- list(structure(list(col_min = 0), class = "RLumImage.ROI"))
 fail3 <- list(structure(list(row_min = 1000, mask = matrix(TRUE)), class = "RLumImage.ROI"))
@@ -20,8 +20,10 @@ test_that("input validation", {
                "'rois' must be a list of 'RLumImage.ROI' objects")
   expect_error(apply_rois(sandworm.file, rois = list(iris), verbose = FALSE),
                "'rois' must be a list of 'RLumImage.ROI' objects")
+  expect_error(apply_rois(sandworm.file, rois = rois.applied, verbose = FALSE),
+               "'rois' must be a list of 'RLumImage.ROI' objects")
   expect_error(apply_rois(list(img_1lyr, terra::aggregate(img_1lyr, 2)),
-                          rois.sandworm, plot = FALSE, verbose = FALSE),
+                          rois.sandworm, verbose = FALSE),
                "All images must have the same dimensions")
   expect_error(apply_rois(img_1lyr, rois = fail1, verbose = FALSE),
                "ROI extends beyond image boundaries")
@@ -38,26 +40,34 @@ test_that("check functionality", {
 
   expect_length(rois.sandworm[[1]]$curves,
                 0)
-  expect_length(rois.applied[[1]]$curves,
+
+  expect_type(rois.applied,
+              "list")
+  expect_length(rois.applied,
+                length(rois.sandworm))
+  expect_s4_class(rois.applied[[1]],
+                  "RLum.Analysis.ROI")
+  expect_length(rois.applied[[1]]@records,
                 1)
 
   ## add curve to an existing one
-  res <- apply_rois(img_1lyr, rois.applied, plot = FALSE, verbose = FALSE)
-  expect_length(res[[1]]$curves,
-                2)
   res2 <- apply_rois(list(img_1lyr, img_1lyr), rois.sandworm,
-                     plot = FALSE, verbose = FALSE)
-  expect_length(res2[[1]]$curves,
-                2)
+                     verbose = FALSE)
   expect_length(res2,
-                length(res))
+                length(rois.sandworm))
+  expect_length(res2[[1]]@records,
+                2)
 
   ## images may have different numbers of layers
   res3 <- apply_rois(list(img_2lyr, img_1lyr), rois.sandworm[1],
-                     plot = FALSE, verbose = FALSE)
-  expect_equal(vapply(res3[[1]]$curves, function(x) length(x$x), numeric(1)),
+                     verbose = FALSE)
+  expect_length(res3,
+                length(rois.sandworm[1]))
+  expect_length(res3[[1]]@records,
+                2)
+  expect_equal(vapply(res3[[1]]@records, nrow, numeric(1)),
                c(2, 1))
-  expect_equal(vapply(res3[[1]]$curves, function(x) length(x$y), numeric(1)),
+  expect_equal(vapply(res3[[1]]@records, nrow, numeric(1)),
                c(2, 1))
 })
 
@@ -65,24 +75,7 @@ test_that("snapshot tests", {
   testthat::skip_on_cran()
 
   SW({
-  expect_snapshot_value(apply_rois(img_2lyr, rois.applied,
-                                   plot = FALSE),
-                        style = "json2")
-  expect_snapshot_value(apply_rois(list(img_1lyr, img_2lyr), rois.applied,
-                                   plot = FALSE),
-                        style = "json2")
-  })
-})
-
-test_that("graphical snapshot tests", {
-  testthat::skip_on_cran()
-  testthat::skip_if_not_installed("vdiffr")
-
-  SW({
-  vdiffr::expect_doppelganger("applied",
-                              apply_rois(img_2lyr, rois.applied))
-  vdiffr::expect_doppelganger("interval unit",
-                              apply_rois(img_2lyr, rois.sandworm,
-                                         x.interval = 2, x.unit = "gy"))
+  expect_snapshot_RLum(apply_rois(img_2lyr, rois.sandworm))
+  expect_snapshot_RLum(apply_rois(list(img_1lyr, img_2lyr), rois.sandworm))
   })
 })
