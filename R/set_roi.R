@@ -237,6 +237,6 @@ set_roi <- function(
     roi$info$source_nrows <- terra::nrow(img)
   }
 
-  class(roi) <- "RLumImage.ROI"
+  class(roi) <- c("list", "RLumImage.ROI")
   return(roi)
 }
