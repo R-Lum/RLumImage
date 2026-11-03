@@ -2,8 +2,25 @@ SW <- function(expr) {
   capture.output(suppressMessages(suppressWarnings(expr)))
 }
 
-expect_snapshot_xlum <- function(xlum, ...) {
-  expect_snapshot(cat(as.character(xlum)), ...)
+## the ... can be used to set the tolerance
+expect_snapshot_RLum <- function(object, ..., expect_snapshot_output = FALSE) {
+  set.seed(list(...)$seed %||% 1)
+  if (expect_snapshot_output)
+    expect_snapshot_output(ignore <- object)
+  if (inherits(object, "list")) {
+    for (idx in seq_along(object))
+      expect_snapshot_RLum(object[[idx]], ...)
+    return()
+  }
+  object@.uid <- NA_character_
+  object@.pid <- NA_character_
+  if ("records" %in% slotNames(object)) {
+    for (idx in seq_along(object@records)) {
+      object@records[[idx]]@.uid <- NA_character_
+      object@records[[idx]]@.pid <- NA_character_
+    }
+  }
+  expect_snapshot_value(object, style = "json2", ...)
 }
 
 ## frequently used inputs
