@@ -33,6 +33,7 @@ Features needed before release:
 | `get_signal_range` | Returns recommended lower and upper signal value boundary for plotting one or multiple images of a stack. Helper function for plotting functions. |
 | `plot_image` | Plots one or multiple images. Is just a wrapper for `terra::plot` but adds some extra fluff like optional colouring depending on the acquisition wavelength, and can overlay circular ROIs (with class colours and optional ID numbers). |
 | `plot_image_difference` | Computes and plots the pixel-wise difference between two images (objA - objB) using `plot_image`. |
+| `plot_RLum` | Plot `RLum.Analysis.ROI` objects. |
 | `rescale_image` | Zooms in or out or moves an image's centre while maintaining its dimensions. Works also with image stacks. |
 | `rotate_image` | Rotates an image while maintaining its dimensions. Works also with image stacks. |
 | `select_grains` | Opens a shiny app that lets the user place circular ROIs on a reference image (combined as the pixel-wise mean of the stack), assign a mineral class to each, and optionally detect grains automatically via `find_grains()`. Returns per-grain ROI objects in the format of `set_roi()` / `apply_rois()`. |

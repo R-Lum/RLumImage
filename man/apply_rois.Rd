@@ -58,5 +58,6 @@ apply_rois(img_1lyr, rois)
 
 }
 \seealso{
-\link[=RLum.Analysis.ROI-class]{RLum.Analysis.ROI}, \link[Luminescence:RLum.Data.Curve-class]{Luminescence::RLum.Data.Curve}
+\link[=RLum.Analysis.ROI-class]{RLum.Analysis.ROI}, \link[Luminescence:RLum.Data.Curve-class]{Luminescence::RLum.Data.Curve},
+\link{plot_RLum,RLum.Analysis.ROI-method}
 }

@@ -42,7 +42,8 @@
 #' is stored in `info$class`.
 #'
 #' @seealso
-#' [RLumImage::RLum.Analysis.ROI-class], [Luminescence::RLum.Data.Curve-class]
+#' [RLumImage::RLum.Analysis.ROI-class], [Luminescence::RLum.Data.Curve-class],
+#' [RLumImage::plot_RLum,RLum.Analysis.ROI-method]
 #'
 #' @examples
 #' file <- system.file("extdata/sandworm_rf_median.tif", package = "RLumImage")
