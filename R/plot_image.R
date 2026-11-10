@@ -136,7 +136,7 @@ plot_image <- function(
 
   if (contains.outlier) col_gradient[64] <- "white"
 
-  custom_cols <- colorRampPalette(
+  custom_cols <- grDevices::colorRampPalette(
     col_gradient,
     bias = 1.8)(64)
 

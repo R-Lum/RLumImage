@@ -68,11 +68,11 @@ get_sections <- function(
 
   if(!plot) return(secs)
 
-  cols <- colorRampPalette(col)(n_records)
+  cols <- grDevices::colorRampPalette(col)(n_records)
 
   # X section
   if (show.X.line) {
-    matplot(x = seq_len(nrow(secs$X)),
+    graphics::matplot(x = seq_len(nrow(secs$X)),
             y = secs$X,
             col = cols,
             ylim = ylim,
@@ -89,7 +89,7 @@ get_sections <- function(
 
   # Y section
   if (show.Y.line) {
-    matplot(x = seq_len(nrow(secs$Y)),
+    graphics::matplot(x = seq_len(nrow(secs$Y)),
             y = secs$Y,
             col = cols,
             ylim = ylim,

@@ -68,7 +68,7 @@ wavelength_to_rgb <- function(wl, factor = 1) {
       b <- 0.5
     }
   }
-  rgb(min(c(r * factor, 1)),
+  grDevices::rgb(min(c(r * factor, 1)),
       min(c(g * factor, 1)),
       min(c(b * factor, 1)))
 }

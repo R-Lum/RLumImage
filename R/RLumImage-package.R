@@ -27,13 +27,11 @@
 #' at the LIAG Institute for Applied Geophysics, Hannover, Germany) and Dr
 #' Margret Fuchs (PI at the Helmholtz Institute Freiberg for Resource
 #' Technology (HIF), Freiberg, Germany).
-
-#' @keywords package
 #'
-#' @importFrom grDevices col2rgb colorRampPalette dev.off png rgb
-#' @importFrom graphics axis box matplot rect
 #' @importFrom methods slotNames
 #' @import Luminescence
 #' @import shiny
 #' @import utils
+#'
+#' @keywords package
 "_PACKAGE"

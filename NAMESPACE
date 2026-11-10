@@ -28,17 +28,4 @@ exportMethods(set_RLum)
 import(Luminescence)
 import(shiny)
 import(utils)
-importFrom(grDevices,
-  col2rgb,
-  colorRampPalette,
-  dev.off,
-  png,
-  rgb
-)
-importFrom(graphics,
-  axis,
-  box,
-  matplot,
-  rect
-)
 importFrom(methods,slotNames)
