@@ -1,22 +1,26 @@
 # RLumImage
 
-RLum network package for luminescence image processing.
+RLum network package for processing luminescence images of sediments, rock slices natural dosimeters and more.
 
-## ToDo's
+This library builds upon the R package `terra` and is furthermost designed to process optically- and thermally stimulated luminescence (OSL, IRSL, TL) and radiofluorescence (RF) image data as used in the fields of geomorphology and archaeology. As input data, raw image data from Freiberg Instruments lexsyg research OSL/TL/RF readers and from DTU Nutech Risø OSL/TL/IRPL readers are supported. Output data are `RLum`-class objects or XLUM files which can be further analysed with the R package `Luminescence`.
 
-Features needed before release:
+## Installation
 
-- Collect small example data sets (TIF/XSYG) of OSL, TL and RF measurement, add to repository and refer ALL code examples and module tests to them
+To install this package run:
 
-- Get a Risø Reader EMCCD data set and implement its import
+```         
+pak::pkg_install("R-Lum/RLumImage")
+```
 
-- Enhance internal data structure to hand over meta data and processing history
+At least the pre-build version `1.3.1.9000-1` of the `Luminescence` package is required.
 
-- Set-up a working Quarto script which uses all (important) functions
+```         
+pak::pkg_install("R-Lum/Luminescence")
+```
 
 ## Current development status
 
-(2026-09-26)
+(2026-11-16)
 
 | Function | Description |
 |------------------------------------|------------------------------------|
@@ -44,9 +48,4 @@ Features needed before release:
 
 ## Funding
 
-The work on `'RLumImage'` is supported through the DFG project “ARENICOLA:
-Advanced RadiofluorescENce Imaging and grain Classification in Luminescence
-Applications” [No 528704761](https://gepris.dfg.de/project/553815036?lang=en)
-led by Dr Sebastian Kreutzer (PI at the LIAG Institute for Applied Geophysics,
-Hannover, Germany) and Dr Margret Fuchs (PI at the Helmholtz Institute Freiberg
-for Resource Technology (HIF), Freiberg, Germany).
+The work on `'RLumImage'` is supported through the DFG project “ARENICOLA: Advanced RadiofluorescENce Imaging and grain Classification in Luminescence Applications” [No 528704761](https://gepris.dfg.de/project/553815036?lang=en) led by Dr Sebastian Kreutzer (PI at the LIAG Institute for Applied Geophysics, Hannover, Germany) and Dr Margret Fuchs (PI at the Helmholtz Institute Freiberg for Resource Technology (HIF), Freiberg, Germany).

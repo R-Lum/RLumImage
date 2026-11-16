@@ -38,13 +38,14 @@ Technology (HIF), Freiberg, Germany).
 Authors:
 \itemize{
   \item Dirk Mittelstraß \email{dirk.mittelstrass@luminescence.de} (\href{https://orcid.org/0000-0002-9567-8791}{ORCID})
-  \item Mariana Sontag-González (\href{https://orcid.org/0000-0003-4678-1212}{ORCID})
   \item Marco Colombo (\href{https://orcid.org/0000-0001-6672-0623}{ORCID})
+  \item Mariana Sontag-González (\href{https://orcid.org/0000-0003-4678-1212}{ORCID})
+  \item Sebastian Kreutzer (\href{https://orcid.org/0000-0002-0734-2199}{ORCID}) [thesis advisor]
 }
 
 Other contributors:
 \itemize{
-  \item Sebastian Kreutzer (\href{https://orcid.org/0000-0002-0734-2199}{ORCID}) [thesis advisor]
+  \item Margret Fuchs (\href{https://orcid.org/0000-0001-7210-1132}{ORCID}) [thesis advisor]
 }
 
 }

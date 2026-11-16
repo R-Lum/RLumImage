@@ -1,15 +1,16 @@
 Package: RLumImage
 Type: Package
-Title: Processing of Luminescence Images
-Version: 0.0.1
-Date: 2026-10-19
+Title: Luminescence Images Processing
+Version: 0.1.0.9000-1
+Date: 2026-11-16
 Authors@R: c(
     person("Dirk", "Mittelstraß", email = "dirk.mittelstrass@luminescence.de", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-9567-8791")),
-    person("Mariana", "Sontag-González", role = c("aut"), comment = c(ORCID = "0000-0003-4678-1212")),
     person("Marco", "Colombo", role = c("aut"), comment = c(ORCID = "0000-0001-6672-0623")),
-    person("Sebastian", "Kreutzer", role = c("ths"), comment = c(ORCID = "0000-0002-0734-2199")))
+    person("Mariana", "Sontag-González", role = c("aut"), comment = c(ORCID = "0000-0003-4678-1212")),
+    person("Margret", "Fuchs", role = c("ths"), comment = c(ORCID = "0000-0001-7210-1132")),
+    person("Sebastian", "Kreutzer", role = c("ths", "aut"), comment = c(ORCID = "0000-0002-0734-2199")))
 Maintainer: Dirk Mittelstraß <dirk.mittelstrass@luminescence.de>
-Description: Processing of luminescence images and spatially-resolved data.
+Description: Function library for processing luminescence images of sediments, rock slices natural dosimeters and more. This library builds upon the R package terra and is furthermost designed to process optically and thermally stimulated luminescence (OSL, IRSL, TL) and radiofluorescence (RF) image data as used in the fields of Geomorphology and Archaeology. As input data, raw image data from Freiberg Instruments lexsyg research OSL/TL/RF readers and from DTU Nutech Risoe OSL/TL/IRPL readers are supported. Output data are RLum-class objects or XLUM files which can be further analysed with the R package Luminescence.
 License: GPL-3
 Depends:
   R (>= 4.5)
