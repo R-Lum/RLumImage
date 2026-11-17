@@ -26,11 +26,11 @@ directory of the XSYG file is used.}
 
 \item{print.sequence}{Currently unused.}
 
-\item{city, country}{Location where the measurement was performed, used to determine the time
+\item{city, country}{Currently unused. Location where the measurement was performed, used to determine the time
 zone of the image files.}
 }
 \value{
-Returns a nested list, structured as:
+Currently unused. Returns a nested list, structured as:
 \itemize{
 \item \verb{[[aliquot position]]}
 \itemize{
