@@ -61,3 +61,6 @@
 
 # -- Package 'RLumImage' stuff -- 
 ^RLumImage\..*$
+
+# -- Posit Assistant stuff --
+^\.posit/assistant$
