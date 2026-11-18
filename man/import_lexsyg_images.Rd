@@ -9,7 +9,7 @@ import_lexsyg_images(
   folder = NA,
   detector = "EMCCD",
   verbose = TRUE,
-  print.sequence = TRUE,
+  print_sequence = TRUE,
   city = NA,
   country = NA
 )
@@ -24,7 +24,8 @@ directory of the XSYG file is used.}
 
 \item{verbose}{Whether progress messages should be printed to the terminal.}
 
-\item{print.sequence}{Currently unused.}
+\item{print_sequence}{Whether sequence information should be printed to the terminal (\code{TRUE}
+by default).}
 
 \item{city, country}{Location where the measurement was performed, used to determine the time
 zone of the image files.}

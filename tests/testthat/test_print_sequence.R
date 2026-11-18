@@ -18,16 +18,16 @@ obj <- list(`27` = list(list(position = 27, recordNumber = 8, recordType = "RF",
 test_that("input validation", {
   testthat::skip_on_cran()
 
-  expect_error(get_sequence(sandworm.file),
+  expect_error(print_sequence(sandworm.file),
                "Input object must be of type list")
-  expect_error(get_sequence(list(sandworm.file)),
+  expect_error(print_sequence(list(sandworm.file)),
                "$ operator is invalid for atomic vectors", fixed = TRUE) # TODO
 })
 
 test_that("snapshot tests", {
   testthat::skip_on_cran()
 
-  expect_snapshot(get_sequence(obj))
-  expect_snapshot(get_sequence(obj, print.friendly = TRUE))
-  expect_snapshot(get_sequence(c(obj, obj), print.friendly = TRUE))
+  expect_snapshot(print_sequence(obj))
+  expect_snapshot(print_sequence(obj, print.friendly = TRUE))
+  expect_snapshot(print_sequence(c(obj, obj), print.friendly = TRUE))
 })

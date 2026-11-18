@@ -24,7 +24,7 @@
 #' # TODO
 #'
 #' @export
-get_sequence <- function(
+print_sequence <- function(
   obj,
   print.friendly = FALSE,
   digits = 2,
@@ -35,7 +35,7 @@ get_sequence <- function(
   ## - Check for 'Processing' list entry and add to table
   ## - Check for 'ImageData' list entry and add to table
 
-  if (!is.list(obj)) stop("[get_sequence()] Input object must be of type list.")
+  if (!is.list(obj)) stop("[print_sequence()] Input object must be of type list.")
 
   # Is input object a list of lists (multiple aliquots) or just a list (one aliquot selected)?
   seq <- if (is.list(obj[[1]])) obj[[1]] else obj
