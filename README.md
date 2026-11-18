@@ -66,7 +66,7 @@ more details.
 
 ## Funding
 
-- Since 08/2025: Dirk Mittelstraß as maintainer of the package is gratefully funded through the DFG project “ARENICOLA: Advanced RadiofluorescENce Imaging and grain Classification in Luminescence Applications” [No 528704761](https://gepris.dfg.de/project/553815036?lang=en) led by Dr Sebastian Kreutzer (PI at the LIAG Institute for Applied Geophysics, Hannover, DE) and Dr Margret Fuchs (PI at the Helmholtz Institute Freiberg for Resource Technology (HIF), Freiberg, DE).
+- Since 08/2025: Dirk Mittelstraß as maintainer of the package is gratefully funded through the DFG project “ARENICOLA: Advanced RadiofluorescENce Imaging and grain Classification in Luminescence Applications” [No 553815036](https://gepris.dfg.de/project/553815036?lang=en) led by Dr Sebastian Kreutzer (PI at the LIAG Institute for Applied Geophysics, Hannover, DE) and Dr Margret Fuchs (PI at the Helmholtz Institute Freiberg for Resource Technology (HIF), Freiberg, DE).
 
 - Since 11/2026: Dr Marco Colombo is funded through the DFG programme “REPLAY: REProducible Luminescence
   Data AnalYses” [No 528704761](https://gepris.dfg.de/project/528704761) led by Dr Sebastian Kreutzer (PI at LIAG - Institute for Applied Geophysics, Hannover, DE) 
