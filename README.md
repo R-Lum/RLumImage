@@ -1,10 +1,20 @@
-# RLumImage <img width=120px src="man/figures/RLumImage_logo.png" align="right" />
+# RLumImage: Advanced luminescence image analysis <img width=120px src="man/figures/RLumImage_logo.png" align="right" />
 
 [![R-CMD-check](https://github.com/R-Lum/RLumImage/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/R-Lum/RLumImage/actions)
 
-[R-Lum network](https://r-luminescence.org) package for processing luminescence images of sediments, rock slices, natural dosimeters and more.
+**'RLumImage'** is package for processing luminescence images of sediments,
+rock slices, natural dosimeters and more.
+The package is part of the [R-Lum network](https://r-luminescence.org).
 
-This library builds upon the R package `terra` and is furthermost designed to process optically- and thermally stimulated luminescence (OSL, IRSL, TL) and radiofluorescence (RF) image data as used in the fields of geomorphology and archaeology. As input data, raw image data from Freiberg Instruments lexsyg research OSL/TL/RF readers and from DTU Nutech Risø OSL/TL/IRPL readers are supported. Output data are `RLum`-class objects or XLUM files which can be further analysed with the R package `Luminescence`.
+This library builds upon the R package `'terra'` and is furthermost designed
+to process optically- and thermally stimulated luminescence (OSL, IRSL, TL)
+and radiofluorescence (RF) image data as used in the fields of geomorphology
+and archaeology.
+
+As input data, raw image data from Freiberg Instruments lexsyg research
+OSL/TL/RF readers and from DTU Nutech Risø OSL/TL/IRPL readers are supported.
+Output data are `RLum`-class objects or XLUM files which can be further
+analysed with the R package `'Luminescence'`.
 
 ## Installation
 
@@ -13,13 +23,12 @@ To install the latest development build directly from GitHub, run:
 ```         
 if (!require("pak"))
   install.packages("pak")
-pak::pkg_install("R-Lum/RLumImage")
+pak::pak("R-Lum/RLumImage")
 ```
 
-At least the pre-build version `1.3.1.9000-1` of the `Luminescence` package is required.
-
+Currently, a development version of `'Luminescence'` (at least 1.3.1.9000-1) is required.
 ```         
-pak::pkg_install("R-Lum/Luminescence")
+pak::pak("R-Lum/Luminescence")
 ```
 
 ## Current development status
