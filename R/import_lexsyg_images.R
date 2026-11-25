@@ -39,7 +39,7 @@
 #' zone of the image files.
 #'
 #' @return
-#' Currently unused. Returns a nested list, structured as:
+#' Returns a nested list, structured as:
 #'
 #' - `[[aliquot position]]`
 #' 	- `[[1]]`
