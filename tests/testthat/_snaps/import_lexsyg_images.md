@@ -3,6 +3,7 @@
     Code
       import_lexsyg_images(xsyg)
     Output
+      _data/2026-05-08_Combined_RF-OSL_02_short.xsyg 
       Folder contains 1 TIFF files.
       
       #1 Find creation time of the TIFF files and sort them ...DONE
@@ -18,7 +19,7 @@
          Created image sequence object which is 0 MB large.
       
         Files Type Emission Interval [sec] Maximum measured temperature [℃]
-      1 1     OSL  410 nm   5              50                              
+      1 1     OSL  365 nm   5              80                              
       Measurement sequence of position 27.
       $`27`
       $`27`[[1]]
@@ -26,7 +27,7 @@
       [1] 27
       
       $`27`[[1]]$recordNumber
-      [1] 33
+      [1] 37
       
       $`27`[[1]]$recordType
       [1] "OSL"
@@ -35,16 +36,16 @@
       [1] 5
       
       $`27`[[1]]$detectionWavelength
-      [1] 410
+      [1] 365
       
       $`27`[[1]]$maxMeasuredT
-      [1] 50
+      [1] 80
       
       $`27`[[1]]$imageFiles
                                                    file                time channel
       1 _data/2026-05-08_Combined_RF-OSL_02_short_9.tif 2026-05-08 20:40:28       1
         maxMeasuredT
-      1           50
+      1           80
       
       
       
