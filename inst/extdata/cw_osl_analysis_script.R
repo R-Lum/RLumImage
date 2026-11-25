@@ -5,7 +5,8 @@
 #'
 
 # Set file path to test data
-xsyg_path <- paste0(getwd(), "/inst/extdata/cw_osl_test_data/2026-10-27_MiniOSL-SAR-FB2A-pos68.xsyg")
+xsyg_path <- system.file("extdata/cw_osl_test_data/2026-10-27_MiniOSL-SAR-FB2A-pos68.xsyg",
+                         package = "RLumImage")
 
 # Import lexsyg research measurement
 sequence <- import_lexsyg_images(xsyg_path)
