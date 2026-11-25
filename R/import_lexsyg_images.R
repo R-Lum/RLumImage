@@ -81,7 +81,7 @@ import_lexsyg_images <- function(
   ##  if folder contains TIFF files which are not covered by the XSYG file
   ## 2026-08-10, DM: Saves detectionInterval now as numeric
   ## 2026-10-11, MSG: added merge if >1 xsyg in folder
-  ## 2026-11-05, MC: At first, try to take image file time stamps from TIFF meta data 
+  ## 2026-11-05, MC: At first, try to take image file time stamps from TIFF meta data
   ## 2026-11-17, DM: Correct TIFF meta data file stamps for their offset before record start
 
 
@@ -173,11 +173,11 @@ import_lexsyg_images <- function(
       if (isTRUE(info$detector == detector)) {
 
         start_time <- as.POSIXct(info$startDate, format = "%Y%m%d%H%M%S")
-        
+
         # In LexStudio 2, TIFF file initialization happens BEFORE start of the record,
         # thus, we need to set the start to an earlier data.
         start_time <- start_time - as.numeric(info$offset)
-        
+
         # We subtract an extra second in case there are small synchronisation errors
         start_time <- start_time - 1
 
@@ -274,15 +274,15 @@ import_lexsyg_images <- function(
 
     # Time limits of the current record
     start_time <- record_table$time[i]
-    
+
     end_time <- if (i < nrow(record_table)) record_table$time[i + 1]
                 else last_record_end
 
     rec_i <- 1
     while (isTRUE(files$time[file_i] < end_time)) {
-      
-      
-      
+
+
+
       if (files$time[file_i] >= start_time) {
         files$position[file_i] <- record_table$position[i]
         files$type[file_i] <- record_table$type[i]
