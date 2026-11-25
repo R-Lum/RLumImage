@@ -30,8 +30,9 @@
 #' @param verbose
 #' Whether progress messages should be printed to the terminal.
 #'
-#' @param print.sequence
-#' Currently unused.
+#' @param print_sequence
+#' Whether sequence information should be printed to the terminal (`TRUE`
+#' by default).
 #'
 #' @param city,country
 #' Currently unused. Location where the measurement was performed, used to determine the time
@@ -63,7 +64,7 @@ import_lexsyg_images <- function(
   folder = NA,
   detector = "EMCCD",
   verbose = TRUE,
-  print.sequence = TRUE, # Currently unused
+  print_sequence = TRUE, # Currently unused
   city = NA, # Currently unused
   country = NA # Currently unused
 ) {
@@ -351,8 +352,8 @@ import_lexsyg_images <- function(
     cat("DONE\n   Created image sequence object which is",
                    image_seq_size, "MB large.\n\n")
   }
-  if (verbose)
-    get_sequence(image_seq, print.friendly = TRUE, verbose = TRUE)
+  if (print_sequence)
+    print_sequence(image_seq, print.friendly = TRUE, verbose = TRUE)
 
   return(image_seq)
 }

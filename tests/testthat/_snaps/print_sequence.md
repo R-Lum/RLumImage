@@ -1,7 +1,7 @@
 # snapshot tests
 
     Code
-      get_sequence(obj)
+      print_sequence(obj)
     Output
         files recordType wavelength interval maxMeasuredT
       1     1         RF        880        5           70
@@ -10,7 +10,7 @@
 ---
 
     Code
-      get_sequence(obj, print.friendly = TRUE)
+      print_sequence(obj, print.friendly = TRUE)
     Output
         Files Type Emission Interval [sec] Maximum measured temperature [℃]
       1 1     RF   880 nm   5              70                              
@@ -23,7 +23,7 @@
 ---
 
     Code
-      get_sequence(c(obj, obj), print.friendly = TRUE)
+      print_sequence(c(obj, obj), print.friendly = TRUE)
     Output
         Files Type Emission Interval [sec] Maximum measured temperature [℃]
       1 1     RF   880 nm   5              70                              

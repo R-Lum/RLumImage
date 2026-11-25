@@ -15,7 +15,8 @@ test_that("input validation", {
 test_that("check functionality", {
   testthat::skip_on_cran()
 
-  expect_warning(import_lexsyg_images(c(xsyg, xsyg), verbose = FALSE),
+  expect_warning(import_lexsyg_images(c(xsyg, xsyg), verbose = FALSE,
+                                      print_sequence = FALSE),
                  "Multiple heating records found, keeping")
 })
 
