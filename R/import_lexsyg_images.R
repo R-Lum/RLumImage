@@ -87,7 +87,8 @@ import_lexsyg_images <- function(
 
   ### --------------- Input checks ------------------
 
-  cat(xsyg_file, "\n")
+  if (verbose)
+    cat(xsyg_file, "\n")
   if (!all(file.exists(xsyg_file)))
     stop("[import_lexsyg_images()] XSYG file does not exist.")
 
