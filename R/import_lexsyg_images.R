@@ -65,14 +65,15 @@ import_lexsyg_images <- function(
   detector = "EMCCD",
   verbose = TRUE,
   print_sequence = TRUE,
-  city = NA,
-  country = NA
+  city = NA, # Currently unused
+  country = NA # Currently unused
 ) {
   ## ToDo
   ## - Add console output of XSYG basename and list of aliquot positions if verbose = TRUE
   ## - Revise 'ImageData' list structure and maybe add an empty 'Processing' list
   ## - Missing or unexpected meta data values in the XSYG have no error handling.
   ##   Put meta data readout in a sub-function which provides error handling and default "NA" return.
+  ## - Remove timezone_difference clutter when current code is successfully tested
   ##
   ## Changelog:
   ## 2026-08-10, DM, MSG: Check for 'recordType' location in the RLum data
@@ -80,10 +81,14 @@ import_lexsyg_images <- function(
   ##  if folder contains TIFF files which are not covered by the XSYG file
   ## 2026-08-10, DM: Saves detectionInterval now as numeric
   ## 2026-10-11, MSG: added merge if >1 xsyg in folder
+  ## 2026-11-05, MC: At first, try to take image file time stamps from TIFF meta data
+  ## 2026-11-17, DM: Correct TIFF meta data file stamps for their offset before record start
 
 
   ### --------------- Input checks ------------------
 
+  if (verbose)
+    cat(xsyg_file, "\n")
   if (!all(file.exists(xsyg_file)))
     stop("[import_lexsyg_images()] XSYG file does not exist.")
 
@@ -155,6 +160,7 @@ import_lexsyg_images <- function(
     lex <- list(merge_RLum(lex))
   }
 
+
   # Get sequence information
   warning.shown <- FALSE
   record_table <- data.frame(NULL)
@@ -168,6 +174,13 @@ import_lexsyg_images <- function(
       if (isTRUE(info$detector == detector)) {
 
         start_time <- as.POSIXct(info$startDate, format = "%Y%m%d%H%M%S")
+
+        # In LexStudio 2, TIFF file initialization happens BEFORE start of the record,
+        # thus, we need to set the start to an earlier data.
+        start_time <- start_time - as.numeric(info$offset)
+
+        # We subtract an extra second in case there are small synchronisation errors
+        start_time <- start_time - 1
 
         # Extract the central emission wavelength from the filter, if available
         wavelength <- suppressWarnings(as.numeric(sub(".*?(\\d+)\\s*nm.*", "\\1",
@@ -222,8 +235,6 @@ import_lexsyg_images <- function(
       }
       no <- no + 1
     }
-
-    #  record_tables[[aliquot_no]] <- record_table
   }
 
   if (verbose) cat("DONE\n   Found", nrow(record_table),"records in", length(lex), "aliquots, using a",
@@ -234,11 +245,11 @@ import_lexsyg_images <- function(
   if (verbose) cat("#3 Assign image files to sequence steps according to their time stamp ...")
 
   #correct for time difference between measurement location and analysis location
-  timezone_offset <- 3600*ifelse(is.na(country),
-                                 round((abs(as.numeric(file.info(xsyg_file)$mtime)-
-                                              as.numeric((strptime( lex[[length(lex)]]@records[[length(lex[[length(lex)]]@records)]]@info[["endDate"]],
-                                                                    format = "%Y%m%d%H%M%S")))))/3600), #difference between xsyg and tif "change time", rounded to hours (time zone)
-                                 get_time_difference(file=tif_files[1], city=city, country=country))
+  # timezone_offset <- 3600*ifelse(is.na(country),
+  #                                round((abs(as.numeric(file.info(xsyg_file)$mtime)-
+  #                                             as.numeric((strptime( lex[[length(lex)]]@records[[length(lex[[length(lex)]]@records)]]@info[["endDate"]],
+  #                                                                   format = "%Y%m%d%H%M%S")))))/3600), #difference between xsyg and tif "change time", rounded to hours (time zone)
+  #                                get_time_difference(file=tif_files[1], city=city, country=country))
 
 
   # TODO(mcol): seems incorrect and breaks coverage
@@ -264,11 +275,15 @@ import_lexsyg_images <- function(
 
     # Time limits of the current record
     start_time <- record_table$time[i]
+
     end_time <- if (i < nrow(record_table)) record_table$time[i + 1]
                 else last_record_end
 
     rec_i <- 1
     while (isTRUE(files$time[file_i] < end_time)) {
+
+
+
       if (files$time[file_i] >= start_time) {
         files$position[file_i] <- record_table$position[i]
         files$type[file_i] <- record_table$type[i]
