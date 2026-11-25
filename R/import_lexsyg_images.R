@@ -35,7 +35,7 @@
 #' by default).
 #'
 #' @param city,country
-#' Currently unused. Location where the measurement was performed, used to determine the time
+#' Location where the measurement was performed, used to determine the time
 #' zone of the image files.
 #'
 #' @return
@@ -64,7 +64,7 @@ import_lexsyg_images <- function(
   folder = NA,
   detector = "EMCCD",
   verbose = TRUE,
-  print_sequence = TRUE, # Currently unused
+  print_sequence = TRUE,
   city = NA, # Currently unused
   country = NA # Currently unused
 ) {
